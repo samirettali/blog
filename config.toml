@@ -1,0 +1,16 @@
+baseURL = "https://samirettali.com/"
+
+languageCode = "en-us"
+title = "SE"
+theme = "one"
+googleAnalytics = "UA-123-45"
+
+# Chroma Syntax Highlighting
+pygmentsCodefences = true
+pygmentsCodefencesGuessSyntax = true
+pygmentsStyle = "pygments"
+
+[params]
+    # navigation = ["archives.md", "about.md"]
+    navigation = []
+    linenum = "https://github.com/rebootuser/LinEnum"

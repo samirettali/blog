@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Bitkoff Bank - Cybrics Quals 2019</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Bitkoff Bank - Cybrics Quals 2019">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Bitkoff Bank - Cybrics Quals 2019">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://samirettali.com/posts/cybrics-2019/bitkoff-bank/">
+	<meta name="og:site_name" content="Bitkoff Bank - Cybrics Quals 2019">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="CTF CybricsQuals2019 ">
+	<link rel="stylesheet" type="text/css" href="https://samirettali.com/css/style.css">
+	
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+
+<header>
+	
+	<a href="https://samirettali.com/" style="float: left;color:#ff3b30;">SE</a>
+	
+	
+	
+	<a href="https://samirettali.com/posts/index.xml" style="color:#777;float: right;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+</header>
+
+
+<div class="content">
+  <h1>Bitkoff Bank - Cybrics Quals 2019</h1>
+  <aside><a href="/tags/ctf/">CTF</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/cybricsquals2019/">CybricsQuals2019</a></a>&nbsp;&nbsp;&nbsp;</aside>
+  <p>
+
+<p><img src="/images/cybrics-2019/bitkoff-bank/task.png" alt="Description" /></p>
+
+<p>This challenge is a web based challenge, here is the registration/login page:
+<img src="/images/cybrics-2019/bitkoff-bank/web.png" alt="Web" /></p>
+
+<p>After the registration we are provided with a simple web interface for mining
+coins:
+<img src="/images/cybrics-2019/bitkoff-bank/ui.png" alt="UI" /></p>
+
+<p>We immediately see that we need 1 USD to buy the flag, we can mine 0.0000000001
+BTCs with a click and we can convert BTC into USD and viceversa.</p>
+
+<p>The thing that immediately came to my mind is to use <code>curl</code> to automate the
+BTC mining, so this is the command I used:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000;font-weight:bold">for</span> i in <span style="color:#666">{</span><span style="color:#666">0</span>..10000000<span style="color:#666">}</span>; <span style="color:#008000;font-weight:bold">do</span>
+curl -i -s -k  -X <span style="color:#ba2121">$&#39;POST&#39;</span> -H <span style="color:#ba2121">$&#39;Cookie: name=samir; password=ciao&#39;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    -b <span style="color:#ba2121">$&#39;name=samir; password=samir&#39;</span> <span style="color:#b62;font-weight:bold">\
+</span><span style="color:#b62;font-weight:bold"></span>    --data-binary <span style="color:#ba2121">$&#39;mine=1&#39;</span> <span style="color:#ba2121">$&#39;http://95.179.148.72:8083/index.php&#39;</span> <span style="color:#666">2</span>&gt;&amp;<span style="color:#666">1</span> &amp;
+<span style="color:#008000;font-weight:bold">done</span></code></pre></div>
+<p>I&rsquo;ve done the request appending <code>&amp;</code> to the command so that it forks in the
+backround, making the mining process much faster. I know it could have been done
+better, probably with python and async requests, but there were 12+ hours.</p>
+
+<p>After less than one hour the amount of BTCs allowed us to buy the flag.</p>
+
+<h3 id="flag">Flag</h3>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">flag: cybrics{50_57R4n93_pR3c1510n}</pre></div>
+<p>Note: buying the auto-miner was not a good idea because you could have bought as
+many as you want but they were doing only one click a second. And even then, the
+page would refresh every second, making the page containing the flag disappear.
+Luckily, I had burp intercepting the traffic.</p>
+</p>
+</div>
+
+
+  <p>Written on Jul 21, 2019.</p>
+
+
+<footer>
+	<p>&copy; 2019 All rights reserved.</p>
+</footer>
+</body>
+</html>

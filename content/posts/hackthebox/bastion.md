@@ -1,5 +1,5 @@
 ---
-title: "Bastion"
+title: "Bastion - HackTheBox"
 date: 2019-09-06T15:42:05+02:00
 tags:
     - "CTF"

@@ -4,6 +4,7 @@ date: 2019-07-21T21:50:37+02:00
 tags:
     - "CTF"
     - "CybricsQuals2019"
+    - "Writeup"
 ---
 
 ![Description](/images/cybrics-2019/bitkoff-bank/task.png)
@@ -22,7 +23,7 @@ The thing that immediately came to my mind is to use `curl` to automate the
 BTC mining, so this is the command I used:
 ```bash
 for i in {0..10000000}; do
-curl -i -s -k  -X $'POST' -H $'Cookie: name=samir; password=ciao' \
+curl -i -s -k  -X $'POST' -H $'Cookie: name=samir; password=samir' \
     -b $'name=samir; password=samir' \
     --data-binary $'mine=1' $'http://95.179.148.72:8083/index.php' 2>&1 &
 done

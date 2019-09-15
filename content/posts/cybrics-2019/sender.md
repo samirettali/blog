@@ -4,6 +4,7 @@ date: 2019-07-21T19:48:34+02:00
 tags:
     - "CTF"
     - "CybricsQuals2019"
+    - "Writeup"
 ---
 ![Task](/images/cybrics-2019/sender/task.png)
 

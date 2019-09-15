@@ -4,6 +4,7 @@ date: 2019-07-21T12:12:55+02:00
 tags:
     - "CTF"
     - "CybricsQuals2019"
+    - "Writeup"
 ---
 
 For this challenge, we are provided with the username and the password for a machine.

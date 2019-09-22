@@ -8,6 +8,7 @@ tags:
     - "Cracking"
 ---
 ![Description](/images/hackthebox/bastion/info.png)
+
 Bastion is a simple Windows machine that involves Windows backups and bad tools
 configurations.
 

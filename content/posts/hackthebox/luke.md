@@ -1,16 +1,13 @@
 ---
 title: "Luke - HackTheBox"
 date: 2019-07-27T17:39:53+02:00
-type: post
 tags:
     - "HackTheBox"
     - "CTF"
 ---
 ![Information](/images/hackthebox/luke/info.png)
 
----
-### Information gathering
-
+# Information gathering
 Let's start with the usual information gathering steps:
 
 ![Port scan](/images/hackthebox/luke/nmap.png)
@@ -38,14 +35,16 @@ from the [SecLists](https://github.com/danielmiessler/SecLists) repository:
 ![Ffuf directories](/images/hackthebox/luke/ffuf.png)
 ![Ffuf files](/images/hackthebox/luke/ffuf2.png)
 
+# Exploration
+
 In the `/management` directory there's a login made with HTTP basic
 authentication:
 ![Management](/images/hackthebox/luke/management.png)
 
-In the `login.php` page there a login form:
+In the `login.php` page there is a login form:
 ![Login](/images/hackthebox/luke/login.png)
 
-Trying [hydra](https://github.com/vanhauser-thc/thc-hydra) on all of them gives
+Trying [hydra](https://github.com/vanhauser-thc/thc-hydra) on both of them gives
 us no results.
 
 The `config.php` file contains something interesting:
@@ -61,9 +60,9 @@ try:
 
 It's getting recognized, but, obviously, it's not a valid token. After a bit of
 googling we find that to authenticate using JWT Tokens we must make a `POST`
-request to a certain url with the username and password.
+request to the endpoint providing the username and the password.
 
-You can find an explanation about JWT [here](https://medium.com/swlh/a-practical-guide-for-jwt-authentication-using-nodejs-and-express-d48369e7e6d4).
+You can find a good explanation about JWT [here](https://medium.com/swlh/a-practical-guide-for-jwt-authentication-using-nodejs-and-express-d48369e7e6d4).
 
 Let's search any valid path on port 3000:
 ![Ffuf 3000](/images/hackthebox/luke/ffuf-3000.png)
@@ -143,7 +142,7 @@ The only interesting file is `config.json`:
     }
 ```
 
-We find the username and password (root:KpMasng6S5EtTy9Z) for the Ajenti panel
+We find the username and password `(root:KpMasng6S5EtTy9Z)` for the Ajenti panel
 running on port `8000`. This is the administration panel:
 ![Ajenti](/images/hackthebox/luke/ajenti.png)
 
@@ -153,11 +152,11 @@ On the left, in the terminal section, we have access to a shell:
 To my surprise, this is a root shell, so during my workflow I must have skipped
 some steps.
 
-### User flag
+## User flag
 ```
 58d441e500e8941f9cf3baa499e2e4da
 ```
-### Root flag
+## Root flag
 ```
 8448343028fadde1e2a1b0a44d01e650
 ```

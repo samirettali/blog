@@ -1,5 +1,5 @@
 ---
-title: "SSRF ME- De1CTF 2019"
+title: "SSRF ME - De1CTF 2019"
 date: 2019-08-06T22:59:36+02:00
 tags:
     - "CTF"
@@ -14,8 +14,8 @@ draft: true
 
 For this challenge we are provided with a url that returns us the following python
 code:
-{{< highlight python "linenos=table" >}}
-#! /usr/bin/env python
+```python
+#!/usr/bin/env python
 #encoding=utf-8
 from flask import Flask
 from flask import request
@@ -125,7 +125,7 @@ def waf(param):
 if __name__ == '__main__':
     app.debug = False
     app.run(host='0.0.0.0',port=80)
-{{< / highlight >}}
+```
 
 It's the code from the Flask app that is running on the website.
 

@@ -1,15 +1,16 @@
 baseURL = "https://samirettali.com/"
 
 languageCode = "en-us"
-title = "SE"
-theme = "one"
-googleAnalytics = "UA-123-45"
+title = "Samir"
+theme = "basics"
 
 # Chroma Syntax Highlighting
-pygmentsCodefences = true
-pygmentsCodefencesGuessSyntax = true
-pygmentsStyle = "pygments"
+# pygmentsCodefences = true
+# pygmentsCodefencesGuessSyntax = true
+# pygmentsStyle = "solarized-light"
+# pygmentsUseClasses = true
 
 [params]
-    # navigation = ["archives.md", "about.md"]
-    navigation = []
+    github = "samirettali"
+    twitter = "samirettali"
+    keybase = "samirettali"

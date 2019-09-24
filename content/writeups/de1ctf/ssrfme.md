@@ -9,10 +9,12 @@ tags:
 draft: true
 ---
 
-![Information](/images/de1ctf-2019/ssrfme/description.png)
----
+### Description
+> SSRF ME TO GET FLAG.
 
-For this challenge we are provided with a url that returns us the following python
+> http://139.180.128.86
+
+For this challenge we are provided with a url that returns the following python
 code:
 ```python
 #!/usr/bin/env python
@@ -191,7 +193,11 @@ r = requests.get("http://192.168.43.204:8080/De1ta", params=params, cookies=cook
 print(r.text)
 ```
 
-![Flag](/images/de1ctf-2019/ssrfme/flag.png)
+Let's run it:
+```
+$ ./solve.py
+{"code": 200, "data": "de1ctf{27782fcffbb7d00309a93bc49b74ca26}\n"}
+```
 
 ### Flag
 ```

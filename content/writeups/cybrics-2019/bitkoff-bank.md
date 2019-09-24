@@ -37,7 +37,7 @@ After less than one hour the amount of BTCs allowed us to buy the flag.
 
 ### Flag
 ```
-flag: cybrics{50_57R4n93_pR3c1510n}
+cybrics{50_57R4n93_pR3c1510n}
 ```
 
 Note: buying the auto-miner was not a good idea because you could have bought as

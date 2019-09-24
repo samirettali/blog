@@ -1,6 +1,7 @@
 ---
 title: "Dotfiles"
 date: 2019-07-15T01:04:41+02:00
+tags: ["dotfiles", "ricing"]
 draft: true
 ---
 

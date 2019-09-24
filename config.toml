@@ -1,16 +1,28 @@
 baseURL = "https://samirettali.com/"
 
 languageCode = "en-us"
-title = "Samir"
-theme = "basics"
+title = "Samir's blog"
+theme = "hugo-theme"
 
-# Chroma Syntax Highlighting
-# pygmentsCodefences = true
-# pygmentsCodefencesGuessSyntax = true
-# pygmentsStyle = "solarized-light"
-# pygmentsUseClasses = true
+[permalinks]
+  blog = "/:filename/"
+
+[taxonomies]
+  tag = "tags"
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "/blog/"
+    weight = 1
+  [[menu.main]]
+    name = "Writeups"
+    url = "/writeups/"
+    weight = 2
 
 [params]
-    github = "samirettali"
-    twitter = "samirettali"
-    keybase = "samirettali"
+  dateFormat = "Jan 2, 2006"
+  homeText = "Welcome to my blog!"
+  github = "samirettali"
+  twitter = "samirettali"
+  keybase = "samirettali"

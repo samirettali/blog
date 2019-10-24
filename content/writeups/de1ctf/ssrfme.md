@@ -2,16 +2,13 @@
 title: "SSRF ME - De1CTF 2019"
 date: 2019-08-06T22:59:36+02:00
 tags:
-    - "CTF"
     - "De1CTF"
     - "Web"
     - "SSRf"
-draft: true
+draft: false
 ---
 
-### Description
-> SSRF ME TO GET FLAG.
-
+> SSRF ME TO GET FLAG.  
 > http://139.180.128.86
 
 For this challenge we are provided with a url that returns the following python
@@ -162,8 +159,8 @@ md5(secret_key + param + 'scan')
 
 The vulnerability in this application is located in the `Exec` function.
 Instead of checking if the passed action is equal to `scan` or `read`, it
-checks if the action contains `scan` and `read`.
-We can exploit this by making a request to `geneSign` with 'flag.txtread' as
+checks if the action string contains the `scan` and `read` strings.
+We can exploit this by making a request to `geneSign` with `flag.txtread` as
 `param`, so that the following signature is generated:
 
 ```

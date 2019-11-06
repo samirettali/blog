@@ -110,7 +110,7 @@ Reading the code we can see that it exploits a SQL injection vulnerabilty in the
 injection, you can find a good explanation
 [here](http://www.sqlinjection.net/time-based/).
 
-Eseguiamo allora l'exploit:
+Let's then run the exploit:
 ```
 $ python2 46635.py -u http://10.10.10.138/writeup/
 

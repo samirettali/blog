@@ -2,19 +2,23 @@ baseURL = "https://samirettali.com/"
 
 languageCode = "en-us"
 title = "Samir's blog"
-theme = "hugo-theme"
+
+pygmentsStyle = "igor" # igor, lovelace, arduino, pastie
+pygmentsCodeFences = true
+pygmentsCodeFencesGuessSyntax = true
+# pygmentsUseClasses = true # new add
+
+disableHugoGeneratorInject = true
+
 
 [permalinks]
   blog = "/:filename/"
 
-[taxonomies]
-  tag = "tags"
-
 [menu]
-  [[menu.main]]
-    name = "Posts"
-    url = "/blog/"
-    weight = 1
+  # [[menu.main]]
+  #   name = "Posts"
+  #   url = "/blog/"
+  #   weight = 1
   [[menu.main]]
     name = "Writeups"
     url = "/writeups/"
@@ -22,7 +26,7 @@ theme = "hugo-theme"
 
 [params]
   dateFormat = "Jan 2, 2006"
-  homeText = "Welcome to my blog!"
+  homeText = "Welcome!"
   github = "samirettali"
   twitter = "samirettali"
   keybase = "samirettali"

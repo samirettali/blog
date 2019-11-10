@@ -1,0 +1,12 @@
+{{ define "main" }}
+    <h1>{{ .Title }}</h1>
+    <ul class="post-list">
+    {{ range .Pages.ByPublishDate.Reverse }}
+        <li>
+            <a class="post-list-title text-dark" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <time class="post-list-date text-muted">{{ .Date.Format "2 Jan 06" }}</time>
+            {{ if .Draft }}<span class="text-primary">&nbsp;(Unpublished)</span>{{ end }}
+        </li>
+    {{ end }}
+    </ul>
+{{ end }}

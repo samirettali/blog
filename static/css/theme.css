@@ -27,7 +27,7 @@ h2 {
 }
 
 h1, h2, h3 {
-    font-weight: 500;
+    font-weight: 400;
 }
 
 /* Navbar */
@@ -115,7 +115,7 @@ code, pre {
 pre {
     padding: .75rem 1rem .75rem 1rem;
     background-color: #f0f0f0 !important;
-    overflow-y: scroll;
+    overflow: auto;
     line-height: 1.3rem;
 }
 

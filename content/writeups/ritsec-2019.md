@@ -9,18 +9,13 @@ tags: []
 ## pre-legend - 100 points
 > 9EEADi^^8:E9F3]4@>^4=2J32==^D@>6E9:?8\FD67F=\C:ED64
 
-This is a `ROT47` encoded string, just decode it to get the flag:
+This is a ROT47 encoded string, just decode it to get the flag:
 ```
 $ tr '\!-~' 'P-~\!-O' <<< "9EEADi^^8:E9F3]4@>^4=2J32==^D@>6E9:?8\FD67F=\C:ED64"
 https://github.com/clayball/something-useful-ritsec
 ```
 At first, I went to the repository to find what's in it, but then I read in the
-discord group that the flag was the link.
-
-### Flag
-```
-RITSEC{https://github.com/clayball/something-useful-ritsec}
-```
+discord group that the flag was the link itself.
 
 ## shiny - 100 points
 
@@ -31,7 +26,7 @@ RITSEC{https://github.com/clayball/something-useful-ritsec}
 
 This challenge is a quote to The Gold Bug, a short story by Edgar Allan Poe, in
 which a substitution cipher lead the protagonist to an adventure. We can use
-[dcode.fr](https://www.dcode.fr/gold-bug-poe) to decode the given string:
+[dcode.fr](https://www.dcode.fr/gold-bug-poe) to decode the given string.
 
 ### Flag
 ```
@@ -138,11 +133,11 @@ def readImage(inputImg, encFile, outputImg):
 ```
 
 The file that the script embeds in the image is read as a binary file, encoded
-in `base64` and then every character of the result string gets subtracted from the
-value `255`. The resulting list of integers get's used as the value of the alpha
+in base64 and then every character of the result string gets subtracted from the
+value `255`. The resulting list of integers gets used as the value of the alpha
 channel of each pixel.
 Luckily, the repository contains a script called `examiner.py`, which opens an
-image and prints the `RGBA` values of each pixel. We can use it as a foundation
+image and prints the RGBA values of each pixel. We can use it as a foundation
 to write a script that decodes the hidden content in an image:
 
 ```python
@@ -210,7 +205,7 @@ RS{4!way5_Ke3p-m0v1ng}
 
 ![](/images/ritsec-2019/ritsec_logo2.png)
 
-With `exiftool` we can read a `base64` encoded string in the User Comment field:
+With exiftool we can read a base64 encoded string in the User Comment field:
 {{< highlight text "hl_lines=30" >}}
 $ exiftool ritsec_logo2.png
 ExifTool Version Number         : 11.75
@@ -255,7 +250,7 @@ $ echo RVZHRlJQe1NCRVJBRlZQRl9TTlZZRl9KQkFHX1VSWUNfTEJIX1VSRVJ9 | base64 -d
 EVGFRP{SBERAFVPF_SNVYF_JBAG_URYC_LBH_URER}
 ```
 
-We can use `tr` to perform a `rot13` decoding, which is just a Ceasar cipher
+We can use `tr` to perform a rot13 decoding, which is just a Caesar cipher
 with `13` as the key:
 ```
 $ tr 'A-Z' 'N-ZA-M' <<< EVGFRP{SBERAFVPF_SNVYF_JBAG_URYC_LBH_URER}
@@ -270,7 +265,7 @@ After downloading the given archive and extracting it with `tar -xvf
 chromebin.tar`, we can see that it's a backup of the user data of the Chrome
 browser. Because the challenge description was talking about history, the
 immediate thing that came to my mind is to search in the browser history. We can
-do so by querying a `sqlite3` database:
+do so by querying a sqlite3 database:
 ```
 $ sqlite3 Chrome/User\ Data/Default/History "SELECT * FROM urls WHERE url LIKE '%ritsec%'"
 76|https://www.google.com/search?hl=en&biw=673&bih=492&ei=BRnPXf76EKHI_Qb03bqQCg&q=us-central-1.ritsec.club%2Fl%2Frelaxfizzblur&oq=us-central-1.ritsec.club%2Fl%2Frelaxfizzblur&gs_l=psy-ab.3...12572.24888..69087...2.1..1.298.3372.37j4j1......0....1..gws-wiz.......0i71j0i273i70i249j0i273j0j0i67j0i131j38j0i30j0i5i30j0i8i30j0i8i10i30.xUoJ6M10dd8&ved=0ahUKEwi-kaP8lO3lAhUhZN8KHfSuDqIQ4dUDCAs&uact=
@@ -290,8 +285,8 @@ This challenge uses the same archive as before. This time the challenge
 description seems to be referring to bookmarks. Chrome stores bookmarks in
 `Chrome/User Data/Default/Bookmarks`. We can open the file with any editor and
 find out that every bookmark has a letter as name and that's the flag, but
-that's time consuming and not much efficient. We can instead use `jq` to parse
-the `json` and get the flag straight:
+that's time consuming and not much efficient. We can instead use jq to parse
+the json and get the flag straight:
 ```
 $ jq -r '.roots.other.children[].name' Bookmarks
 R
@@ -318,16 +313,16 @@ W
 ```
 
 ## findme - 400 points
-> Find me! Challenge created by Security Risk Advisors for RITSEC CTF
+> Find me! Challenge created by Security Risk Advisors for RITSEC CTF  
 > [findme.pcap](/files/ritsec-2019/findme.pcap)
 
-By analyzing the `.pcap` file with Wireshark, we can see that there are two main
+By analyzing the pcap file with Wireshark, we can see that there are two main
 streams of data. The interesing one is the number 1, let's check it:
 ![](/images/ritsec-2019/findme.png)
-It looks like there are two `base64` encoded strings. The first one decodes to a
+It looks like there are two base64 encoded strings. The first one decodes to a
 [link](https://www.youtube.com/watch?v=dQw4w9WgXcQ) to the Rickroll song, a
 recurrent thing in this CTF.
-The second one is where the juice is. It is a `gzip` archive, so after writing
+The second one is where the juice is. It is a gzip archive, so after writing
 the string in a file let's decode and extract it:
 ```
 $ base64 -d data | gunzip
@@ -345,10 +340,10 @@ And there's our flag!
 > nc ctfchallenges.ritsec.club 8080
 
 This was to my surprise, a very easy challenge. After connecting with netcat to
-te given host, it would give us `NTLM` and `sha256crypt` hashes. It also
-suggested three wordlists for cracking the hashes, so I've merged them and piped
+the given host, it gives us NTLM and sha256crypt hashes. It also
+suggests three wordlists for cracking the hashes, so I've merged them and piped
 into `sort -u` to remove duplicates and then we can use hashcat with `-m 1000`
-for `NTLM` hashes and with `-m 1800` for the `sha256crypt` ones.
+for NTLM hashes and with `-m 1800` for the sha256crypt ones.
 
 ```
 $ nc ctfchallenges.ritsec.club 8080                                                                                                                                        [master↑1●5●]
@@ -370,7 +365,7 @@ NICE JOB.  FLAG:RS{H@$HM31FY0UCAN}
 ## AlPhAbEtIcAl Challenge - 300 points
 > 59:87:57:51:85:80{:40:50:56:08:82:58:81:08:18:85:57:87:48:85:88:40:50:56:59:15:56:11:18:85:59:51:}
 
-This looks like a substitution cipher, in which every letter get's replaced by
+This looks like a substitution cipher, in which every letter gets replaced by
 another one. There are a plethora of tools to crack them based on dictionaries
 and letters frequencies, but we need to convert the two digits to a single
 characters for this tools to work. So I wrote a python script:

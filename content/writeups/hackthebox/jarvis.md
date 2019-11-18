@@ -137,7 +137,7 @@ pepper@jarvis:/var/www/Admin-Utilities$ cat /home/pepper/user.txt
 ## Privilege escalation
 
 By running again `linpeas.sh` we stumble upon an unusual executable who has the
-`SUID` bit set, `systemcl`. We can exploit this to run any command as `root`, so
+`SUID` bit set, `systemctl`. We can exploit this to run any command as `root`, so
 let's create a `systemd` service file that will gets us a reverse shell:
 ```
 [Service]

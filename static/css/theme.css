@@ -27,7 +27,7 @@ h2 {
 }
 
 h1, h2, h3 {
-    font-weight: 400;
+    font-weight: 500;
 }
 
 /* Navbar */
@@ -151,6 +151,10 @@ ul.posts-list time {
         monospace;
 }
 
+.highlight code.language-text span {
+    color: #c7254e;
+}
+
 /* Blockquotes */
 body .post blockquote {
     font-style: italic;
@@ -167,5 +171,6 @@ blockquote p {
 
 /* Horizontal lines */
 hr {
-    margin-top: 2rem;
+    border: .07em solid #ddd;
+    /* margin-top: 2rem; */
 }

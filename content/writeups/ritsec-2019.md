@@ -2,13 +2,10 @@
 title: "Ritsec 2019"
 date: 2019-11-15T18:01:56+01:00
 tags: []
-draft: true
 ---
 
 # Crypto
-
 ---
-
 ## pre-legend - 100 points
 > 9EEADi^^8:E9F3]4@>^4=2J32==^D@>6E9:?8\FD67F=\C:ED64
 
@@ -45,7 +42,8 @@ RITSEC{POEWASTHEGOAT}
 ---
 ## HD Pepe - 300 points
 
-> Pepe is alpha tier
+> Pepe is alpha tier  
+> [ctf-pepe.png](/images/ritsec-2019/ctf_pepe.png)
 
 ![](/images/ritsec-2019/ctf_pepe.png)
 
@@ -319,7 +317,7 @@ W
 }
 ```
 
-## findme - 400? points
+## findme - 400 points
 > Find me! Challenge created by Security Risk Advisors for RITSEC CTF
 > [findme.pcap](/files/ritsec-2019/findme.pcap)
 
@@ -370,7 +368,6 @@ NICE JOB.  FLAG:RS{H@$HM31FY0UCAN}
 ```
 
 ## AlPhAbEtIcAl Challenge - 300 points
-### Flag
 > 59:87:57:51:85:80{:40:50:56:08:82:58:81:08:18:85:57:87:48:85:88:40:50:56:59:15:56:11:18:85:59:51:}
 
 This looks like a substitution cipher, in which every letter get's replaced by

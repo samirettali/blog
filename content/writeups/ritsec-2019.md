@@ -1,6 +1,6 @@
 ---
 title: "Ritsec 2019"
-date: 2019-11-15T18:01:56+01:00
+date: 2019-11-17T18:01:56+01:00
 tags: []
 ---
 
@@ -20,7 +20,7 @@ discord group that the flag was the link itself.
 ## shiny - 100 points
 
 > .‡8]5);483‡5;  
-[gold-bug.jfif](/images/ritsec-2019/shiny/gold-bug.jfif)
+[gold-bug.jfif](/images/ritsec-2019/gold-bug.jfif)
 
 ![](/images/ritsec-2019/gold-bug.jfif)
 
@@ -197,7 +197,7 @@ RS{4!way5_Ke3p-m0v1ng}
 
 # Forensics
 ---
-## Take it to the Cleaners - 100 - points
+## Take it to the Cleaners - 100 points
 
 > People hide things in images all the time! See if you can find what the artist
 > forgot to take out in this one!  

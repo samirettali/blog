@@ -120,7 +120,7 @@ pre {
 }
 
 /* Inline code */
-p code {
+p code, li code {
     color: #c7254e;
     padding: 2px 4px;
     background-color: #fff0f0;

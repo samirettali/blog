@@ -346,7 +346,7 @@ into `sort -u` to remove duplicates and then we can use hashcat with `-m 1000`
 for NTLM hashes and with `-m 1800` for the sha256crypt ones.
 
 ```
-$ nc ctfchallenges.ritsec.club 8080                                                                                                                                        [master↑1●5●]
+$ nc ctfchallenges.ritsec.club 8080
 Some moron just breached Meme Corp and decided to dump their passwords...
 In the meantime, prepare your GPUs, and get Ready... Set.... and go CRACK!
 However... We have a theory that the passwords might come from 500-worst-passwords.txt, darkweb2017-top10000.txt or probable-v2-top12000.txt

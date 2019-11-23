@@ -37,7 +37,7 @@ Join us at the pool party this Sat to get a glimpse
 ```
 
 As the comment says, the upload and the gallery are not linked yet. Let's
-search if they already on the server:
+search if they are already on the server:
 ```
 $ gobuster dir -q -t 40 -w raft-large-directories.txt -u http://10.10.10.146
 /backup (Status: 301)

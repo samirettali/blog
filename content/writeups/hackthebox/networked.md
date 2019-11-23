@@ -377,5 +377,4 @@ bar
 33 root.txt
 ```
 
-Lessons learned: read the carefully the documentation before writing system
-scripts!
+Lessons learned: read carefully the documentation before writing system scripts!

@@ -1,5 +1,5 @@
 ---
-title: "How I manage my website"
+title: "How I manage my blog"
 date: 2019-11-21T07:54:35+01:00
 tags: ["Hugo", "Github", "Github Actions", "CI"]
 ---

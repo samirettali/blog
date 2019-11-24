@@ -70,6 +70,10 @@ h1, h2, h3 {
     margin-top: 3rem;
 }
 
+.home svg {
+    margin: .1rem;
+}
+
 @media screen and (min-width: 560px) {
     .home p {
         margin: 3rem;

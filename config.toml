@@ -15,10 +15,10 @@ disableHugoGeneratorInject = true
   blog = "/:filename/"
 
 [menu]
-  # [[menu.main]]
-  #   name = "Posts"
-  #   url = "/blog/"
-  #   weight = 1
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 1
   [[menu.main]]
     name = "Writeups"
     url = "/writeups/"

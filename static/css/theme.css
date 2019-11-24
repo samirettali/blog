@@ -19,10 +19,14 @@ body {
 
 /* Headings */
 h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
 }
 
 h2 {
+    font-size: 1.5em;
+}
+
+h3 {
     font-size: 1.25em;
 }
 
@@ -31,38 +35,28 @@ h1, h2, h3 {
 }
 
 /* Navbar */
-.navbar * {
-    margin-bottom: 0;
-}
-
-.navbar {
-    overflow: auto;
-    padding: 0;
-    margin: 0;
-}
-
-.navbar li {
+.navbar ul {
     list-style: none;
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
 }
 
 .navbar .title {
-    float: left;
-    padding: 0;
-    margin: 0;
+    margin-right: auto;
 }
 
-.navbar .links {
-    float: right;
-    padding: 0;
-    margin: 0;
+.navbar .section {
+    margin-left: 1rem;
 }
 
-.navbar .links a {
+.navbar .section a {
     color: var(--grey-color);
     font-weight: 400;
 }
 
-.navbar .links a:hover {
+.navbar .section a:hover {
     color: var(--dark-grey-color);
 }
 
@@ -117,6 +111,7 @@ pre {
     background-color: #f0f0f0 !important;
     overflow: auto;
     line-height: 1.3rem;
+    width: 100%;
 }
 
 /* Inline code */
@@ -124,6 +119,13 @@ p code, li code {
     color: #c7254e;
     padding: 2px 4px;
     background-color: #fff0f0;
+}
+
+body > div.post > div > div > table > tbody > tr > td:nth-child(1) > pre {
+    padding-right: 0;
+}
+body > div.post > div > div > table > tbody > tr > td:nth-child(2) > pre {
+    padding-left: 0;
 }
 
 /* Posts lists */
@@ -155,6 +157,10 @@ ul.posts-list time {
     color: #c7254e;
 }
 
+.post-title {
+    margin-top: .0rem;
+}
+
 /* Blockquotes */
 body .post blockquote {
     font-style: italic;
@@ -163,6 +169,7 @@ body .post blockquote {
     border-left: 2px solid #666;
     margin: 0;
     padding: 1em;
+    overflow-wrap: break-word;
 }
 
 blockquote p {

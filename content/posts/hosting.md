@@ -105,6 +105,8 @@ And then, let's add the private key as a secret called `ACTIONS_DEPLOY_KEY`:
 Now Github Actions should be able to build from `master` to `public` and our
 repository should be ready to go!
 
+P.S. these are not my actual keys, it's just a test repository that I removed.
+
 ## Server setting
 The last thing to do is to setup our server to automatically pull from `public`.
 We will use a bare repository, which basically have the `.git` folder separated

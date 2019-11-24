@@ -1,10 +1,8 @@
 <div class="navbar">
-    <ul class="title">
-        <li><a href="/"><h1>{{ .Site.Title }}</h1></a></li>
-    </ul>
-    <ul class="links">
-    {{ range .Site.Menus.main }} 
-    <li><a href="{{ .URL }}"><h3>{{ .Name }}</h3></a></li>
-    {{ end }}
+    <ul>
+        <li class="title"><a href="/"><h1>{{ .Site.Title }}</h1></a></li>
+        {{ range .Site.Menus.main }} 
+        <li class="section"><a href="{{ .URL }}"><h3>{{ .Name }}</h3></a></li>
+        {{ end }}
     </ul>
 </div>

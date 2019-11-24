@@ -159,7 +159,9 @@ modified and we can inspect the Actions tab on Github to find what's wrong.
 
 This setup can be easily adapted to work with Jekyll or other static website
 builders, of course there are many other better ways, but this is the one that
-fits my needs the most.
+fits my needs the most. It can become really powerful if, for example, you want
+to plan posts publishing by using `publishDate` option in Hugo and set the
+Github Action to build your site every hour.
 
 I hope this will be useful for someone, don't hesitate to contact me for
 clarifications, thanks for reading!

@@ -147,7 +147,8 @@ And now we can setup cron to periodically pull from Github. After running
 */15 * * * * git --git-dir=/home/samir/website --work-tree=/var/www/html pull 2>>/home/samir/website-errors.log
 ```
 
-Now cron will pull every 15 minutes from Github, and it will log any errors in a
+Now cron will pull every 15 minutes from Github, and it will log any
+error in a
 file called `website-errors.log` in the user home. You can use
 [crontab.guru](https://crontab.guru/) to generate the job that you want.
 

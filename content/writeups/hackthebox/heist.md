@@ -1,7 +1,6 @@
 ---
 title: "Heist - HackTheBox"
 date: 2019-11-30T20:00:00+01:00
-publishDate: 2019-11-30T20:00:00+01:00
 tags: ["Windows", "impacket", "winrm", "procdump", "memory dump"]
 ---
 

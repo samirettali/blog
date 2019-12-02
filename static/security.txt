@@ -1,0 +1,3 @@
+Contact: mailto:ettali.samir@gmail.com
+Encryption: https://keybase.io/samirettali/pgp_keys.asc
+Preferred-Languages: en

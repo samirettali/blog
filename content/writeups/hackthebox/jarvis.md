@@ -41,7 +41,6 @@ banned and the site will respond with this message:
 
 Nevermind, let's wait a bit.
 
-In the rooms section the data for each room is 
 Exploring the website, we can see that the link to each room uses a `GET`
 parameter to indicate the number of the room, for example:
 ```

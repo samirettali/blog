@@ -167,13 +167,16 @@ ul.posts-list time {
 
 /* Blockquotes */
 body .post blockquote {
-    font-style: italic;
     color: #444;
     background-color: #f5f5f5;
     border-left: 2px solid #666;
     margin: 0;
     padding: 1em;
     overflow-wrap: break-word;
+}
+
+body .post blockquote p {
+    font-style: italic;
 }
 
 blockquote p {

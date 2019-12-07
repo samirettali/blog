@@ -221,7 +221,7 @@ continued reading LinEnum's output and I found an unusual executable in the
 `SUID` files section:
 ![](/images/hackthebox/wall/linenum.png)
 
-It is 'screen-4.5.0', and luckily, there's a handy local root exploit on
+It is `screen-4.5.0`, and luckily, there's a handy local root exploit on
 [exploit-db](https://www.exploit-db.com/exploits/41154). After downloading it on
 our machine, let's start a web server with `python -m http.server 8080` and
 let's download it on the remote machine with `wget

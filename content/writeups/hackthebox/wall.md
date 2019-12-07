@@ -230,9 +230,14 @@ have a root shell! Let's read the flags:
 
 ```
 wc -c /home/shelby/user.txt
-33 user.txt
-fe6194544f452f62dc905b12f8da8406
+33 /home/shelby/user.txt
 
-cat /root/root.txt
-1fdbcf8c33eaa2599afdc52e1b4d5db7
+wc -c /root/root.txt
+33 /root/root.txt
 ```
+
+I really couldn't find a way from `www-data` to `shelby`, except for some hashes
+in `/etc/shadow` but I couldn't crack them, I guess I'll wait for Ippsec's
+writeup!
+
+Thanks for reading!

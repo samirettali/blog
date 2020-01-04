@@ -1,8 +1,7 @@
 ---
 title: "Craft - HackTheBox"
-date: 2019-10-25T00:23:10+02:00
+date: 2020-01-04T16:00:00+02:00
 tags: []
-draft: true
 ---
 
 As usual, let's start with a quick port scan:

@@ -1,6 +1,6 @@
 ---
 title: "Bitlab - HackTheBox"
-date: 2019-10-26T15:23:03+02:00
+date: 2020-01-11T19:00:00+02:00
 tags: []
 ---
 
@@ -215,8 +215,9 @@ void FUN_00401520(void)
     pppuVar2 = (undefined4 ***)((int)pppuVar2 + 1);
   }
   lpParameters[local_20] = L'\0';
-  ShellExecuteW((HWND)0x0,L"open",L"C:\\Program Files\\PuTTY\\putty.exe",lpParameters,(LPCWSTR)0x0,
-                10);
+  if (local_6c == L'clave') {
+  ShellExecuteW((HWND)0x0,L"open",L"C:\\Program Files\\PuTTY\\putty.exe",lpParameters,(LPCWSTR)0x0, 10);
+  }
   if (0xf < local_1c) {
     operator_delete(local_30[0]);
   }
@@ -243,7 +244,7 @@ with PuTTY to a machine on line 71. The only problem is that the user that runs
 the program must be named `Clave`, and this check is at address `0x401640`:
 ![](/images/hackthebox/bitlab/graph.png)
 
-We can patch the program by editing `JNZ LAB_00401662` to `JMP 0x00401649` to
+We can patch the program by editing `JNZ LAB_00401662` at address `0x401647` to `JMP 0x00401649` to
 unconditionally jump, and running the patched program gets us a root shell on
 the machine:
 ![](/images/hackthebox/bitlab/putty.png)

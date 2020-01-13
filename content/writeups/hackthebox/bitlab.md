@@ -143,7 +143,7 @@ Let's copy it on our machine to analyze it:
 Using Ghidra to reverse engineer it we can find some interesting strings:
 ![](/images/hackthebox/bitlab/strings.png)
 
-And those strings are user in this function:
+And those strings are used in this function:
 {{< highlight C "linenos=table, hl_lines=71" >}}
 /* WARNING: Could not reconcile some variable overlaps */
 

@@ -3,7 +3,7 @@ baseURL = "https://samirettali.com/"
 languageCode = "en-us"
 title = "Samir's blog"
 
-pygmentsStyle = "igor" # igor, lovelace, arduino, pastie
+pygmentsStyle = "lovelace" # igor, lovelace, arduino, pastie
 pygmentsCodeFences = true
 pygmentsCodeFencesGuessSyntax = true
 # pygmentsUseClasses = true # new add

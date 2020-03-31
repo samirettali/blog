@@ -13,8 +13,7 @@ body {
     margin: 0 auto;
     max-width: 50rem;
     padding: 0 1rem;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    line-height: 1.4rem;
+    font-family: "Source Sans Pro";
 }
 
 /* Headings */
@@ -76,7 +75,7 @@ table td {
 
 .navbar .section a {
     color: var(--grey-color);
-    font-weight: 400;
+    /* font-weight: 400; */
 }
 
 .navbar .section a:hover {

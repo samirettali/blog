@@ -28,7 +28,7 @@ PORT    STATE SERVICE  VERSION
 |_Not valid after:  2029-05-03T21:14:35
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
-The web responds with the default nginx web page:
+The web server responds with the default nginx web page:
 ![](/images/hackthebox/registry/web.png)
 
 Let's run a simple discovery against it using [ffuf](https://github.com/ffuf/ffuf):

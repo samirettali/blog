@@ -166,9 +166,9 @@ homedirs_public         public_www
 Basically, after reading the
 [documentation](http://www.nazgul.ch/dev/nostromo_man.html), what I've
 understood is that nostromo creates a path on the web server named as every
-folder in `/home` and prepeding a `~` to it, and it's root will be a folder
-called `public_www` in the respective user home. In this case, for example, we have
-`http://10.10.10.165/~david/` point to `/home/david/public_www`:
+folder in `/home` and prepending a `~` to it, and it's root will be a folder
+called `public_www` in the respective user home. In this case, for example, we
+have `http://10.10.10.165/~david/` point to `/home/david/public_www`:
 ![](/images/hackthebox/traverxec/david.png)
 
 We can list all the files in `~david` then:
@@ -231,7 +231,7 @@ VeYniFU/TGnRKDYLQH2x0ni1tBf0wKOLERY0CbGDcquzRoWjAmTN/PV2VbEKKD/w
 Let's copy it on our machine and try to crack it with John:
 ```
 $ ssh2john.py id_rsa > id_rsa.hash
-vagrant@kali:traver$ john --wordlist=lists/rockyou.txt id_rsa.hash                                                                                                      
+$ john --wordlist=lists/rockyou.txt id_rsa.hash                                                                                                      
 Using default input encoding: UTF-8
 Loaded 1 password hash (SSH [RSA/DSA/EC/OPENSSH (SSH private keys) 32/64])
 Cost 1 (KDF/cipher [0=MD5/AES 1=MD5/3DES 2=Bcrypt/AES]) is 0 for all loaded hashes
@@ -262,7 +262,6 @@ david@traverxec:~$
 And we got user!
 
 ## Root escalation
-
 As we login, we can see a folder named `bin` that contains a script called
 `server-stats.sh`
 ```bash

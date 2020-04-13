@@ -5,7 +5,7 @@ tags: [path traversal, rce]
 ---
 
 ![](/images/hackthebox/traverxec/traverxec.png)
-Traverxec is an easy Linux machine on HackTheBox involving a Path traversal bug
+Traverxec is an easy Linux machine on HackTheBox involving a path traversal bug
 that allows RCE, cracking an SSH key and exploiting the pager functionality of
 journalctl to get a root shell.
 

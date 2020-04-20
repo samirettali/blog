@@ -39,27 +39,26 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
 Let's visit the two web servers, here's the one on port 80, altough as we can
-see from the nmap scan, it will return 403:
+see from the port scan, it will return 403:
 ![](/images/hackthebox/mango/web-80.png)
 
 And here's the one on port 443:
 ![](/images/hackthebox/mango/web-443.png)
 
-From the nmap scan it seems that there's a subdomain, so let's add
-`staging-order.mango.htb` to `/etc/hosts` and let's visit it:
+From the port scan it seems that there's a subdomain, so let's add
+`staging-order.mango.htb` to `/etc/hosts` in order to be able to visit it:
 ![](/images/hackthebox/mango/mango.png)
 
-It's a simple login form, and trying usual default credentials yields us
+It's a simple login form, and trying some default credentials yields us
 nothing. This took me a lot of time and so much trial and error, but in the end
-I found out there was a NoSQL injection in mongoDB, hence the name mango.
+I found out that there was a NoSQL injection in mongoDB, hence the name mango.
 
-Basically we can use regexes to enumerate usernames and passwords, and make a
-request using `username[$regex]=^a.*`, `username[$regex]=^b.*` and so on. When
-the regex matches a database record, a `302` response will happen, here's
-an example request:
+Basically we can use regexes to enumerate usernames and passwords by making a
+request like `username[$regex]=^a.*`, so that if the regex matches a database
+record, a `302` response will happen, here's an example request:
 ![](/images/hackthebox/mango/nosql-injection-request.png)
 
-And when the regex matches we get a `302`:
+And the response we get when it matches a record:
 ![](/images/hackthebox/mango/nosql-injection-response.png)
 
 ## Getting some credentials
@@ -153,7 +152,7 @@ $ wc -c user.txt
 Running any enumeration script like
 [LinEnum](https://github.com/rebootuser/LinEnum) or
 [linpeas](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite)
-will show us that there's an unusual binary with SUID enabled in
+will show us that there's an unusual binary with the SUID bit enabled in
 `/usr/lib/jvm/java-11-openjdk-amd64/bin/jjs` owned by root:
 ```
 $ ls -la /usr/lib/jvm/java-11-openjdk-amd64/bin/jjs

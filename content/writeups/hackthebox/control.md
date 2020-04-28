@@ -1,6 +1,6 @@
 ---
 title: "Control - HackTheBox"
-date: 2020-04-28T18:00:00+01:00
+date: 2020-04-25T18:00:00+01:00
 tags: [HackTheBox, Windows, SQL Injection, ACL, Registry]
 ---
 

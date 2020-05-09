@@ -1,5 +1,5 @@
 ---
-title: "Obscurity"
+title: "Obscurity - HackTheBox"
 date: 2020-05-09T17:00:00+01:00
 tags: []
 ---

@@ -5,6 +5,7 @@ title = "Samir's blog"
 
 pygmentsStyle = "lovelace" # igor, lovelace, arduino, pastie
 pygmentsCodeFences = true
+theme = "clean"
 pygmentsCodeFencesGuessSyntax = true
 # pygmentsUseClasses = true # new add
 
@@ -26,7 +27,7 @@ disableHugoGeneratorInject = true
 
 [params]
   dateFormat = "Jan 2, 2006"
-  homeText = "Welcome!"
   github = "samirettali"
   twitter = "samirettali"
-  keybase = "samirettali"
+  mail = "ettali.samir@gmail.com"
+  description="Hi, I'm Samir and I'm a Computer Science student living in Turin, Italy. I love programming and I play CTFs. I mainly post my writeups on the blog."

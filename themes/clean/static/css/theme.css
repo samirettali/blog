@@ -11,12 +11,16 @@
 
 body {
     margin: 0 auto;
-    max-width: 50rem;
+    max-width: 800px;
     padding: 0 1rem;
+    color: #24292e;
     line-height: 1.4em;
     font-family: Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI",
                  Roboto, Arial, sans-serif, "Apple Color Emoji",
                  "Segoe UI Emoji", "Segoe UI Symbol";
+    /* text-rendering: optimizeLegibility; */
+    /* -webkit-font-smoothing: antialiased; */
+    /* -moz-osx-font-smoothing: grayscale; */
 }
 
 /* Headings */
@@ -34,29 +38,6 @@ h3 {
 
 h1, h2, h3 {
     font-weight: 500;
-}
-
-table {
-	color:#333333;
-	border-width: 1px;
-	border-color: #666666;
-	border-collapse: collapse;
-}
-
-table th {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: #dedede;
-}
-
-table td {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: #ffffff;
 }
 
 /* Navbar */
@@ -78,7 +59,7 @@ table td {
 
 .navbar .section a {
     color: var(--grey-color);
-    /* font-weight: 400; */
+    font-weight: 400;
 }
 
 .navbar .section a:hover {
@@ -152,7 +133,6 @@ div.highlight {
 /* Inline code */
 p code, li code {
     color: #c7254e;
-    /* color: #b83838; */
     padding: 2px 4px;
     background-color: #fff8f8;
 }
@@ -160,6 +140,7 @@ p code, li code {
 body > div.post > div > div > table > tbody > tr > td:nth-child(1) > pre {
     padding-right: 0;
 }
+
 body > div.post > div > div > table > tbody > tr > td:nth-child(2) > pre {
     padding-left: 0;
 }
@@ -169,6 +150,7 @@ ul.posts-list {
     display: table;
     list-style: none;
     padding-left: 0;
+    /* line-height: 1.8em; */
 }
 
 ul.posts-list > li {
@@ -185,7 +167,7 @@ ul.posts-list time {
     color: var(--grey-color);
     white-space: nowrap;
     text-align: right;
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    font-family: "Roboto Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
         monospace;
 }
 
@@ -193,9 +175,9 @@ ul.posts-list time {
     color: #c7254e;
 }
 
-.post-title {
-    margin-top: .0rem;
-}
+/* .post-title { */
+/*     margin-top: .0rem; */
+/* } */
 
 /* Blockquotes */
 body .post blockquote {
@@ -219,4 +201,28 @@ blockquote p {
 hr {
     border: .07em solid #ddd;
     /* margin-top: 2rem; */
+}
+
+table {
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+    margin: 0 auto;
+}
+
+table th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+
+table td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
 }

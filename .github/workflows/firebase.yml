@@ -1,0 +1,2 @@
+- name: Hugo build and Firebase Deploy
+  uses: pulimento/github-action-hugo-deploy-to-firebase@1.1.0

@@ -4,6 +4,12 @@ date: 2020-06-20T17:00:00+02:00
 tags: []
 ---
 
+![](/images/hackthebox/servmon/info.png)
+Servmon is an easy Windows machine on Hack The Box. We will get some passwords
+from a path traversal vulnerability and exploit a misconfigured monitoring app
+running as Administrator.
+
+## Information gathering
 Let's start with a port scan:
 ```
 $ nmap -A -T4 10.10.10.184
@@ -161,6 +167,7 @@ Let's keep this stuff in mind. The HTTP server shows us a login and there's not
 much that we can do:
 ![](/images/hackthebox/servmon/http.png)
 
+## Finding some credentials
 Searchsploit reveals some path traversal exploits for `nvms`:
 ```
 $ searchsploit nvms
@@ -207,6 +214,7 @@ IfH3s4b0Utg0t0H1sH0me
 Gr4etN3w5w17hMySk1Pa5$
 ```
 
+## Getting a shell
 Using [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) we can try to
 bruteforce smb:
 ![](/images/hackthebox/servmon/cme.png)
@@ -235,7 +243,7 @@ user.txt SERVMON\Administrator:(F)
 Successfully processed 1 files; Failed processing 0 files
 ```
 
-# Privilege escalation
+## Privilege escalation
 
 One thing that we did not investigate is the HTTP server on port 8443, let's
 visit it:

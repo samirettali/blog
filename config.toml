@@ -1,29 +1,37 @@
 baseURL = "https://samirettali.com/"
 
 languageCode = "en-us"
-title = "Samir's blog"
+title = "SE"
 
 pygmentsStyle = "lovelace" # igor, lovelace, arduino, pastie
 pygmentsCodeFences = true
-theme = "clean"
+theme = "codex"
 pygmentsCodeFencesGuessSyntax = true
 # pygmentsUseClasses = true # new add
 
 disableHugoGeneratorInject = true
-
 
 [permalinks]
   blog = "/:filename/"
 
 [menu]
   [[menu.main]]
+    identifier = "about"
+    name = "About"
+    title = "About"
+    url = "/"
+
+  [[menu.main]]
+    identifier = "posts"
     name = "Posts"
     url = "/posts/"
-    weight = 1
+    title = "Blog"
+
   [[menu.main]]
+    identifier = "writeups"
     name = "Writeups"
     url = "/writeups/"
-    weight = 2
+    title = "Writeups"
 
 [params]
   dateFormat = "Jan 2, 2006"

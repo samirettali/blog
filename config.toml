@@ -16,9 +16,9 @@ disableHugoGeneratorInject = true
 
 [menu]
   [[menu.main]]
-    identifier = "about"
-    name = "About"
-    title = "About"
+    identifier = "home"
+    name = "Home"
+    title = "Home"
     url = "/"
 
   [[menu.main]]

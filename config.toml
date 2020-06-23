@@ -20,6 +20,7 @@ disableHugoGeneratorInject = true
     name = "Home"
     title = "Home"
     url = "/"
+    weight = 1
 
   [[menu.main]]
     identifier = "blog"

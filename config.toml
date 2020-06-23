@@ -22,8 +22,8 @@ disableHugoGeneratorInject = true
     url = "/"
 
   [[menu.main]]
-    identifier = "posts"
-    name = "Posts"
+    identifier = "blog"
+    name = "Blog"
     url = "/posts/"
     title = "Blog"
 

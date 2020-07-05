@@ -7,7 +7,6 @@ pygmentsStyle = "lovelace" # igor, lovelace, arduino, pastie
 pygmentsCodeFences = true
 theme = "codex"
 pygmentsCodeFencesGuessSyntax = true
-# pygmentsUseClasses = true # new add
 
 disableHugoGeneratorInject = true
 

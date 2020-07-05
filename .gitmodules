@@ -1,0 +1,3 @@
+[submodule "themes/codex"]
+	path = themes/codex
+	url = git@github.com:samirettali/hugo-theme-codex

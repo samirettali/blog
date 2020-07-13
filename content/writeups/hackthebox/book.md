@@ -1,8 +1,7 @@
 ---
-title: "Book"
+title: "Book - HackThebox"
 date: 2020-04-20T02:15:50+02:00
-tags: []
-draft: true
+tags: [HackTheBox, logrotate, pdf-generator, arbitrary-file-read, logrotten]
 ---
 
 Book is a medium difficulty Linux machine on Hack The Box in which we'll take

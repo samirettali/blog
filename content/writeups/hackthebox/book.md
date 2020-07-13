@@ -135,6 +135,7 @@ book title in the user section of the website, this is the resulting exported
 Collections PDF from the admin section:
 ![](/images/hackthebox/book/bold-collections.png)
 
+## Arbitraty file read
 Great! Let's see how we can exploit this!
 [Here's](https://www.noob.ninja/2017/11/local-file-read-via-xss-in-dynamically.html)
 an article that helped me a lot.

@@ -1,6 +1,6 @@
 ---
 title: "Book - HackThebox"
-date: 2020-04-20T02:15:50+02:00
+date: 2020-07-18T18:00:00+02:00
 tags: [HackTheBox, logrotate, pdf-generator, arbitrary-file-read, logrotten]
 ---
 
@@ -108,7 +108,7 @@ While doing some common enumeration stuff, I noticed something interesting. I've
 registered an account using a long mail address, and the login suddenly wouldn't
 work. Some in depth fuzzing allowed me to discover that there's a mail length
 limit of 20 characters, so if we register with `abcdefghijklmnopqrst@mail.com`,
-the `@mail.com` part will be omitted.  Probabily the backend uses the `TRUNCATE`
+the `@mail.com` part will be omitted. Probably the backend uses the `TRUNCATE`
 SQL function.
 
 This is a serious problem because we can register using `admin@book.htb
@@ -226,7 +226,7 @@ and it is explained
 [here](https://tech.feedyourhead.at/content/details-of-a-logrotate-race-condition)
 really well.
 
-We will use it to write out mailicious payload to `/etc/bash_completion.d`,
+We will use it to write out malicious payload to `/etc/bash_completion.d`,
 which contains some scripts that `bash` runs upon any login.
 
 Let's download and compile the `logrotten` exploit:

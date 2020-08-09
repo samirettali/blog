@@ -1,12 +1,13 @@
 baseURL = "https://samirettali.com/"
 
 languageCode = "en-us"
-title = "SE"
+title = "Samir Ettali"
 
 pygmentsStyle = "lovelace" # igor, lovelace, arduino, pastie
 pygmentsCodeFences = true
 theme = "codex"
 pygmentsCodeFencesGuessSyntax = true
+googleAnalytics = "UA-149325930-1"
 
 disableHugoGeneratorInject = true
 

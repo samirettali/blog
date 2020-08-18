@@ -1,5 +1,5 @@
 on: [push]
-name: Publish blog
+name: Publish blog on commit
 jobs:
   build:
     runs-on: ubuntu-latest

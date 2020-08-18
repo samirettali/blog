@@ -4,3 +4,6 @@
 [submodule "themes/hugo-tanka"]
 	path = themes/hugo-tanka
 	url = https://github.com/nanxstats/hugo-tanka
+[submodule "themes/hugo-theme-cactus-plus"]
+	path = themes/hugo-theme-cactus-plus
+	url = https://github.com/nodejh/hugo-theme-cactus-plus.git

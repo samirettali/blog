@@ -1,75 +1,20 @@
 :root {
     --accent-color: #ee0000;
     --darker-accent-color: #a20000;
-    --grey-color: #7f7f7f;
-    --dark-grey-color: #3f3f3f;
-}
+    --grey-color: #66758c;
 
-*, *::before, *::after {
-    box-sizing: border-box;
 }
 
 body {
-    margin: 0 auto;
-    max-width: 800px;
-    padding: 0 1rem;
-    color: #24292e;
-    line-height: 1.4em;
-    font-family: Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    font-family: "Fira Sans", Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI",
                  Roboto, Arial, sans-serif, "Apple Color Emoji",
                  "Segoe UI Emoji", "Segoe UI Symbol";
-    /* text-rendering: optimizeLegibility; */
-    /* -webkit-font-smoothing: antialiased; */
-    /* -moz-osx-font-smoothing: grayscale; */
-}
-
-/* Headings */
-h1 {
-    font-size: 1.75rem;
-}
-
-h2 {
-    font-size: 1.5em;
-}
-
-h3 {
-    font-size: 1.25em;
-}
-
-h1, h2, h3 {
-    font-weight: 500;
-}
-
-/* Navbar */
-.navbar ul {
-    list-style: none;
-    display: flex;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0;
-}
-
-.navbar .title {
-    margin-right: auto;
-}
-
-.navbar .section {
-    margin-left: 1rem;
-}
-
-.navbar .section a {
-    color: var(--grey-color);
-    font-weight: 400;
-}
-
-.navbar .section a:hover {
-    color: var(--dark-grey-color);
 }
 
 /* Home */
 .home {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.2em;
 }
 
 .home p {
@@ -77,80 +22,32 @@ h1, h2, h3 {
 }
 
 .home svg {
-    margin: .1rem;
-}
-
-@media screen and (min-width: 560px) {
-    .home p {
-        margin: 3rem;
-    }
-}
-
-/* Links */
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-
-
-a:hover {
-    color: var(--darker-accent-color);
-    text-decoration: underline;
+    margin: .2rem;
 }
 
 /* Images */
 img {
-    max-width: 100%;
     padding-top: 1rem;
     padding-bottom: 1rem;
     display: block;
-    margin: 0 auto;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto; /* Needed ? */
 }
 
 /* Code */
 code, pre {
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    font-family: "Fira Code", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
         monospace;
-    font-size: 14px;
     border-radius: 4px;
-}
-
-/* Code block */
-pre {
-    padding: .75rem 1rem .75rem 1rem;
-    background-color: #f0f0f0 !important;
-    overflow: auto;
-    line-height: 1.3rem;
-    width: 100%;
-    margin-bottom: 0px;
-}
-
-/* Fix for separated scrollbar from code block */
-div.highlight {
-    margin-bottom: 1em;
-}
-
-/* Inline code */
-p code, li code {
-    color: #c7254e;
-    padding: 2px 4px;
-    background-color: #fff8f8;
-}
-
-body > div.post > div > div > table > tbody > tr > td:nth-child(1) > pre {
-    padding-right: 0;
-}
-
-body > div.post > div > div > table > tbody > tr > td:nth-child(2) > pre {
-    padding-left: 0;
 }
 
 /* Posts lists */
 ul.posts-list {
-    display: table;
     list-style: none;
+    display: table;
     padding-left: 0;
-    /* line-height: 1.8em; */
+    line-height: 1.8em;
 }
 
 ul.posts-list > li {
@@ -167,62 +64,17 @@ ul.posts-list time {
     color: var(--grey-color);
     white-space: nowrap;
     text-align: right;
-    font-family: "Roboto Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    font-family: "Fira Code", "Roboto Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
         monospace;
 }
 
-.highlight code.language-text span {
-    color: #c7254e;
-}
-
-/* .post-title { */
-/*     margin-top: .0rem; */
-/* } */
-
 /* Blockquotes */
 body .post blockquote {
-    color: #444;
-    background-color: #f5f5f5;
-    border-left: 2px solid #666;
-    margin: 0;
-    padding: 1em;
-    overflow-wrap: break-word;
-}
-
-body .post blockquote p {
+    width: 100%;
     font-style: italic;
 }
 
-blockquote p {
-    display: inline;
-}
-
-/* Horizontal lines */
-hr {
-    border: .07em solid #ddd;
-    /* margin-top: 2rem; */
-}
-
-table {
-	color:#333333;
-	border-width: 1px;
-	border-color: #666666;
-	border-collapse: collapse;
-    margin: 0 auto;
-}
-
-table th {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: #dedede;
-}
-
-table td {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: #ffffff;
+header {
+    margin-top: 1em;
+    margin-bottom: 2em;
 }

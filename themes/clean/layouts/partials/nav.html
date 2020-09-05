@@ -1,8 +1,8 @@
-<div class="navbar">
-    <ul>
-        <li class="title"><a href="/"><h1>{{ .Site.Title }}</h1></a></li>
-        {{ range .Site.Menus.main }} 
-        <li class="section"><a href="{{ .URL }}"><h3>{{ .Name }}</h3></a></li>
-        {{ end }}
-    </ul>
-</div>
+<header class="navbar">
+    <section class="navbar-section">
+        <a class="title navbar-brand mr-2" href="/">{{ .Site.Title }}</a>
+    </section>
+    <section class="navbar-section">
+        {{ range .Site.Menus.main }}<a class="btn btn-link" href="{{ .URL }}">{{ .Name }}</a>{{ end }}
+    </section>
+</header>

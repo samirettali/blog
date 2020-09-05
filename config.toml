@@ -3,9 +3,9 @@ baseURL = "https://samirettali.com/"
 languageCode = "en-us"
 title = "Samir Ettali"
 
-pygmentsStyle = "lovelace" # igor, lovelace, arduino, pastie
+pygmentsStyle = "lovelace"
 pygmentsCodeFences = true
-theme = "hugo-theme-cactus-plus"
+theme = "clean"
 hasCJKLanguage = false
 pygmentsCodeFencesGuessSyntax = true
 googleAnalytics = "UA-149325930-1"
@@ -38,7 +38,6 @@ disableHugoGeneratorInject = true
 [params]
   author = "Samir Ettali"
   description = "Hi, I'm Samir and I'm a Computer Science student living in Turin, Italy. I love programming and I play CTFs. I mainly post my writeups on the blog."
-  bio = ""
   dateFormat = "Jan 2, 2006"
 
   twitter = "samirettali"
@@ -46,41 +45,5 @@ disableHugoGeneratorInject = true
   mail = "ettali.samir@gmail.com"
 
   enableRSS = true
-  enableToc = false
-
-  enableDisqus = false
-
-  enableSummary = false
-  useDescriptionReplaceSummary = true
 
   enableGoogleAnalytics = true
-
-  enableTwitterCard = true
-  # The url for twitter card image, default is avatar.png in static/images directory
-  twitterCardImage = ""
-
-  # Add custom assets with their paths relative to the static folder
-  customCSS = []
-  customJS  = []
-
-  # The variables below are optionally too and can be used to
-  # translate or customize each string of the theme.
-
-  # show latest posts in single page
-  showLatestPosts = false
-
-  # Share
-  enableShare = false
-
-  # 404 page
-  title404 = ""
-  subtitle404 = ""
-
-  # Choose a font for the social icons in the footer. Either "mono-social" or "font-awesome"
-  iconFont = "font-awesome"
-  # The social icons can be styled differently if you use mono as font - circle, rounded, or empty
-  socialIconStyle = ""
-
-[social]
-  twitter-square = "https://www.twitter.com/samirettali"
-  github-square = "https://www.github.com/samirettali"

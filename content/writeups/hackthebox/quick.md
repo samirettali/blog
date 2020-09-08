@@ -4,7 +4,7 @@ date: 2020-08-29T18:00:00+02:00
 tags: [xslt-injection, race-condition, http3, quic, hackthebox]
 ---
 
-![](/images/hackthebox/quick/info)
+![](/images/hackthebox/quick/info.png)
 Quick is a hard Linux machine on Hack The Box. We will use a HTTP/3 client to
 get a PDF file containing some credentials, use ESI injection to get a shell,
 exploit a race condition to escalate to another user and find some hardcoded

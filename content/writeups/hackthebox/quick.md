@@ -195,7 +195,6 @@ co.uk
 
 And these are the domain names:
 ```
-user@ctf:~/hacking/ctf/htb/.quick$ cat domains.txt
 quick
 qconsulting
 darkwng

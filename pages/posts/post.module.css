@@ -1,0 +1,19 @@
+.post img {
+  max-width: 100%;
+  display: block;
+}
+
+.post p {
+  margin-bottom: 1.25rem;
+}
+
+.post p img {
+  margin-top: 1.25rem;
+}
+
+/* .post :not(pre) code { */
+/*   background: var(--color-background-secondary); */
+/*   border-radius: 3px; */
+/*   padding: 0.2em 0.2em; */
+/* /1*   border-radius: 4px !important; *1/ */
+/* } */

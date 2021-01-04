@@ -28,7 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showBack = false }) => {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Navbar name="Samir Ettali" />
+      <Navbar name="SE" />
       <main>{children}</main>
       {showBack && (
        <div className="my-12">

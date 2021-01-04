@@ -1,5 +1,5 @@
 Hi, I'm Samir and I'm a Computer Science student living in Turin, Italy. I'm
-deeply passionate about programming, hacking, and cryptocurrencies.
+deeply passionate about programming and hacking.
 
 I play CTFs every now and then and I post my [writeups](/writeups) on the blog.
 You can check some of the code I've written on my

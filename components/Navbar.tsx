@@ -21,7 +21,7 @@ const Navbar = ({ name }: NavbarProps) => {
     const initialColorValue = root.style.getPropertyValue(
       "--initial-color-mode"
     );
-    console.log("initialColorValue", initialColorValue);
+    // console.log("initialColorValue", initialColorValue);
     setDarkMode(initialColorValue === "dark");
   }, []);
 
@@ -38,7 +38,7 @@ const Navbar = ({ name }: NavbarProps) => {
         localStorage.setItem("theme", "light");
       }
     }
-    console.log("Dark mode changed: ", darkMode);
+    // console.log("Dark mode changed: ", darkMode);
   }, [darkMode]);
 
   return (

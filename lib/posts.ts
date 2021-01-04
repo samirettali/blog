@@ -108,7 +108,7 @@ export const getSortedContent = (type: ContentType): IPostProps[] => {
 
 const getContentData = async (id: string | string[], filename: string) => {
   const contentPath = path.join(process.cwd(), filename);
-  console.log("Post path", contentPath);
+  // console.log("Post path", contentPath);
   const rawContent = fs.readFileSync(contentPath, "utf8");
 
   // Use gray-matter to parse the post metadata section
@@ -122,7 +122,7 @@ const getContentData = async (id: string | string[], filename: string) => {
     await remark().use(html).use(prism, { transformInlineCode: false }).process(matterResult.content)
   ).toString();
 
-  console.log(tags)
+  // console.log(tags)
   // Combine the data with the id and contentHtml
   return {
     id,

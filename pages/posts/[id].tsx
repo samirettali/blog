@@ -5,7 +5,6 @@ import Layout from "../../components/layout";
 import { getPostData, getPostsIds } from "../../lib/posts";
 import Date from "../../components/date";
 import styles from "./post.module.css";
-import { DarkModeContext } from "../../context/theme";
 import { useContext, useEffect, useState } from "react";
 import 'prism-themes/themes/prism-material-oceanic.css'
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Moon, Sun } from "react-feather";
+import { Moon, Sun } from 'heroicons-react'
 
 import { useEffect, useState } from "react";
 // import { DarkModeContext } from '../context/theme'
@@ -46,12 +46,12 @@ const Navbar = ({ name }: NavbarProps) => {
       <nav className="flex items-center flex-wrap font-semibold">
         <div className="flex-grow">
           <Link href="/">
-            <a className="mr-4 inline-flex items-center text-3xl">
+            <a className="mr-4 inline-flex text-3xl">
               {name}
             </a>
           </Link>
         </div>
-        <div className='text-lg flex'>
+        <div className='text-lg flex items-center'>
         <div className="px-3">
           <Link href="/posts">
             <a>Posts</a>

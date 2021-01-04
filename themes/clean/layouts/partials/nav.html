@@ -1,8 +1,0 @@
-<header class="navbar">
-    <section class="navbar-section">
-        <a class="title navbar-brand mr-2" href="/">{{ .Site.Title }}</a>
-    </section>
-    <section class="navbar-section">
-        {{ range .Site.Menus.main }}<a class="btn btn-link" href="{{ .URL }}">{{ .Name }}</a>{{ end }}
-    </section>
-</header>

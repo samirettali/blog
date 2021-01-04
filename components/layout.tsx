@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
 import Router from 'next/router'
-import { DarkModeProvider } from '../context/theme'
 
 import Navbar from "./Navbar";
 
@@ -29,7 +28,6 @@ const Layout: React.FC<LayoutProps> = ({ children, showBack = false }) => {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <DarkModeProvider>
       <Navbar name="Samir Ettali" />
       <main>{children}</main>
       {showBack && (
@@ -39,7 +37,6 @@ const Layout: React.FC<LayoutProps> = ({ children, showBack = false }) => {
           {/* </Link> */}
         </div>
       )}
-      </DarkModeProvider>
     </div>
   );
 };

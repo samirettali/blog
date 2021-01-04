@@ -8,6 +8,7 @@ const urls = {
   twitter: "https://twitter.com/",
   github: "https://github.com/",
   facebook: "https://facebook.com/",
+  instagram: "https://instagram.com/",
   // keybase: "https://keybase.com/",
   mail: "mailto:",
 };

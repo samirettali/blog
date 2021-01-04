@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { Moon, Sun } from "react-feather";
 
-import { useContext, useEffect, useState } from "react";
-import { DarkModeContext } from '../context/theme'
+import { useEffect, useState } from "react";
+// import { DarkModeContext } from '../context/theme'
 
 type NavbarProps = {
   name: string;
 };
 
 const Navbar = ({ name }: NavbarProps) => {
-  // const [darkMode, setDarkMode] = useState<boolean | undefined>(undefined);
-  const { darkMode, setDarkMode } = useContext(DarkModeContext)
+  const [darkMode, setDarkMode] = useState<boolean | undefined>(undefined);
+  // const { darkMode, setDarkMode } = useContext(DarkModeContext)
 
   const handleToggle = () => {
     setDarkMode((darkMode) => !darkMode);

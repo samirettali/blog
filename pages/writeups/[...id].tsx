@@ -2,7 +2,7 @@ import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 import Layout from "../../components/layout";
-import { getContentIds, getWriteupData, getWriteupsIds } from "../../lib/posts";
+import { getWriteupData, getWriteupsIds } from "../../lib/posts";
 import Date from "../../components/date";
 import styles from "./post.module.css";
 import 'prism-themes/themes/prism-material-oceanic.css'

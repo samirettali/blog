@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import remark from "remark";
 import html from "remark-html";
 import { IPostProps } from "../pages/posts/[id]";
+import slug from 'remark-slug';
 import prism from "remark-prism";
 import unwrapImages from "remark-unwrap-images";
 import glob from "glob";
@@ -108,7 +109,6 @@ export const getSortedContent = (type: ContentType): IPostProps[] => {
 
 const getContentData = async (id: string | string[], filename: string) => {
   const contentPath = path.join(process.cwd(), filename);
-  // console.log("Post path", contentPath);
   const rawContent = fs.readFileSync(contentPath, "utf8");
 
   // Use gray-matter to parse the post metadata section
@@ -119,7 +119,11 @@ const getContentData = async (id: string | string[], filename: string) => {
 
   // Use remark to convert markdown into HTML string
   const htmlContent = (
-    await remark().use(html).use(prism, { transformInlineCode: false }).process(matterResult.content)
+    await remark()
+      .use(slug)
+      .use(html)
+      .use(prism, { transformInlineCode: false })
+      .process(content)
   ).toString();
 
   // console.log(tags)

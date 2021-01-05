@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next";
 
+import Article from '../../components/Article'
 import Layout from "../../components/layout";
 import { getWriteupData, getWriteupsIds } from "../../lib/posts";
-import Date from "../../components/date";
-import styles from "./post.module.css";
+
 import 'prism-themes/themes/prism-material-oceanic.css'
 
 type IWriteupFile = {
@@ -27,15 +27,7 @@ const Writeup = (props: IWriteupProps) => {
       <Head>
         <title>{props.title}</title>
       </Head>
-      <article className={styles.post}>
-        <h1 className="text-4xl font-bold mb-1">{props.title}</h1>
-        <div className="text-gray-500 mb-8">
-          <Date dateString={props.date.toLocaleString()} />
-        </div>
-        <div
-          dangerouslySetInnerHTML={{ __html: props.html as string }}
-        />
-      </article>
+      <Article {...props} />
     </Layout>
   );
 };

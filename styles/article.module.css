@@ -1,66 +1,89 @@
-/* .post img { */
+/* .post-body img { */
 /*   max-width: 100%; */
 /*   display: block; */
 /* } */
 
-.post :not(pre) code {
+.post-body :not(pre) code {
   background: var(--color-background-secondary);
   border-radius: 3px;
   padding: 0.2em 0.2em;
 /*   border-radius: 4px !important; */
 }
 
-.post pre {
+.post-body pre {
 	@apply rounded;
 	@apply shadow-lg;
 }
 
-.post img {
+.post-body img {
 	/* @apply rounded; */
-	@apply shadow-lg;
+	/* @apply shadow-lg; */
 }
 
-.post p {
+.post-body p {
 	@apply my-6;
 }
 
-.post ol {
+.post-body ol {
 	@apply list-disc;
 	@apply list-inside;
 }
 
-.post ol li {
+.post-body ol li {
 	@apply ml-6;
 }
 
 /* width */
-.post pre::-webkit-scrollbar {
+.post-body pre::-webkit-scrollbar {
   width: 10px;
 }
 
 /* Track */
-.post pre::-webkit-scrollbar-track {
+.post-body pre::-webkit-scrollbar-track {
 	@apply bg-gray-500;
   /* background: #f1f1f1; */
 	@apply rounded-b;
 }
 
 /* Handle */
-.post pre::-webkit-scrollbar-thumb {
+.post-body pre::-webkit-scrollbar-thumb {
 	@apply bg-gray-700;
   /* background: #888; */
 	@apply rounded-b;
 }
 
 /* Handle on hover */
-.post pre::-webkit-scrollbar-thumb:hover {
+.post-body pre::-webkit-scrollbar-thumb:hover {
 	@apply bg-gray-800;
   background: #555;
 	@apply rounded-b;
 }
 
+.post-body h1, .post-body h2, .post-body h3 {
+	@apply mt-8;
+	@apply mb-4;
+}
+
+.post-body blockquote {
+	@apply p-2;
+	@apply mb-4;
+	@apply rounded;
+	@apply bg-mygray-light;
+	@apply border-gray-400;
+	@apply text-mygray-dark;
+	@apply border-l-8;
+	@apply italic mx-2;
+	@apply font-light;
+}
+
+.post-body blockquote p {
+	@apply ml-4;
+}
+
+
+
 @media screen and (min-width: 600px) {
-  .post {
+  .post-body {
 		@apply text-lg;
   }
 }

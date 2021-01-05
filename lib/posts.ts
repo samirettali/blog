@@ -10,6 +10,8 @@ import unwrapImages from "remark-unwrap-images";
 import glob from "glob";
 import { IWriteupProps } from "../pages/writeups/[...id]";
 import { IS_PROD } from '../constants'
+import unified from 'unified';
+import markdown from 'remark-parse';
 
 type ContentType = "posts" | "writeups";
 
@@ -119,8 +121,9 @@ const getContentData = async (id: string | string[], filename: string) => {
 
   // Use remark to convert markdown into HTML string
   const htmlContent = (
-    await remark()
-      .use(slug)
+    await unified()
+      // .use()
+      .use(markdown)
       .use(html)
       .use(prism, { transformInlineCode: false })
       .process(content)

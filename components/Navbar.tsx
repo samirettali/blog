@@ -31,10 +31,12 @@ const Navbar = ({ name }: NavbarProps) => {
       if (darkMode) {
         root.setAttribute("data-theme", "dark");
         root.style.setProperty("--initial-color-mode", "dark");
+        document.querySelector('html').classList.add('dark')
         localStorage.setItem("theme", "dark");
       } else {
         root.removeAttribute("data-theme");
         root.style.setProperty("--initial-color-mode", "light");
+        document.querySelector('html').classList.remove('dark')
         localStorage.setItem("theme", "light");
       }
     }

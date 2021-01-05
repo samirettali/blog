@@ -1,19 +1,66 @@
+/* .post img { */
+/*   max-width: 100%; */
+/*   display: block; */
+/* } */
+
+.post :not(pre) code {
+  background: var(--color-background-secondary);
+  border-radius: 3px;
+  padding: 0.2em 0.2em;
+/*   border-radius: 4px !important; */
+}
+
+.post pre {
+	@apply rounded;
+	@apply shadow-lg;
+}
+
 .post img {
-  max-width: 100%;
-  display: block;
+	/* @apply rounded; */
+	@apply shadow-lg;
 }
 
 .post p {
-  margin-bottom: 1.25rem;
+	@apply my-6;
 }
 
-.post p img {
-  margin-top: 1.25rem;
+.post ol {
+	@apply list-disc;
+	@apply list-inside;
 }
 
-/* .post :not(pre) code { */
-/*   background: var(--color-background-secondary); */
-/*   border-radius: 3px; */
-/*   padding: 0.2em 0.2em; */
-/* /1*   border-radius: 4px !important; *1/ */
-/* } */
+.post ol li {
+	@apply ml-6;
+}
+
+/* width */
+.post pre::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.post pre::-webkit-scrollbar-track {
+	@apply bg-gray-500;
+  /* background: #f1f1f1; */
+	@apply rounded-b;
+}
+
+/* Handle */
+.post pre::-webkit-scrollbar-thumb {
+	@apply bg-gray-700;
+  /* background: #888; */
+	@apply rounded-b;
+}
+
+/* Handle on hover */
+.post pre::-webkit-scrollbar-thumb:hover {
+	@apply bg-gray-800;
+  background: #555;
+	@apply rounded-b;
+}
+
+@media screen and (min-width: 600px) {
+  .post {
+		@apply text-lg;
+  }
+}

@@ -6,6 +6,7 @@ import { getPostData, getPostsIds } from "../../lib/posts";
 import Date from "../../components/date";
 import styles from "./post.module.css";
 import { useContext, useEffect, useState } from "react";
+// import 'prismjs/themes/prism-tomorrow.css'
 import 'prism-themes/themes/prism-material-oceanic.css'
 
 type IPostFile = {
@@ -24,7 +25,7 @@ export type IPostProps = {
 
 const Post = (props: IPostProps) => {
   // console.log('DarkModeContext: ', DarkModeContext)
-// const darkMode = false;
+  // const darkMode = false;
   // const { darkMode } = useContext(DarkModeContext);
   // const [theme, setTheme] = useState<string>("")
   // const theme = darkMode ? 'tomorrow' : 'solarizedlight';
@@ -43,7 +44,7 @@ const Post = (props: IPostProps) => {
       <Head>
         <title>{props.title}</title>
       </Head>
-      <article className={styles.post + " post leading-relaxed"}>
+      <article className={styles.post}>
         <h1 className="text-4xl font-bold mb-1">{props.title}</h1>
         <div className="text-gray-500 mb-8">
           <Date dateString={props.date.toLocaleString()} />

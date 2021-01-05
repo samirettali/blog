@@ -23,17 +23,16 @@ export type IWriteupProps = {
 
 const Writeup = (props: IWriteupProps) => {
   return (
-    <Layout>
+    <Layout showBack>
       <Head>
         <title>{props.title}</title>
       </Head>
-      <article className={styles.post + " post"}>
+      <article className={styles.post}>
         <h1 className="text-4xl font-bold mb-1">{props.title}</h1>
         <div className="text-gray-500 mb-8">
           <Date dateString={props.date.toLocaleString()} />
         </div>
         <div
-          className="text-base"
           dangerouslySetInnerHTML={{ __html: props.html as string }}
         />
       </article>

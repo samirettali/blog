@@ -25,8 +25,13 @@ function setInitialColorMode() {
   const root = document.documentElement;
   root.style.setProperty("--initial-color-mode", colorMode);
 
-  if (colorMode === "dark")
+  if (colorMode === "dark") {
+    document.querySelector('html').classList.add('dark')
     document.documentElement.setAttribute("data-theme", "dark");
+  } else {
+    document.querySelector('html').classList.remove('dark')
+  }
+
 }
 
 const blockingSetInitialColorMode = `(function() {

@@ -1,21 +1,36 @@
-const { colors } = require("tailwindcss/defaultTheme");
-// console.log(colors);
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   purge: [],
-  darkMode: false,
+  darkMode: "class",
   theme: {
+    fontFamily: {
+      serif: ["Roboto Slab", "serif"],
+      sans: ["ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
+      monospace: [ "SFMono-Regular", "Menlo", "Consolas","Liberation Mono", "monospace" ],
+    },
+    colors: {
+      ...colors,
+      gray: colors.warmGray,
+    },
     extend: {
       colors: {
-        accent: 'var(--accent)',
-        // 'accent-dark': 'var(--accent-dark)',
-        'accent-dark': '#ff0000',
-        'black-light': '#141516'
+        mygray: {
+          light: "#e4e4e4",
+          DEFAULT: "#222831",
+          dark: "#2b2d3e",
+        },
+        accent: {
+          DEFAULT: "#ef4f4f",
+          dark: "#e94560",
+        },
       },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+    },
   },
-  plugins: [],
+  plugins: [
+  ],
 };

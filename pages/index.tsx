@@ -7,6 +7,7 @@ import { getConfig } from "../lib/config";
 import Contacts from "../components/Contacts";
 import { IPostProps } from "./posts/[id]";
 import { getSortedContent } from "../lib/posts";
+import styles from '../styles/home.module.css';
 
 type ConfigType = {
   name: string;
@@ -26,7 +27,7 @@ const Home = ({ config, shortBio }: HomeProps) => {
         <title>{siteTitle}</title>
       </Head>
       <section
-        className="bio text-lg leading-relaxed font-normal mb-16"
+        className={styles.bio + " bio text-lg leading-relaxed font-normal mb-16"}
         dangerouslySetInnerHTML={{ __html: shortBio }}
       >
 

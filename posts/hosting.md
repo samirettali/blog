@@ -37,6 +37,7 @@ If you already have your website on version control, you can skip to the
 
 After creating a repository on Github, let's create the website structure, make
 it a repository and add the remote:
+
 ```
 $ hugo new website
 $ cd website
@@ -45,6 +46,7 @@ $ git remote add origin git@github.com:samirettali/website
 ```
 
 Let's add the files to the repository:
+
 ```
 $ git add .
 $ git commit
@@ -55,7 +57,6 @@ You can configure Hugo pretty much however you want, choosing your theme,
 website name and a whole lot of stuff, the official
 [documentation](https://gohugo.io/getting-started/quick-start/#site-configuration)
 is a nice place to start.
-
 
 ## Github Actions
 Now we have to setup the Github Action that will automatically generate the HTML
@@ -97,9 +98,11 @@ jobs:
 We will need a pair of ssh keys to allow Actions to push to a new repository, so
 after generating them with `ssh-keygen`, let's add the public key as a deploy
 key, you can name it whatever you want:
+
 ![](/images/hosting/deploy-key.png)
 
 And then, let's add the private key as a secret called `ACTIONS_DEPLOY_KEY`:
+
 ![](/images/hosting/secret-key.png)
 
 Now Github Actions should be able to build from `master` to `public` and our

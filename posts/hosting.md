@@ -158,6 +158,7 @@ file called `website-errors.log` in the user home. You can use
 ## Ending
 From now on, after every push, Github Actions will log in the Action tab the
 operation success:
+
 ![](/images/hosting/action.png)
 
 If it fails we will receive a mail and of course the `public` branch will not be

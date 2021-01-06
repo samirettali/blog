@@ -59,11 +59,6 @@ const Navbar = ({ name }: NavbarProps) => {
             <a>Posts</a>
           </Link>
         </div>
-        <div className="px-3">
-          <Link href="/writeups">
-            <a>Writeups</a>
-          </Link>
-        </div>
         <div className="block cursor-pointer transition pl-3" onClick={handleToggle}>
           <a>{darkMode ? <Moon /> : <Sun />}</a>
         </div>

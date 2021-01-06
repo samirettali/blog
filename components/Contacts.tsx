@@ -13,8 +13,8 @@ const Contacts: React.FC<ContactProps> = ({ socials }) => {
         const name = Object.keys(social)[0];
         const username = Object.values(social)[0];
         return (
-          <div className={styles.icon}>
-            <Social key={name} name={name} username={username} />
+          <div className={styles.icon} key={name}>
+            <Social name={name} username={username} />
           </div>
         );
       })}

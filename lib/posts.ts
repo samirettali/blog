@@ -1,17 +1,12 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import remark from "remark";
-import html from "remark-html";
-import { IPostProps } from "../pages/posts/[id]";
-import slug from 'remark-slug';
-import prism from "remark-prism";
-import unwrapImages from "remark-unwrap-images";
 import glob from "glob";
-import { IWriteupProps } from "../pages/writeups/[...id]";
+
+import markdownToHtml from "./markdown";
 import { IS_PROD } from '../constants'
-import unified from 'unified';
-import markdown from 'remark-parse';
+import { IPostProps } from "../pages/posts/[id]";
+import { IWriteupProps } from "../pages/writeups/[...id]";
 
 type ContentType = "posts" | "writeups";
 
@@ -114,22 +109,13 @@ const getContentData = async (id: string | string[], filename: string) => {
   const rawContent = fs.readFileSync(contentPath, "utf8");
 
   // Use gray-matter to parse the post metadata section
-  const matterResult = matter(rawContent);
+  const { content, data } = matter(rawContent);
 
-  const { content } = matterResult;
-  const { title, date, tags, draft } = matterResult.data;
+  const { title, date, tags, draft } = data;
 
   // Use remark to convert markdown into HTML string
-  const htmlContent = (
-    await unified()
-      // .use()
-      .use(markdown)
-      .use(html)
-      .use(prism, { transformInlineCode: false })
-      .process(content)
-  ).toString();
+  const htmlContent = await markdownToHtml(content);
 
-  // console.log(tags)
   // Combine the data with the id and contentHtml
   return {
     id,

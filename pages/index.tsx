@@ -2,12 +2,10 @@ import Head from "next/head";
 import Link from "next/link"
 
 import Layout, { siteTitle } from "../components/layout";
-import { getBio } from "../lib/bio";
 import { getConfig } from "../lib/config";
 import Contacts from "../components/Contacts";
-import { IPostProps } from "./posts/[id]";
-import { getSortedContent } from "../lib/posts";
 import styles from '../styles/home.module.css';
+import About from '../content/about.mdx'
 
 type ConfigType = {
   name: string;
@@ -16,10 +14,9 @@ type ConfigType = {
 
 type HomeProps = {
   config: ConfigType;
-  shortBio: string;
 };
 
-const Home = ({ config, shortBio }: HomeProps) => {
+const Home = ({ config }: HomeProps) => {
   const { socials } = config;
   return (
     <Layout>
@@ -27,11 +24,10 @@ const Home = ({ config, shortBio }: HomeProps) => {
         <title>{siteTitle}</title>
       </Head>
       <section
-        className={styles.bio + " bio text-lg leading-relaxed font-normal mb-16"}
-        dangerouslySetInnerHTML={{ __html: shortBio }}
+        className={styles.bio + " mb-16"}
       >
-
- </section>
+        <About />
+      </section>
       {socials && (
         <div className="">
           <Contacts socials={socials} />
@@ -44,14 +40,10 @@ const Home = ({ config, shortBio }: HomeProps) => {
 export default Home;
 
 export const getStaticProps = async () => {
-  const shortBio = await getBio("normal");
   const config = await getConfig();
-  const posts = getSortedContent("posts");
   return {
     props: {
       config,
-      shortBio,
-      posts,
     },
   };
 };

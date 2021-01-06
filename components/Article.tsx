@@ -1,5 +1,6 @@
 import Date from './Date';
 import styles from "../styles/article.module.css";
+import 'prismjs/themes/prism-tomorrow.css';
 
 export type ArticleProps = {
   id: string | string[];
@@ -21,7 +22,7 @@ const Article = ({title, date, html}: ArticleProps) => {
           </div>
         </div>
         <div
-          className={styles['post-body']}
+          className={styles.article}
           dangerouslySetInnerHTML={{ __html: html as string }}
         />
       </article>

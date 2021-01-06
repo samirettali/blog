@@ -5,8 +5,6 @@ import Article from "../../components/Article";
 import Layout from "../../components/layout";
 import { getPostData, getPostsIds } from "../../lib/posts";
 
-import 'prism-themes/themes/prism-material-oceanic.css'
-
 type IPostFile = {
   id: string;
 };

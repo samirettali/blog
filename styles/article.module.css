@@ -1,89 +1,77 @@
-/* .post-body img { */
+/* .article img { */
 /*   max-width: 100%; */
 /*   display: block; */
 /* } */
 
-.post-body :not(pre) code {
+.article :not(pre) code {
   background: var(--color-background-secondary);
   border-radius: 3px;
   padding: 0.2em 0.2em;
 /*   border-radius: 4px !important; */
 }
 
-.post-body pre {
+.article pre {
 	@apply rounded;
-	@apply shadow-lg;
+	/* @apply shadow-lg; */
+	@apply bg-mygray-secondaryDark !important;
 }
 
-.post-body img {
+.article img {
 	/* @apply rounded; */
 	/* @apply shadow-lg; */
 }
 
-.post-body p {
+.article p {
 	@apply my-6;
 }
 
-.post-body ol {
+.article ol {
 	@apply list-disc;
 	@apply list-inside;
 }
 
-.post-body ol li {
+.article ol li {
 	@apply ml-6;
 }
 
-/* width */
-.post-body pre::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-.post-body pre::-webkit-scrollbar-track {
-	@apply bg-gray-500;
-  /* background: #f1f1f1; */
-	@apply rounded-b;
-}
-
-/* Handle */
-.post-body pre::-webkit-scrollbar-thumb {
-	@apply bg-gray-700;
-  /* background: #888; */
-	@apply rounded-b;
-}
-
-/* Handle on hover */
-.post-body pre::-webkit-scrollbar-thumb:hover {
-	@apply bg-gray-800;
-  background: #555;
-	@apply rounded-b;
-}
-
-.post-body h1, .post-body h2, .post-body h3 {
+.article h1, .article h2, .article h3 {
 	@apply mt-8;
 	@apply mb-4;
 }
 
-.post-body blockquote {
-	@apply p-2;
-	@apply mb-4;
-	@apply rounded;
-	@apply bg-mygray-light;
-	@apply border-gray-400;
-	@apply text-mygray-dark;
+.article blockquote {
+	@apply py-2;
+	@apply mx-2;
+	/* @apply mb-4; */
+	/* @apply rounded; */
+	/* @apply bg-mygray-secondaryDark; */
+	@apply border-gray-300;
+	@apply dark:border-mygray-secondaryDark;
+	/* @apply text-mygray-light; */
 	@apply border-l-8;
-	@apply italic mx-2;
+	@apply italic;
 	@apply font-light;
 }
 
-.post-body blockquote p {
+.article blockquote p {
 	@apply ml-4;
 }
 
-
-
-@media screen and (min-width: 600px) {
-  .post-body {
-		@apply text-lg;
-  }
+.article blockquote p:first-child {
+	@apply pt-0;
+	@apply mt-0;
 }
+
+.article blockquote p:last-child {
+	@apply pb-0;
+	@apply mb-0;
+}
+
+
+
+
+/* @media screen and (min-width: 800px) { */
+/*   .article { */
+/* 		@apply text-lg; */
+/*   } */
+/* } */

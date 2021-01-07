@@ -42,11 +42,6 @@ export default Posts;
 
 export const getStaticProps = async () => {
   const posts = getSortedContent("posts");
-
-  // Generate RSS feed
-  const rss = await generateRss(posts);
-  fs.writeFileSync('./public/rss.xml', rss);
-
   return {
     props: {
       posts,

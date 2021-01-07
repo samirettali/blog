@@ -1,31 +1,40 @@
 import Date from './Date';
 import styles from "../styles/article.module.css";
-import 'prismjs/themes/prism-tomorrow.css';
 
-export type ArticleProps = {
-  id: string | string[];
+// TODO use it in light mode
+// import 'base16-prism/themes/base16-default-light.css'
+import 'base16-prism/themes/base16-tomorrow-night.css'
+
+export type ArticleType = {
+  id: string[];
   date: Date;
   title: string;
   tags: string[];
   content?: string;
-  html?: string;
+  html: string;
   draft?: boolean | undefined;
 };
 
-const Article = ({title, date, html}: ArticleProps) => {
+interface ArticleProps {
+  article: ArticleType
+}
+
+const Article = ({ article }: ArticleProps) => {
+  const { title, date, html } = article;
+  console.log(article);
   return (
-      <article>
-        <div className='post-header mb-8'>
-          <h1 className="mb-1 text-4xl font-bold">{title}</h1>
-          <div className="text-gray-500">
-            <Date dateString={date.toLocaleString()} />
-          </div>
+    <article>
+      <div className='post-header mb-8'>
+        <h1 className="mb-1 text-4xl font-bold">{title}</h1>
+        <div className="text-gray-500">
+          <Date dateString={date.toLocaleString()} />
         </div>
-        <div
-          className={styles.article}
-          dangerouslySetInnerHTML={{ __html: html as string }}
-        />
-      </article>
+      </div>
+      <div
+        className={styles.article}
+        dangerouslySetInnerHTML={{ __html: html as string }}
+      />
+    </article>
   );
 };
 

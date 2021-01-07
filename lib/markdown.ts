@@ -9,7 +9,7 @@ const markdownToHtml = async (content: string) => {
 		.use(markdown)
 		.use(slug)
 		.use(html)
-		.use(prism)
+		.use(prism, { transformInlineCode: true})
 		.process(content)
 	return result.toString();
 }

@@ -5,26 +5,12 @@ import glob from "glob";
 
 import markdownToHtml from "./markdown";
 import { IS_PROD } from '../constants'
-import { IPostProps } from "../pages/posts/[id]";
-import { IWriteupProps } from "../pages/writeups/[...id]";
+import { ArticleType } from "../components/Article";
 
 type ContentType = "posts" | "writeups";
 
-export const getPostsIds = () => {
-  const directory = path.join(process.cwd(), "posts");
-  const filenames = fs.readdirSync(directory);
-  return filenames.map((filename) => {
-    const id = filename.replace(/\.md$/, "");
-    return {
-      params: {
-        id,
-      },
-    };
-  });
-};
-
-export const getWriteupsIds = () => {
-  const directory = path.join(process.cwd(), "writeups");
+export const getArticlesIds = (type: ContentType) => {
+  const directory = path.join(process.cwd(), type);
   const filenames = glob.sync(path.join(directory, "**/*.md")) as string[];
   return filenames.map((filename) => {
     const id = filename.replace(directory, "").replace(/\.md$/, "").slice(1).split('/');
@@ -36,75 +22,42 @@ export const getWriteupsIds = () => {
   });
 };
 
-export const getSortedContent = (type: ContentType): IPostProps[] => {
+export const getSortedContent = (type: ContentType): ArticleType[] => {
   const directory = path.join(process.cwd(), type);
 
-  if (type === "writeups") {
-    const filenames = glob.sync(path.join(directory, "**/*.md")) as string[];
-    const posts = filenames.map((filename) => {
-      const id = filename.replace(directory, "").replace(/\.md$/, "").slice(1);
+  const filenames = glob.sync(path.join(directory, "**/*.md")) as string[];
+  const posts = filenames.map((filename) => {
+    const id = filename.replace(directory, "").replace(/\.md$/, "").slice(1);
 
-      // Read markdown file as string
-      const fullPath = filename;
-      const fileContents = fs.readFileSync(fullPath, "utf8");
+    // Read markdown file as string
+    const fullPath = filename;
+    const fileContents = fs.readFileSync(fullPath, "utf8");
 
-      // Use gray-matter to parse the post metadata section
-      const matterResult = matter(fileContents);
+    // Use gray-matter to parse the post metadata section
+    const matterResult = matter(fileContents);
 
-      // Combine the data with the id
-      const { title, date, tags, draft } = matterResult.data;
+    // Combine the data with the id
+    const { title, date, tags, draft } = matterResult.data;
 
-      return {
-        id,
-        date,
-        draft: !!draft,
-        title: draft ? title + " (Draft)" : title,
-        tags: tags || [],
-      };
-    });
+    return {
+      id,
+      date,
+      draft: !!draft,
+      title: draft ? title + " (Draft)" : title,
+      tags: tags || [],
+    };
+  }).filter(post => IS_PROD ? !post.draft : true);
 
-    return posts.sort((a: IPostProps, b: IPostProps) => {
-      if (a.date < b.date) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
-  } else {
-    const filenames = fs.readdirSync(directory);
-    const posts = filenames.map((filename) => {
-      const id = filename.replace(/\.md$/, "");
-
-      // Read markdown file as string
-      const fullPath = path.join(directory, filename);
-      const fileContents = fs.readFileSync(fullPath, "utf8");
-
-      // Use gray-matter to parse the post metadata section
-      const matterResult = matter(fileContents);
-
-      // Combine the data with the id
-      const { title, date, tags, draft } = matterResult.data;
-
-      return {
-        id,
-        date,
-        draft: !!draft,
-        title: draft ? title + " (Draft)" : title,
-        tags: tags || [],
-      };
-    }).filter(post => IS_PROD ? !post.draft : true);
-
-    return posts.sort((a: IPostProps, b: IPostProps) => {
-      if (a.date < b.date) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
-  }
+  return posts.sort((a: ArticleType, b: ArticleType) => {
+    if (a.date < b.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 };
 
-const getContentData = async (id: string | string[], filename: string) => {
+const getContentData = async (id: string[], filename: string) => {
   const contentPath = path.join(process.cwd(), filename);
   const rawContent = fs.readFileSync(contentPath, "utf8");
 
@@ -114,7 +67,7 @@ const getContentData = async (id: string | string[], filename: string) => {
   const { title, date, tags, draft } = data;
 
   // Use remark to convert markdown into HTML string
-  const htmlContent = await markdownToHtml(content);
+  const html = await markdownToHtml(content);
 
   // Combine the data with the id and contentHtml
   return {
@@ -124,16 +77,16 @@ const getContentData = async (id: string | string[], filename: string) => {
     draft: !!draft,
     tags: tags || [],
     content,
-    html: htmlContent,
+    html,
   };
 };
 
-export const getWriteupData = async (id: string[]) => {
-  const filename = `writeups/${id.join("/")}.md`;
-  return getContentData(id, filename) as unknown as IWriteupProps;
-};
-
-export const getPostData = async (id: string) => {
-  const filename = `posts/${id}.md`;
-  return getContentData(id, filename) as unknown as IPostProps;
+export const getArticleData = async (type: ContentType, id: string[]) => {
+  const filename = path.join(type, ...id) + '.md';
+  const data = await getContentData(id, filename);
+  console.log(data);
+  return {
+    id,
+    ...data
+  } as unknown as ArticleType;
 };

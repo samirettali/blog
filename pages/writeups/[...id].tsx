@@ -1,33 +1,25 @@
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next";
 
-import Article from '../../components/Article'
+import Article, { ArticleType } from '../../components/Article'
 import Layout from "../../components/layout";
-import { getWriteupData, getWriteupsIds } from "../../lib/posts";
-
-import 'prism-themes/themes/prism-material-oceanic.css'
+import { getArticlesIds, getArticleData,  } from "../../lib/posts";
 
 type IWriteupFile = {
   id: string[];
 };
 
-export type IWriteupProps = {
-  id: string[];
-  date: Date;
-  title: string;
-  tags: string[];
-  content?: string;
-  html?: string;
-  draft: boolean;
+export type WriteupProps = {
+  writeup: ArticleType
 };
 
-const Writeup = (props: IWriteupProps) => {
+const Writeup = ({ writeup }: WriteupProps) => {
   return (
     <Layout showBack>
       <Head>
-        <title>{props.title}</title>
+        <title>{writeup.title}</title>
       </Head>
-      <Article {...props} />
+      <Article article={writeup} />
     </Layout>
   );
 };
@@ -35,21 +27,21 @@ const Writeup = (props: IWriteupProps) => {
 export default Writeup;
 
 export const getStaticPaths: GetStaticPaths<IWriteupFile> = async () => {
-  const ids = getWriteupsIds();
+  const ids = getArticlesIds('writeups');
   return {
     paths: ids,
     fallback: false,
   };
 };
 
-export const getStaticProps: GetStaticProps<IWriteupProps, IWriteupFile> = async ({
+export const getStaticProps: GetStaticProps<WriteupProps, IWriteupFile> = async ({
   params,
 }) => {
   // TODO is ! needed?
-  const post = await getWriteupData(params!.id);
+  const writeup = await getArticleData('writeups', params!.id);
   return {
     props: {
-      ...post,
+      writeup
     },
   };
 };

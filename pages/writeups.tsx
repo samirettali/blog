@@ -4,10 +4,10 @@ import Link from "next/link";
 import Layout, { siteTitle } from "../components/layout";
 import { getSortedContent } from "../lib/posts";
 import Date from "../components/Date";
-import { IPostProps } from "./posts/[id]";
+import { ArticleType } from "../components/Article";
 
 type PostProps = {
-  writeups: IPostProps[];
+  writeups: ArticleType[];
 };
 
 const Writeups = ({ writeups }: PostProps) => {
@@ -19,8 +19,8 @@ const Writeups = ({ writeups }: PostProps) => {
       <section className="text-xl">
         <h2 className="text-4xl">Writeups</h2>
         <ul className="list-none">
-          {writeups.map(({ id, date, title }) => (
-            <li className="mb-4" key={id}>
+          {writeups.map(({ id, date, title }, index) => (
+            <li className="mb-4" key={index}>
               <Link href={`/writeups/${id}`}>
                 <a>{title}</a>
               </Link>

@@ -5,11 +5,11 @@ import fs from 'fs';
 import Layout, { siteTitle } from "../components/layout";
 import { getSortedContent } from "../lib/posts";
 import Date from "../components/Date";
-import { IPostProps } from "./posts/[id]";
+import { ArticleType } from "../components/Article";
 import { generateRss } from "../lib/rss";
 
 type PostProps = {
-  posts: IPostProps[];
+  posts: ArticleType[];
 };
 
 const Posts = ({ posts }: PostProps) => {
@@ -21,8 +21,8 @@ const Posts = ({ posts }: PostProps) => {
       <section className="text-xl">
         <h2 className="text-4xl">Posts</h2>
         <ul className="list-none">
-          {posts.map(({ id, date, title }) => (
-            <li className="mb-4" key={id}>
+          {posts.map(({ id, date, title }, index) => (
+              <li className="mb-4" key={index}>
               <Link href={`/posts/${id}`}>
                 <a>{title}</a>
               </Link>

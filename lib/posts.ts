@@ -33,11 +33,12 @@ export const getSortedContent = (type: ContentType): ArticleType[] => {
     const fullPath = filename;
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
+    // TODO use matter.read and remove fs
     // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
+    const { data } = matter(fileContents);
 
     // Combine the data with the id
-    const { title, date, tags, draft } = matterResult.data;
+    const { title, date, tags, draft } = data;
 
     return {
       id,
@@ -54,7 +55,7 @@ export const getSortedContent = (type: ContentType): ArticleType[] => {
     } else {
       return -1;
     }
-  });
+  }) as ArticleType[];
 };
 
 const getContentData = async (id: string[], filename: string) => {

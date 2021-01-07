@@ -6,12 +6,12 @@ import styles from "../styles/article.module.css";
 import 'base16-prism/themes/base16-tomorrow-night.css'
 
 export type ArticleType = {
-  id: string[];
+  id: string | string[];
   date: Date;
   title: string;
   tags: string[];
   content?: string;
-  html: string;
+  html?: string;
   draft?: boolean | undefined;
 };
 

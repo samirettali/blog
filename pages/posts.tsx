@@ -2,10 +2,8 @@ import Head from "next/head";
 
 import Layout, { siteTitle } from "../components/layout";
 import { getSortedContent } from "../lib/posts";
-import Date from "../components/Date";
 import ArticlesList from '../components/ArticlesList';
 import { ArticleType } from "../components/Article";
-import { generateRss } from "../lib/rss";
 
 type PostProps = {
   posts: ArticleType[];

@@ -3,13 +3,13 @@ import matter from "gray-matter";
 import glob from "glob";
 
 import markdownToHtml from "./markdown";
-import { IS_PROD } from '../constants'
 import { ArticleType } from "../components/Article";
+import { CONTENT_PATH, IS_PROD } from '../constants'
 
 type ContentType = "posts" | "writeups";
 
 export const getArticlesIds = (type: ContentType) => {
-  const directory = path.join(process.cwd(), type);
+  const directory = path.join(process.cwd(), CONTENT_PATH, type);
   const filenames = glob.sync(path.join(directory, "**/*.md")) as string[];
   return filenames.map((filename) => {
     const id = filename.replace(directory, "").replace(/\.md$/, "").slice(1).split('/');
@@ -22,7 +22,7 @@ export const getArticlesIds = (type: ContentType) => {
 };
 
 export const getSortedContent = (type: ContentType): ArticleType[] => {
-  const directory = path.join(process.cwd(), type);
+  const directory = path.join(process.cwd(), CONTENT_PATH, type);
 
   const filenames = glob.sync(path.join(directory, "**/*.md")) as string[];
   const posts = filenames.map((filename) => {
@@ -56,8 +56,12 @@ export const getSortedContent = (type: ContentType): ArticleType[] => {
   }) as ArticleType[];
 };
 
+export const getFeedContent = () => {
+  return getSortedContent("" as ContentType);
+}
+
 const getContentData = async (id: string[], filename: string) => {
-  const contentPath = path.join(process.cwd(), filename);
+  const contentPath = path.join(process.cwd(), CONTENT_PATH, filename);
 
   // Use gray-matter to parse the post metadata section
   const { content, data } = matter.read(contentPath);

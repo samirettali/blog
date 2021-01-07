@@ -6,6 +6,8 @@ import { getConfig } from "../lib/config";
 import Contacts from "../components/Contacts";
 import styles from '../styles/home.module.css';
 import About from '../content/about.mdx'
+import { generateRss } from "../lib/rss";
+import { getFeedContent } from "../lib/posts";
 
 type ConfigType = {
   name: string;
@@ -41,6 +43,8 @@ export default Home;
 
 export const getStaticProps = async () => {
   const config = await getConfig();
+  const posts = getFeedContent();
+  await generateRss(posts);
   return {
     props: {
       config,

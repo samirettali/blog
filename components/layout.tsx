@@ -11,7 +11,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, showBack = false }) => {
   return (
-    <div className="container mx-auto max-w-prose px-8">
+    <div className="container mx-auto max-w-prose px-4">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta

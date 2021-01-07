@@ -6,6 +6,7 @@ import styles from "../styles/article.module.css";
 import 'base16-prism/themes/base16-tomorrow-night.css'
 
 export type ArticleType = {
+  type: "posts" | "writeups"
   id: string | string[];
   date: Date;
   title: string;

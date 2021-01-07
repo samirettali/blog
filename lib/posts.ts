@@ -42,6 +42,7 @@ export const getSortedContent = (type: ContentType): ArticleType[] => {
 
     return {
       id,
+      type,
       date,
       draft: !!draft,
       title: draft ? title + " (Draft)" : title,
@@ -87,6 +88,7 @@ export const getArticleData = async (type: ContentType, id: string[]) => {
   const data = await getContentData(id, filename);
   return {
     id,
+    type,
     ...data
   } as unknown as ArticleType;
 };

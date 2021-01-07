@@ -9,6 +9,7 @@ const urls = {
   github: "https://github.com/",
   facebook: "https://facebook.com/",
   instagram: "https://instagram.com/",
+  rss: "/",
   // keybase: "https://keybase.com/",
   mail: "mailto:",
 };
@@ -21,7 +22,7 @@ const Social = ({ name, username }: SocialProps) => {
   }
 
   return (
-    <a href={url}>
+    <a href={url} target='blank'>
       <Icon name={name as any} />
     </a>
   );

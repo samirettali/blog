@@ -84,7 +84,6 @@ const getContentData = async (id: string[], filename: string) => {
 export const getArticleData = async (type: ContentType, id: string[]) => {
   const filename = path.join(type, ...id) + '.md';
   const data = await getContentData(id, filename);
-  console.log(data);
   return {
     id,
     ...data

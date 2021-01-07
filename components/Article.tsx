@@ -21,7 +21,6 @@ interface ArticleProps {
 
 const Article = ({ article }: ArticleProps) => {
   const { title, date, html } = article;
-  console.log(article);
   return (
     <article>
       <div className='post-header mb-8'>

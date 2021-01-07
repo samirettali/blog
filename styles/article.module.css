@@ -3,26 +3,28 @@
 /*   display: block; */
 /* } */
 
-.article :not(pre) code {
-  background: var(--color-background-secondary);
-  border-radius: 3px;
-  padding: 0.2em 0.2em;
-/*   border-radius: 4px !important; */
-}
-
 .article pre {
 	@apply rounded;
-	/* @apply shadow-lg; */
 	@apply bg-mygray-secondaryDark !important;
+	@apply text-sm !important;
 }
 
-.article img {
-	/* @apply rounded; */
-	/* @apply shadow-lg; */
+.article code{
+	@apply font-mono !important;
+	@apply text-sm !important;
+	@apply bg-mygray-secondaryDark !important;
+	@apply rounded;
+	@apply text-mygray-light;
+
 }
 
 .article p {
 	@apply my-6;
+}
+
+.article p code, .article ol code {
+	@apply px-1;
+	@apply py-0.5;
 }
 
 .article ol {

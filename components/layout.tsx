@@ -14,10 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showBack = false }) => {
     <div className="container mx-auto max-w-prose px-4">
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content="Learn how to build a personal website using Next.js"
-        />
+        <meta name="description" content="Samir's blog" />
         <meta
           property="og:image"
           content={`https://og-image.now.sh/${encodeURI(
@@ -31,7 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showBack = false }) => {
       <main>{children}</main>
       {showBack && (
        <div className="my-12">
-          // TODO improve
+          {/* TODO improve */}
           {/* <Link href="/"> */}
             <a onClick={() => Router.back()}>← Back</a>
           {/* </Link> */}

@@ -1,4 +1,3 @@
-import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import glob from "glob";
@@ -31,11 +30,9 @@ export const getSortedContent = (type: ContentType): ArticleType[] => {
 
     // Read markdown file as string
     const fullPath = filename;
-    const fileContents = fs.readFileSync(fullPath, "utf8");
 
-    // TODO use matter.read and remove fs
     // Use gray-matter to parse the post metadata section
-    const { data } = matter(fileContents);
+    const { data } = matter.read(fullPath);
 
     // Combine the data with the id
     const { title, date, tags, draft } = data;
@@ -61,10 +58,9 @@ export const getSortedContent = (type: ContentType): ArticleType[] => {
 
 const getContentData = async (id: string[], filename: string) => {
   const contentPath = path.join(process.cwd(), filename);
-  const rawContent = fs.readFileSync(contentPath, "utf8");
 
   // Use gray-matter to parse the post metadata section
-  const { content, data } = matter(rawContent);
+  const { content, data } = matter.read(contentPath);
 
   const { title, date, tags, draft } = data;
 

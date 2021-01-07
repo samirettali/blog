@@ -20,7 +20,6 @@ function setInitialColorMode() {
     return "light";
   }
 
-  // console.log("setinitialColorMode");
   const colorMode = getInitialColorMode();
   const root = document.documentElement;
   root.style.setProperty("--initial-color-mode", colorMode);

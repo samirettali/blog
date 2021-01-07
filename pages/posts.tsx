@@ -1,10 +1,12 @@
 import Head from "next/head";
 import Link from "next/link";
+import fs from 'fs';
 
 import Layout, { siteTitle } from "../components/layout";
 import { getSortedContent } from "../lib/posts";
-import Date from "../components/date";
+import Date from "../components/Date";
 import { IPostProps } from "./posts/[id]";
+import { generateRss } from "../lib/rss";
 
 type PostProps = {
   posts: IPostProps[];
@@ -26,7 +28,7 @@ const Posts = ({ posts }: PostProps) => {
               </Link>
               <br />
               <small className="text-gray-500">
-              {date}
+                <Date dateString={date.toLocaleString()} />
               </small>
             </li>
           ))}
@@ -40,6 +42,11 @@ export default Posts;
 
 export const getStaticProps = async () => {
   const posts = getSortedContent("posts");
+
+  // Generate RSS feed
+  const rss = await generateRss(posts);
+  fs.writeFileSync('./public/rss.xml', rss);
+
   return {
     props: {
       posts,

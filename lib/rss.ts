@@ -1,4 +1,6 @@
 // import { BLOG_URL, BLOG_TITLE, BLOG_SUBTITLE} from '@lib/constants'
+import fs from 'fs';
+import { RSS_FEED_PATH } from '../constants';
 import markdownToHtml from './markdown';
 
 const BLOG_URL = 'https://samirettali.com'
@@ -34,7 +36,7 @@ export async function generateRssItem(post) {
 export async function generateRss(posts) {
   const itemsList = await Promise.all(posts.map(generateRssItem))
 
-  return `
+  const rss = `
     <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
       <channel>
         <title>${BLOG_TITLE}</title>
@@ -47,4 +49,5 @@ export async function generateRss(posts) {
       </channel>
     </rss>
   `
+  fs.writeFileSync(RSS_FEED_PATH, rss);
 }

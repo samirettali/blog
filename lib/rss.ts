@@ -9,12 +9,13 @@ const BLOG_SUBTITLE="Samir's blog"
 
 export async function generateRssItem(post) {
   const content = await markdownToHtml(post.content || '')
+  console.log(post.type);
 
   return `
     <item>
-      <guid>${BLOG_URL}/posts/${post.slug}</guid>
+      <guid>${BLOG_URL}/${post.id}</guid>
       <title>${post.title}</title>
-      <link>${BLOG_URL}/posts/${post.id}</link>
+      <link>${BLOG_URL}/${post.id}</link>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
       <content:encoded><![CDATA[${content}]]></content:encoded>
     </item>

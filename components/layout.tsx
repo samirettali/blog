@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import Router from 'next/router'
 
 import Navbar from "./Navbar";
@@ -32,6 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showBack = false }) => {
       <main>{children}</main>
       {showBack && (
        <div className="my-12">
+          // TODO improve
           {/* <Link href="/"> */}
             <a onClick={() => Router.back()}>← Back</a>
           {/* </Link> */}

@@ -1,13 +1,17 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  purge: [],
+  purge: ['./pages/**/*.tsx?', './components/**/*.tsx?', './styles/*.css'],
   darkMode: "class",
   theme: {
     fontFamily: {
       serif: ["Roboto Slab", "serif"],
       sans: ["ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
       mono: [ "Menlo", "Consolas", "Liberation Mono", "monospace" ],
+    },
+    colors: {
+      white: colors.white,
+      gray: colors.coolGray,
     },
     extend: {
       colors: {

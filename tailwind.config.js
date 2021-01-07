@@ -1,7 +1,20 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  purge: ['./pages/**/*.tsx?', './components/**/*.tsx?', './styles/*.css'],
+  purge: {
+    enabled: process.env.NODE_ENV === 'production',
+    content: [
+      "./pages/**/*.js",
+      "./pages/**/*.ts",
+      "./pages/**/*.jsx",
+      "./pages/**/*.tsx",
+      "./components/**/*.js",
+      "./components/**/*.ts",
+      "./components/**/*.jsx",
+      "./components/**/*.tsx",
+      './styles/**/*.css'
+    ],
+  },
   darkMode: "class",
   theme: {
     fontFamily: {

@@ -14,14 +14,17 @@
 	@apply rounded;
 }
 
-.article p code, .article ol code, .article ul code {
+.article p code,
+.article ol code,
+.article ul code {
 	@apply py-0.5 !important;
 	@apply px-1 !important;
 }
 
 /* Fix for prism shadow */
-.article code[class*="language-"], .article pre[class*="language-"] {
-    text-shadow: none !important;
+.article code[class*="language-"],
+.article pre[class*="language-"] {
+	text-shadow: none !important;
 }
 
 .article p {
@@ -37,7 +40,9 @@
 	@apply ml-6;
 }
 
-.article h1, .article h2, .article h3 {
+.article h1,
+.article h2,
+.article h3 {
 	@apply mt-8;
 	@apply mb-4;
 }
@@ -69,12 +74,3 @@
 	@apply pb-0;
 	@apply mb-0;
 }
-
-
-
-
-/* @media screen and (min-width: 800px) { */
-/*   .article { */
-/* 		@apply text-lg; */
-/*   } */
-/* } */

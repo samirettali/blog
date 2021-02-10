@@ -25,13 +25,11 @@ const Home = ({ config }: HomeProps) => {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section
-        className={styles.bio + " mb-16"}
-      >
+      <section className={styles.bio + " mt-16 mb-16"}>
         <About />
       </section>
       {socials && (
-        <div className="">
+        <div>
           <Contacts socials={socials} />
         </div>
       )}

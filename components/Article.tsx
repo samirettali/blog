@@ -1,12 +1,10 @@
-import Date from './Date';
+import Date from "./Date";
 import styles from "../styles/article.module.css";
 
-// TODO use it in light mode
-// import 'base16-prism/themes/base16-default-light.css'
-import 'base16-prism/themes/base16-tomorrow-night.css'
+import "base16-prism/themes/base16-tomorrow-night.css";
 
 export type ArticleType = {
-  type: "posts" | "writeups"
+  type: "posts" | "writeups";
   id: string | string[];
   date: Date;
   title: string;
@@ -17,22 +15,22 @@ export type ArticleType = {
 };
 
 interface ArticleProps {
-  article: ArticleType
+  article: ArticleType;
 }
 
 const Article = ({ article }: ArticleProps) => {
   const { title, date, html } = article;
   return (
     <article>
-      <div className='post-header mb-8'>
-        <h1 className="mb-1 text-4xl font-bold">{title}</h1>
-        <div className="text-gray-500">
+      <div className="post-header mb-8 text-center">
+        <h1 className="font-bold text-4xl mb-1">{title}</h1>
+        <div className="text-gray-500 dark:text-gray-400">
           <Date dateString={date.toLocaleString()} />
         </div>
       </div>
       <div
         className={styles.article}
-        dangerouslySetInnerHTML={{ __html: html as string }}
+        dangerouslySetInnerHTML={{ __html: html }}
       />
     </article>
   );

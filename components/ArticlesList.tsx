@@ -1,6 +1,6 @@
-import Link from 'next/link'
+import Link from "next/link";
 
-import Date from './Date'
+import Date from "./Date";
 import { ArticleType } from "./Article";
 
 type ArticlesListProps = {
@@ -12,12 +12,15 @@ const ArticlesList = ({ articles }: ArticlesListProps) => {
     <ul className="list-none">
       {articles.map(({ id, type, date, title }, index) => {
         return (
-          <li className="mb-4" key={index}>
+          <li
+            className="text-coolGray-700 hover:text-coolGray-500 mb-4"
+            key={index}
+          >
             <Link href={`/${type}/${id}`}>
               <a>{title}</a>
             </Link>
             <br />
-            <small className="text-gray-500">
+            <small className="text-gray-500 dark:text-gray-400">
               <Date dateString={date.toLocaleString()} />
             </small>
           </li>

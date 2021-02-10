@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Router from 'next/router'
+import Router from "next/router";
 
 import Navbar from "./Navbar";
 
@@ -11,7 +11,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, showBack = false }) => {
   return (
-    <div className="container mx-auto max-w-prose px-4">
+    <div className="container mx-auto max-w-5xl px-4 lg:px-6 text-lg">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Samir's blog" />
@@ -24,16 +24,17 @@ const Layout: React.FC<LayoutProps> = ({ children, showBack = false }) => {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Navbar name="SE" />
-      <main>{children}</main>
-      {showBack && (
-       <div className="my-12">
-          {/* TODO improve */}
-          {/* <Link href="/"> */}
-            <a onClick={() => Router.back()}>← Back</a>
-          {/* </Link> */}
-        </div>
-      )}
+      <Navbar name="Samir Ettali" shortname="SE" />
+      <main className="max-w-2xl mx-auto">
+        {children}
+        {showBack && (
+          <div className="my-12">
+            <a className="cursor-pointer" onClick={() => Router.back()}>
+              ← Back
+            </a>
+          </div>
+        )}
+      </main>
     </div>
   );
 };

@@ -1,16 +1,15 @@
 import Link from "next/link";
-import { Moon, Sun } from 'heroicons-react'
+import { Moon, Sun } from "heroicons-react";
 
 import { useEffect, useState } from "react";
-// import { DarkModeContext } from '../context/theme'
 
 type NavbarProps = {
   name: string;
+  shortname: string;
 };
 
-const Navbar = ({ name }: NavbarProps) => {
+const Navbar = ({ name, shortname }: NavbarProps) => {
   const [darkMode, setDarkMode] = useState<boolean | undefined>(undefined);
-  // const { darkMode, setDarkMode } = useContext(DarkModeContext)
 
   const handleToggle = () => {
     setDarkMode((darkMode) => !darkMode);
@@ -21,7 +20,6 @@ const Navbar = ({ name }: NavbarProps) => {
     const initialColorValue = root.style.getPropertyValue(
       "--initial-color-mode"
     );
-    // console.log("initialColorValue", initialColorValue);
     setDarkMode(initialColorValue === "dark");
   }, []);
 
@@ -31,37 +29,42 @@ const Navbar = ({ name }: NavbarProps) => {
       if (darkMode) {
         root.setAttribute("data-theme", "dark");
         root.style.setProperty("--initial-color-mode", "dark");
-        document.querySelector('html').classList.add('dark')
+        document.querySelector("html").classList.add("dark");
         localStorage.setItem("theme", "dark");
       } else {
         root.removeAttribute("data-theme");
         root.style.setProperty("--initial-color-mode", "light");
-        document.querySelector('html').classList.remove('dark')
+        document.querySelector("html").classList.remove("dark");
         localStorage.setItem("theme", "light");
       }
     }
-    // console.log("Dark mode changed: ", darkMode);
   }, [darkMode]);
 
   return (
-    <header className="mt-8 mb-12">
+    <header className="my-8">
       <nav className="flex items-center flex-wrap font-semibold">
         <div className="flex-grow">
           <Link href="/">
-            <a className="mr-4 inline-flex text-3xl">
-              {name}
+            <a className="inline-flex mr-4 text-3xl">
+              <span className="visible md:invisible">{shortname}</span>
+              <span className="invisible md:visible md:order-first">
+                {name}
+              </span>
             </a>
           </Link>
         </div>
-        <div className='text-lg flex items-center'>
-        <div className="px-3">
-          <Link href="/posts">
-            <a>Posts</a>
-          </Link>
-        </div>
-        <div className="block cursor-pointer transition pl-3" onClick={handleToggle}>
-          <a>{darkMode ? <Moon /> : <Sun />}</a>
-        </div>
+        <div className="flex text-lg items-center">
+          <div className="px-3">
+            <Link href="/posts">
+              <a>Posts</a>
+            </Link>
+          </div>
+          <div
+            className="block cursor-pointer transition pl-3"
+            onClick={handleToggle}
+          >
+            <a>{darkMode ? <Moon /> : <Sun />}</a>
+          </div>
         </div>
       </nav>
     </header>

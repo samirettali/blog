@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Moon, Sun } from "heroicons-react";
 
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 type NavbarProps = {
   name: string;
@@ -9,36 +10,9 @@ type NavbarProps = {
 };
 
 const Navbar = ({ name, shortname }: NavbarProps) => {
-  const [darkMode, setDarkMode] = useState<boolean | undefined>(undefined);
+  const { theme, setTheme } = useTheme();
 
-  const handleToggle = () => {
-    setDarkMode((darkMode) => !darkMode);
-  };
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const initialColorValue = root.style.getPropertyValue(
-      "--initial-color-mode"
-    );
-    setDarkMode(initialColorValue === "dark");
-  }, []);
-
-  useEffect(() => {
-    if (darkMode !== undefined) {
-      const root = document.documentElement;
-      if (darkMode) {
-        root.setAttribute("data-theme", "dark");
-        root.style.setProperty("--initial-color-mode", "dark");
-        document.querySelector("html").classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        root.removeAttribute("data-theme");
-        root.style.setProperty("--initial-color-mode", "light");
-        document.querySelector("html").classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      }
-    }
-  }, [darkMode]);
+  useEffect(() => { console.log(theme)}, [theme])
 
   return (
     <header className="my-8">
@@ -61,9 +35,9 @@ const Navbar = ({ name, shortname }: NavbarProps) => {
           </div>
           <div
             className="block cursor-pointer transition pl-3"
-            onClick={handleToggle}
+            onClick={() => { theme === "light" ? setTheme("dark") : setTheme("light")}}
           >
-            <a>{darkMode ? <Moon /> : <Sun />}</a>
+            <a>{theme === "dark" ? <Moon /> : <Sun />}</a>
           </div>
         </div>
       </nav>

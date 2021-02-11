@@ -5,6 +5,7 @@ const redirects = async () => {
     {
       source: "/cv",
       destination: "https://samir-resume.vercel.app",
+      permanent: false,
     },
   ];
 };

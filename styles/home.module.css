@@ -1,6 +1,5 @@
 .bio {
 	@apply text-xl;
-	@apply font-light;
 	@apply leading-relaxed;
 }
 

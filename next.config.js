@@ -5,6 +5,7 @@ const rewrites = async () => {
     {
       source: "/cv",
       destination: "https://samir-resume.vercel.app",
+      basePath: false,
     },
   ];
 };
@@ -12,4 +13,5 @@ const rewrites = async () => {
 module.exports = {
   ...withMDX(),
   rewrites,
+  reactStrictMode: true,
 };

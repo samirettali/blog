@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Moon, Sun } from "heroicons-react";
 
-import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
 type NavbarProps = {
@@ -12,7 +11,9 @@ type NavbarProps = {
 const Navbar = ({ name, shortname }: NavbarProps) => {
   const { theme, setTheme } = useTheme();
 
-  useEffect(() => { console.log(theme)}, [theme])
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   return (
     <header className="my-8">
@@ -35,7 +36,7 @@ const Navbar = ({ name, shortname }: NavbarProps) => {
           </div>
           <div
             className="block cursor-pointer transition pl-3"
-            onClick={() => { theme === "light" ? setTheme("dark") : setTheme("light")}}
+            onClick={toggleTheme}
           >
             <a>{theme === "dark" ? <Moon /> : <Sun />}</a>
           </div>

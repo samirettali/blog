@@ -35,13 +35,20 @@ module.exports = {
       ],
       mono: ["Menlo", "Consolas", "Liberation Mono", "monospace"],
     },
-    colors: colors,
+    colors: {
+      ...colors,
+      blue: {
+        ...colors.blue,
+        500: "#1982ff",
+        600: "#0070f3",
+      },
+    },
     extend: {
       colors: {
         mygray: {
           light: "#e4e4e4",
-          DEFAULT: "#292a2d",
-          secondary: "#252627",
+          DEFAULT: "#18191a",
+          secondary: "#333333",
         },
       },
     },

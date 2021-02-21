@@ -28,7 +28,7 @@
   a {
     @apply transition;
     @apply text-blue-500;
-    @apply hover:text-blue-700;
+    @apply hover:text-blue-600;
   }
 
   body {

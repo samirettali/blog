@@ -39,10 +39,3 @@
 .article ol li {
 	@apply ml-6;
 }
-
-.article h1,
-.article h2,
-.article h3 {
-	@apply mt-8;
-	@apply mb-4;
-}

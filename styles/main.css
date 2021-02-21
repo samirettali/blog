@@ -5,20 +5,20 @@
 @layer base {
   h1 {
     @apply text-4xl;
-    @apply font-semibold;
-    @apply my-6;
   }
 
   h2 {
     @apply text-3xl;
-    @apply font-bold;
-    @apply my-5;
   }
 
   h3 {
     @apply text-xl;
+  }
+
+  h1,
+  h2,
+  h3 {
     @apply font-semibold;
-    @apply my-4;
   }
 
   /* pre { */
@@ -33,12 +33,17 @@
 
   body {
     @apply font-sans;
-    @apply transition-colors;
 
     @apply bg-white;
     @apply text-mygray;
     @apply dark:bg-mygray;
     @apply dark:text-mygray-light;
+  }
+
+  body,
+  pre,
+  code {
+    @apply transition-all;
   }
 
   blockquote {
@@ -104,4 +109,7 @@
 /*   background-color: var(--dark-scrollbar-fg); */
 /*   border-radius: 20px; */
 /*   border: 3px solid var(--dark-scrollbar-fg); */
+/* } */
+/* } */
+/* } */
 /* } */

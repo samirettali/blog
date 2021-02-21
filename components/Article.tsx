@@ -1,7 +1,9 @@
+import { useTheme } from "next-themes";
+
 import Date from "./Date";
 import styles from "../styles/article.module.css";
-
-import "base16-prism/themes/base16-tomorrow-night.css";
+import prismLight from "../styles/prism-light";
+import prismDark from "../styles/prism-dark";
 
 export type ArticleType = {
   type: "posts" | "writeups";
@@ -19,7 +21,9 @@ interface ArticleProps {
 }
 
 const Article = ({ article }: ArticleProps) => {
+  const { theme } = useTheme();
   const { title, date, html } = article;
+
   return (
     <article>
       <div className="post-header mb-8 text-center">
@@ -32,6 +36,7 @@ const Article = ({ article }: ArticleProps) => {
         className={styles.article}
         dangerouslySetInnerHTML={{ __html: html }}
       />
+      <style>{theme === "dark" ? prismDark : prismLight}</style>
     </article>
   );
 };

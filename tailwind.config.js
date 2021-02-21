@@ -40,11 +40,8 @@ module.exports = {
       colors: {
         mygray: {
           light: "#e4e4e4",
-          // DEFAULT: "#222831",
-          DEFAULT: "#24292e",
-          dark: "#2b2d3e",
-          // secondaryDark: "#263238",
-          secondaryDark: "#1d2125",
+          DEFAULT: "#292a2d",
+          secondary: "#252627",
         },
       },
     },

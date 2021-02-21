@@ -36,12 +36,36 @@
     @apply transition-colors;
 
     @apply bg-white;
-    /* @apply text-coolGray-700;
-    @apply dark:bg-gray-800;
-    @apply dark:text-gray-200; */
-    @apply text-mygray-dark;
+    @apply text-mygray;
     @apply dark:bg-mygray;
     @apply dark:text-mygray-light;
+  }
+
+  blockquote {
+    @apply py-4;
+    @apply pr-2;
+    @apply italic;
+    @apply font-light;
+    @apply rounded;
+    @apply bg-gray-100;
+    @apply dark:bg-mygray-secondary;
+    @apply border-l-8;
+    @apply border-gray-300;
+    @apply dark:border-gray-700;
+  }
+
+  blockquote p {
+    @apply ml-4;
+  }
+
+  blockquote p:first-child {
+    @apply pt-0;
+    @apply mt-0;
+  }
+
+  blockquote p:last-child {
+    @apply pb-0;
+    @apply mb-0;
   }
 
   /* .dark hr { */

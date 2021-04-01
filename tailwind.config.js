@@ -19,12 +19,13 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
-        "system-ui",
         "-apple-system",
         "BlinkMacSystemFont",
         "Segoe UI",
         "Roboto",
+        "system-ui",
         "Helvetica Neue",
+        "Helvetica",
         "Arial",
         "Noto Sans",
         "sans-serif",

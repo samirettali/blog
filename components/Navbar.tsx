@@ -1,14 +1,16 @@
 import Link from "next/link";
-import { Moon, Sun } from "heroicons-react";
+import { Moon, Sun } from 'react-feather'
 
 import { useTheme } from "next-themes";
 
 type NavbarProps = {
+  className?: string;
   name: string;
   shortname: string;
+  showHome?: boolean;
 };
 
-const Navbar = ({ name, shortname }: NavbarProps) => {
+const Navbar = ({ className, name, shortname, showHome = true }: NavbarProps) => {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
@@ -16,19 +18,23 @@ const Navbar = ({ name, shortname }: NavbarProps) => {
   };
 
   return (
-    <header className="my-8">
-      <nav className="flex items-center flex-wrap font-semibold">
+    <header className={`my-8 ${className}`}>
+      <nav className="flex items-center flex-wrap font-semibold text-lg">
         <div className="flex-grow">
-          <Link href="/">
-            <a className="inline-flex mr-4 text-3xl">
-              <span className="visible md:invisible">{shortname}</span>
-              <span className="invisible md:visible md:order-first">
-                {name}
-              </span>
-            </a>
-          </Link>
+          {showHome && (
+            <Link href="/">
+              <a className="inline-flex mr-4">
+                Home
+              </a>
+            </Link>
+          )}
         </div>
-        <div className="flex text-lg items-center">
+        <div className="flex items-center">
+          <div className="px-3">
+            <Link href="/writeups">
+              <a>Writeups</a>
+            </Link>
+          </div>
           <div className="px-3">
             <Link href="/posts">
               <a>Posts</a>

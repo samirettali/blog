@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 @layer base {
   h1 {
     @apply text-4xl;
@@ -33,11 +35,12 @@
 
   body {
     @apply font-sans;
+    @apply lg:text-lg;
 
     @apply bg-white;
-    @apply text-mygray;
+    @apply text-blueGray-900;
     @apply dark:bg-mygray;
-    @apply dark:text-mygray-light;
+    @apply dark:text-blueGray-50;
   }
 
   body,

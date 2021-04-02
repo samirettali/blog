@@ -5,12 +5,10 @@ import { useTheme } from "next-themes";
 
 type NavbarProps = {
   className?: string;
-  name: string;
-  shortname: string;
   showHome?: boolean;
 };
 
-const Navbar = ({ className, name, shortname, showHome = true }: NavbarProps) => {
+const Navbar = ({ className, showHome = true }: NavbarProps) => {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {

@@ -7,6 +7,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <title>{siteTitle}</title>
           <link rel="icon" href="/favicon.ico" />
           <meta name="description" content="Samir's blog" />
           <meta

@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 import Article, { ArticleType } from '../../components/Article'
@@ -15,10 +14,7 @@ export type WriteupProps = {
 
 const Writeup = ({ writeup }: WriteupProps) => {
   return (
-    <Layout showBack>
-      <Head>
-        <title>{writeup.title}</title>
-      </Head>
+    <Layout title={writeup.title} showBack>
       <Article article={writeup} />
     </Layout>
   );

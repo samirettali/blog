@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 import Article, { ArticleType } from "../../components/Article";
@@ -15,10 +14,7 @@ export type PostProps = {
 
 const Post = ({ post }: PostProps) => {
   return (
-    <Layout showBack>
-      <Head>
-        <title>{post.title}</title>
-      </Head>
+    <Layout title={post.title} showBack>
       <Article article={post} />
     </Layout>
   );

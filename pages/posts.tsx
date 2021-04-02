@@ -9,7 +9,7 @@ type PostProps = {
 
 const Posts = ({ posts }: PostProps) => {
   return (
-    <Layout>
+    <Layout title="Posts">
       <section className="text-xl">
         <h2 className="text-4xl mb-8">Posts</h2>
         <ArticlesList articles={posts} />

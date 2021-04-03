@@ -6,9 +6,10 @@ import { useTheme } from "next-themes";
 type NavbarProps = {
   className?: string;
   showHome?: boolean;
+  showToggler?: boolean;
 };
 
-const Navbar = ({ className, showHome = true }: NavbarProps) => {
+const Navbar = ({ className, showHome = true, showToggler = true }: NavbarProps) => {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
@@ -33,17 +34,19 @@ const Navbar = ({ className, showHome = true }: NavbarProps) => {
               <a>Writeups</a>
             </Link>
           </div>
-          <div className="px-3">
+          <div className={showToggler ? "px-3" : null}>
             <Link href="/posts">
               <a>Posts</a>
             </Link>
           </div>
-          <div
-            className="block cursor-pointer transition pl-3"
-            onClick={toggleTheme}
-          >
-            <a>{theme === "dark" ? <Moon /> : <Sun />}</a>
-          </div>
+          {showToggler && (
+            <div
+              className="block cursor-pointer transition pl-3"
+              onClick={toggleTheme}
+            >
+              <a>{theme === "dark" ? <Moon /> : <Sun />}</a>
+            </div>
+          )}
         </div>
       </nav>
     </header>

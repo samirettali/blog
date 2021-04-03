@@ -6,7 +6,7 @@ const Home = () => {
     <Layout
       showNavbar={false}
       containerClassname='px-8'
-      contentClassname='flex flex-col md:justify-center mt-40 md:mt-0 md:h-screen'
+      contentClassname='flex flex-col max-w-2xl mx-auto justify-center h-screen transform -translate-y-1/4'
     >
       <div className='text-4xl mb-8 font-medium'>
         Samir Ettali

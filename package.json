@@ -10,6 +10,7 @@
     "type-check": "tsc --project tsconfig.json --pretty --noEmit"
   },
   "dependencies": {
+    "@panelbear/panelbear-js": "^1.2.0",
     "next": "^10.1.2",
     "next-themes": "^0.0.14",
     "react": "17.0.2",

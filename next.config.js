@@ -10,8 +10,19 @@ const redirects = async () => {
   ];
 };
 
+
+const rewrites = async () => {
+  return [
+    {
+      source: '/bear.js',
+      destination: 'https://cdn.panelbear.com/analytics.js',
+    },
+  ];
+},
+
 module.exports = {
   ...withMDX(),
   redirects,
+  rewrites,
   reactStrictMode: true,
 };

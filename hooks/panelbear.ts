@@ -6,7 +6,7 @@ export const usePanelbear = (site, config = {}) => {
   const router = useRouter();
 
   useEffect(() => {
-    Panelbear.load(site, config);
+    Panelbear.load(site, { ...config, scriptSrc: '/bear.js' });
 
     // Trigger initial page view
     Panelbear.trackPageview();

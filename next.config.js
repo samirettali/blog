@@ -18,7 +18,7 @@ const rewrites = async () => {
       destination: 'https://cdn.panelbear.com/analytics.js',
     },
   ];
-},
+};
 
 module.exports = {
   ...withMDX(),

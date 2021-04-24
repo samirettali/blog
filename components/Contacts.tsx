@@ -1,8 +1,7 @@
 import React from "react";
-import Links from "./Links";
-import styles from "../styles/contacts.module.css";
-import { Link } from "../lib/config";
 import Icon from "./Icon";
+
+import { Link } from "../lib/config";
 
 interface Props {
   links: Link[];

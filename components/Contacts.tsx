@@ -12,10 +12,10 @@ const Contacts: React.FC<Props> = ({ links, className }) => {
   return (
     <div className={`flex flex-row justify-center w-full ${className || ''}`}>
       {
-        links.map(({ name, href, iconName }) => {
+        links.map(({ name, target, iconName }) => {
           return (
             <div className='p-3' key={name}>
-              <a href={href} target='blank'>
+              <a href={target} target='blank'>
                 <Icon name={iconName as any} />
               </a>
             </div>

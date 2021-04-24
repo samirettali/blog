@@ -1,26 +1,26 @@
 name: SE
 links:
   - name: Github
-    href: /github
+    target: /api/link/github
     iconName: github
   - name: Twitter
-    href: /twitter
+    target: /api/link/twitter
     iconName: twitter
   - name: Instagram
-    href: /instagram
+    target: /api/link/instagram
     iconName: instagram
   - name: Linkedin
-    href: /linkedin
+    target: /api/link/linkedin
     iconName: linkedin
   - name: Mail
-    href: mailto:samirettali@protonmail.com
+    target: mailto:samirettali@protonmail.com
     iconName: mail
   - name: Photographs
-    href: /photographs
+    target: /api/link/photographs
     iconName: camera
-  # - name: NFT
-  #   href: https://rarible.com/samirettali
-  #   iconName: code
+  - name: NFT
+    target: /api/link/nft
+    iconName: code
   - name: RSS
-    href: /rss.xml
+    target: /rss.xml
     iconName: rss

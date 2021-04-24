@@ -10,7 +10,7 @@ export interface Config {
 
 export interface Link {
   name: string;
-  href: string;
+  target: string;
   iconName?: string;
 }
 

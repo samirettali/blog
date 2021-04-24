@@ -208,7 +208,7 @@ file name with underscores and the final name will be `10_10_14_8.php.png` and
 this allows PHP to run the code inside it.
 
 This is an example of the gallery after a file gets uploaded:
-![](/images/hackthebox/networked/uploaded.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/networked/uploaded.png)
 
 ## Getting a shell
 

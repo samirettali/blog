@@ -4,7 +4,7 @@ date: "2020-04-11"
 tags: [path traversal, rce]
 ---
 
-![](/images/hackthebox/traverxec/traverxec.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/traverxec/traverxec.png)
 Traverxec is an easy Linux machine on HackTheBox involving a path traversal bug
 that allows RCE, cracking an SSH key and exploiting the pager functionality of
 journalctl to get a root shell.
@@ -30,7 +30,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
 The web server hosts a simple presentation page:
-![](/images/hackthebox/traverxec/web.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/traverxec/web.png)
 
 ## Exploiting nostromo
 As I've never heard about nostromo, the first thing I did is to search for
@@ -169,7 +169,7 @@ understood is that nostromo creates a path on the web server named as every
 folder in `/home` and prepending a `~` to it, and it's root will be a folder
 called `public_www` in the respective user home. In this case, for example, we
 have `http://10.10.10.165/~david/` point to `/home/david/public_www`:
-![](/images/hackthebox/traverxec/david.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/traverxec/david.png)
 
 We can list all the files in `~david` then:
 ```
@@ -308,11 +308,11 @@ Apr 12 14:43:23 traverxec sudo[835]: pam_unix(sudo:auth): authentication failure
 Notice that when you run it it does not ask for the user's password, despite
 using sudo on the last line? We can exploit this because `journalctl` uses
 `less` to stop output from scrolling too much:
-![](/images/hackthebox/traverxec/journalctl.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/traverxec/journalctl.png)
 
 And we can use `less` to get a shell as root, because `journalctl` was launched
 with `sudo`:
-![](/images/hackthebox/traverxec/root-shell.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/traverxec/root-shell.png)
 
 Cool little trick, right? Who would think to something about that!
 Let's check the root flag:

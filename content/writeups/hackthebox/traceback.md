@@ -5,7 +5,7 @@ publishDate: 2020-08-15T18:00:00+02:00
 tags: [web-shell, perl, reverse-shell, lua]
 ---
 
-![](/images/hackthebox/traceback/info.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/traceback/info.png)
 
 Traceback is an easy Linux machine on Hack The Box in which we will take
 advantage of a PHP shell left from someone who defaced a website, use it to
@@ -33,7 +33,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
 Lets take a look at the homepage:
-![](/images/hackthebox/traceback/web.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/traceback/web.png)
 
 Looks like the site got defaced. Reading the source code gives us a hint:
 ```html
@@ -93,7 +93,7 @@ smevk.php               [Status: 200, Size: 1261, Words: 318, Lines: 59]
 ```
 
 Looks like we found one! Let's visit the url:
-![](/images/hackthebox/traceback/webshell-login.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/traceback/webshell-login.png)
 
 There is a login, let's take a look at the source code of `smevk.php` from the
 previously cloned repository:
@@ -123,7 +123,7 @@ $TabsColor = '#0E5061';                              //Change tabs color here.
 ```
 
 And luckily the credentials were not changed:
-![](/images/hackthebox/traceback/webshell.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/traceback/webshell.png)
 This looks straight out of a 90s hacking movie!
 
 ## Command execution

@@ -29,7 +29,7 @@ PORT    STATE SERVICE  VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 The web server responds with the default nginx web page:
-![](/images/hackthebox/registry/web.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/registry/web.png)
 
 Let's run a simple discovery against it using [ffuf](https://github.com/ffuf/ffuf):
 ```
@@ -88,7 +88,7 @@ install                 [Status: 200, Size: 1010, Words: 5, Lines: 3]
 
 The `backup.php` file size is 0, so there's no content, but the `install` file
 looks interesting. Let's visit it:
-![](/images/hackthebox/registry/install.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/registry/install.png)
 
 Looks like a binary file, let's check it's type after saving it:
 ```
@@ -294,7 +294,7 @@ backup.php  bolt  index.html  index.nginx-debian.html  install
 ```
 
 Here is the web page:
-![](/images/hackthebox/registry/bolt.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/registry/bolt.png)
 
 Also, under `/var/www/html/bolt/app/database/` there's `bolt.db`, which contains
 the hash of the admin user:
@@ -309,19 +309,19 @@ Simply running John The Ripper against it, we can find that the password is
 Now, the default location of the admin panel of the Bolt web app is under
 `/bolt`, but given the the app was already in a folder named `bolt`, we have to
 visit `http://10.10.10.159/bolt/bolt/`:
-![](/images/hackthebox/registry/login.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/registry/login.png)
 
 This is a simple CMS system.
 One appealing thing is the upload functionality, so the first thing that came to
 my mind is to upload a PHP reverse shell:
-![](/images/hackthebox/registry/upload.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/registry/upload.png)
 
 But if we try to upload one, we can see that `php` is not an allowed extension:
-![](/images/hackthebox/registry/upload-error.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/registry/upload-error.png)
 
 It would be nice if we could change that setting, right? Well, luckily we can,
 under Configuration -> Main configuration, we can modify the `config.yml` file:
-![](/images/hackthebox/registry/config.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/registry/config.png)
 
 Let's add the `php` extension to the `allowed_file_type` option, save, and
 now we can upload PHP files.

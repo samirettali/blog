@@ -4,7 +4,7 @@ date: "2020-08-29"
 tags: [xslt-injection, race-condition, http3, quic, hackthebox]
 ---
 
-![](/images/hackthebox/quick/info.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/info.png)
 Quick is a hard Linux machine on Hack The Box. We will use a HTTP/3 client to
 get a PDF file containing some credentials, use ESI injection to get a shell,
 exploit a race condition to escalate to another user and find some hardcoded
@@ -33,7 +33,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
 Let's check the HTTP server on port 9001:
-![](/images/hackthebox/quick/web.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/web.png)
 
 It looks like a webpage from a small business. The testimonials section could be
 a good way to gather usernames or email addresses, and there are more
@@ -164,7 +164,7 @@ PDF files:
 ```
 
 Let's download and open `https://portal.quick.htb/docs/Connectivity.pdf`:
-![](/images/hackthebox/quick/connectivity.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/connectivity.png)
 
 We can now try to check if the password is reused in the previously found login
 form. Let's create some wordlists of users and domains using the information
@@ -269,19 +269,19 @@ ________________________________________________
 ```
 
 Let's now login with `elisa@wink.co.uk`:
-![](/images/hackthebox/quick/ticketing.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/ticketing.png)
 
 Now, having access to the ticketing panel, we can create a ticket:
-![](/images/hackthebox/quick/create-ticket.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/create-ticket.png)
 
 An alert confirms the ticket creation:
-![](/images/hackthebox/quick/created-ticket.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/created-ticket.png)
 
 And now we can search for the ticket:
-![](/images/hackthebox/quick/search-ticket.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/search-ticket.png)
 
 The first thing that came to my mind is to test for HTML injection:
-![](/images/hackthebox/quick/html-injection.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/html-injection.png)
 
 ## Exploiting the ESI inclusion
 I tried different payloads to achieve LFI but then I read one of the responses
@@ -295,7 +295,7 @@ Let's create a ticket to try to achieve ESI injection:
 <esi:include src="http://127.0.0.1" />
 ```
 And let's search for it:
-![](/images/hackthebox/quick/esi-injection.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/esi-injection.png)
 
 Looks like the homepage got included in the response! Let's try to include a
 remote resource using this payload after starting a HTTP server with `python3 -m
@@ -511,7 +511,7 @@ requests to `printerv2.quick.htb:8080` and they will be forwarded to the
 localhost interface on `10.10.10.186`.
 
 The homepage of the web site is a login:
-![](/images/hackthebox/quick/printerv2-login.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/printerv2-login.png)
 
 Let's read the source file on the remote machine:
 ```php
@@ -565,18 +565,18 @@ Password found: yl51pbx
 ```
 
 Now we have access to the print platform:
-![](/images/hackthebox/quick/printerv2.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/printerv2.png)
 
 If we try to add a printer and create a job we will get this error message:
-![](/images/hackthebox/quick/ping-test.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/ping-test.png)
 
 Let's create a netcat listener and use it as a printer to test the
 functionality:
-![](/images/hackthebox/quick/ping-ok.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/ping-ok.png)
 
 ## Race condition to escalate to srvadm user
 This is the job adding page:
-![](/images/hackthebox/quick/add-job.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/quick/add-job.png)
 
 And this is the code that is executed when we create a job
 ```php

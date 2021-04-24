@@ -20,9 +20,9 @@ discord group that the flag was the link itself.
 ## shiny - 100 points
 
 > .‡8]5);483‡5;  
-[gold-bug.jfif](/images/ritsec-2019/gold-bug.jfif)
+[gold-bug.jfif](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/ritsec-2019/gold-bug.jpg)
 
-![](/images/ritsec-2019/gold-bug.jfif)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/ritsec-2019/gold-bug.jpg)
 
 This challenge is a quote to The Gold Bug, a short story by Edgar Allan Poe, in
 which a substitution cipher lead the protagonist to an adventure. We can use
@@ -188,7 +188,7 @@ http://ctfchallenges.ritsec.club:5000/
 Visiting the link with a browser will end up in an infinite redirection.
 Analyzing the requests with Burp we can read a well defined string by
 concatenating the paths that we get redirected to:
-![](/images/ritsec-2019/misdirection.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/ritsec-2019/misdirection.png)
 
 ### Flag
 ```
@@ -201,9 +201,9 @@ RS{4!way5_Ke3p-m0v1ng}
 
 > People hide things in images all the time! See if you can find what the artist
 > forgot to take out in this one!  
-> [ritsec_logo2.png](/images/ritsec-2019/ritsec_logo2.png)
+> [ritsec_logo2.png](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/ritsec-2019/ritsec_logo2.png)
 
-![](/images/ritsec-2019/ritsec_logo2.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/ritsec-2019/ritsec_logo2.png)
 
 With exiftool we can read a base64 encoded string in the User Comment field:
 {{< highlight text "hl_lines=30" >}}
@@ -318,7 +318,7 @@ W
 
 By analyzing the pcap file with Wireshark, we can see that there are two main
 streams of data. The interesing one is the number 1, let's check it:
-![](/images/ritsec-2019/findme.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/ritsec-2019/findme.png)
 It looks like there are two base64 encoded strings. The first one decodes to a
 [link](https://www.youtube.com/watch?v=dQw4w9WgXcQ) to the Rickroll song, a
 recurrent thing in this CTF.
@@ -386,5 +386,5 @@ print(converted)
 ```
 Running it gives us this string `abcdefghijklmjnecboepghiaqirnead` which we can
 use on [quipqiup](https://quipqiup.com) and set `abcdef=ritsec`:
-![](/images/ritsec-2019/alphabetical-challenge.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/ritsec-2019/alphabetical-challenge.png)
 And there's the flag!

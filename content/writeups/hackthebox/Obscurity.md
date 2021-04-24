@@ -4,7 +4,7 @@ date: "2020-05-09"
 tags: []
 ---
 
-![](/images/hackthebox/obscurity/info.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/obscurity/info.png)
 Obscurity is a medium difficulty Linux machine on Hack The Box in which we will
 exploit two bad implementations of an HTTP and a SSH-like service.
 
@@ -97,7 +97,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 On port 8080 there's an HTTP server running, named `BadHTTPServer`. There's
 this interesting message on the website:
-![](/images/hackthebox/obscurity/dev.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/obscurity/dev.png)
 
 Let's search for this *secret* directory:
 ```

@@ -4,7 +4,7 @@ date: "2020-05-02"
 tags: [HackTheBox, Exploit, RCE, GTFOBins]
 ---
 
-![](/images/hackthebox/openadmin/info.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/openadmin/info.png)
 
 OpenAdmin is an easy machine from Hack The Box involving a RCE vulnerability on
 a web app, finding a password in configuration files and using `nano` to become
@@ -53,7 +53,7 @@ the websites and found this:
 
 It's the control panel for OpenNetAdmin, an application used to manage IP
 addresses:
-![](/images/hackthebox/openadmin/ona.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/openadmin/ona.png)
 
 ## Remote command execution
 

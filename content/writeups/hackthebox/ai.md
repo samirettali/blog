@@ -27,10 +27,10 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 While visiting the website, the only thing that might be interesting is in
 [ai.php](http://10.10.10.163/ai.php):
-![](/images/hackthebox/ai/upload.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/ai/upload.png)
 
 After uploading a random wav file found on the internet, we get this output:
-![](/images/hackthebox/ai/randomfile.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/ai/randomfile.png)
 
 It looks like there's an online service that does voice recognition and uses
 its output to perform a query, and given that in our text there are single
@@ -50,12 +50,12 @@ $ gobuster dir -q -r -w lists/raft-small-words-lowercase.txt -x php,html -s 200 
 ```
 
 Here is the page:
-![](/images/hackthebox/ai/instructions.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/ai/instructions.png)
 
 We can try to exploit this by recording an audio ourself or using text to speech
 services. I will use [text2speech](https://www.text2speech.org/) with these
 options:
-![](/images/hackthebox/ai/text2speech.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/ai/text2speech.png)
 
 Following the guide and after many, many attempts, I've come up with the
 following payload:
@@ -64,7 +64,7 @@ open single quote space union select space username from users comment database
 ```
 
 And the result is:
-![](/images/hackthebox/ai/username.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/ai/username.png)
 
 And this payload:
 ```
@@ -72,7 +72,7 @@ open single quote space union select password from users comment database
 ```
 
 gives us the password:
-![](/images/hackthebox/ai/password.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/ai/password.png)
 
 Let's try to connect with SSH:
 ```

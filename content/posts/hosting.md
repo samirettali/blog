@@ -99,11 +99,11 @@ We will need a pair of ssh keys to allow Actions to push to a new repository, so
 after generating them with `ssh-keygen`, let's add the public key as a deploy
 key, you can name it whatever you want:
 
-![](/images/hosting/deploy-key.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hosting/deploy-key.png)
 
 And then, let's add the private key as a secret called `ACTIONS_DEPLOY_KEY`:
 
-![](/images/hosting/secret-key.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hosting/secret-key.png)
 
 Now Github Actions should be able to build from `master` to `public` and our
 repository should be ready to go!
@@ -159,7 +159,7 @@ file called `website-errors.log` in the user home. You can use
 From now on, after every push, Github Actions will log in the Action tab the
 operation success:
 
-![](/images/hosting/action.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hosting/action.png)
 
 If it fails we will receive a mail and of course the `public` branch will not be
 modified and we can inspect the Actions tab on Github to find what's wrong.

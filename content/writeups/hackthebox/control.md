@@ -4,7 +4,7 @@ date: "2020-04-25"
 tags: [HackTheBox, Windows, SQL Injection, ACL, Registry]
 ---
 
-![](/images/hackthebox/control/info.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/info.png)
 Control is a hard Windows machine from HackTheBox. We'll exploit a SQL injection
 to get some credentials, upload a PHP file that will get us a reverse shell, use
 the found credentials to escalate privileges and exploit a ACL to become
@@ -58,11 +58,11 @@ Host '10.10.14.81' is not allowed to connect to this MariaDB server
 ```
 
 Let's check the HTTP server:
-![](/images/hackthebox/control/web.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/web.png)
 
 The login and admin links on the top navigation bar brings us both to
 `/admin.php`, but there's an error message on the page:
-![](/images/hackthebox/control/admin-error.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/admin-error.png)
 
 Proxies add `X-Forwarded-For` header to all requests to indicate which client
 the request originated from, we could try to bruteforce the correct IP address
@@ -121,15 +121,15 @@ The right IP address is the same one in the HTML comment! I guess I should have
 tried it first.
 
 Now we can visit the admin page by using Burp to add the header:
-![](/images/hackthebox/control/proxy.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/proxy.png)
 
 And here's the admin page:
-![](/images/hackthebox/control/admin.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/admin.png)
 
 We can use the handy [Add Custom
 Header](https://portswigger.net/bappstore/807907f5380c4cb38748ef4fc1d8cdbc)
 plugin for Burp to automatically add the header on every request:
-![](/images/hackthebox/control/plugin.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/plugin.png)
 
 If we search product `'` we get a SQL error:
 ```
@@ -138,25 +138,25 @@ Error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error
 
 ## Exploiting the SQL injection
 Now let's search for `' or 1=1 #`
-![](/images/hackthebox/control/sql-injection.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/sql-injection.png)
 
 Looks like SQL injection to me! Trying to enumerate the number of columns in the
 query we find out there are 6 with `test' UNION SELECT 1, 2, 3, 4, 5, 6 #`
-![](/images/hackthebox/control/col-enum.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/col-enum.png)
 
 Let's find the database name with `test' UNION SELECT database(), 2, 3, 4, 5, 6
 #`
-![](/images/hackthebox/control/db-name.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/db-name.png)
 
 And now let's find all the tables in the database with `test' UNION SELECT
 GROUP_CONCAT(table_name), 2, 3, 4, 5, 6 FROM information_schema.tables where
 table_schema='warehouse' #`
-![](/images/hackthebox/control/tables.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/tables.png)
 
 It looks like there are only products tables. Let's make a step back. Let's see
 if we can read MySQL users with `test' UNION SELECT user, password, 3, 4, 5, 6
 FROM mysql.user #`
-![](/images/hackthebox/control/dbms-users.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/control/dbms-users.png)
 
 Cool! We have some hashes! Let's try to crack them with hashcat. I'm using the
 rockyou wordlist and the `best64` rule set from hashcat: `hashcat -m 300 -a0 -r

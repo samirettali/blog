@@ -4,7 +4,7 @@ date: "2020-04-18"
 tags: [nosql injection, suid]
 ---
 
-![](/images/hackthebox/mango/info.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/mango/info.png)
 Mango is a medium difficulty machine from Hack The Box, which is actually pretty
 straight forwards as it involves a noSQL injection and a simple privilege
 escalation using a SUID binary.
@@ -40,14 +40,14 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Let's visit the two web servers, here's the one on port 80, altough as we can
 see from the port scan, it will return 403:
-![](/images/hackthebox/mango/web-80.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/mango/web-80.png)
 
 And here's the one on port 443:
-![](/images/hackthebox/mango/web-443.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/mango/web-443.png)
 
 From the port scan it seems that there's a subdomain, so let's add
 `staging-order.mango.htb` to `/etc/hosts` in order to be able to visit it:
-![](/images/hackthebox/mango/mango.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/mango/mango.png)
 
 It's a simple login form, and trying some default credentials yields us
 nothing. This took me a lot of time and so much trial and error, but in the end
@@ -56,10 +56,10 @@ I found out that there was a NoSQL injection in mongoDB, hence the name mango.
 Basically we can use regexes to enumerate usernames and passwords by making a
 request like `username[$regex]=^a.*`, so that if the regex matches a database
 record, a `302` response will happen, here's an example request:
-![](/images/hackthebox/mango/nosql-injection-request.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/mango/nosql-injection-request.png)
 
 And the response we get when it matches a record:
-![](/images/hackthebox/mango/nosql-injection-response.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/mango/nosql-injection-response.png)
 
 ## Getting some credentials
 We can use python to write a simple script that automates this, enumerating all

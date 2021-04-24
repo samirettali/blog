@@ -44,10 +44,10 @@ Nmap done: 1 IP address (1 host up) scanned in 82.67 seconds
 
 As always, when there's a web server, that's the first thing that I look into,
 and there's a login page:
-![](/images/hackthebox/heist/login.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/heist/login.png)
 
 Given that we can login as guest, let's do it:
-![](/images/hackthebox/heist/support.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/heist/support.png)
 
 It looks like someone needed help with the configuration of a Cisco router and
 asked for help, it looks like it's username is Hazard. Let's check the
@@ -152,10 +152,10 @@ We can now try to login with all usernames and passwords combinations that
 we've found. There's a handy metasploit module that can help us. After writing
 all the users in a file called `users` and the passwords in `pws`, let's load the
 module and set the options:
-![](/images/hackthebox/heist/metasploit-options.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/heist/metasploit-options.png)
 
 And let's run it with `exploit`:
-![](/images/hackthebox/heist/metasploit-results.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/heist/metasploit-results.png)
 
 Cool! We've found the passwords of Hazard and Chase! Now we can use `evil-winrm`
 (install it with `gem install --user evil-winrm`) to check if one of the two
@@ -208,11 +208,11 @@ The next thing that came to my mind is to dump the processes memory with
 [Procdump](https://docs.microsoft.com/en-us/sysinternals/downloads/procdump).
 After downloading it on our machine, and moving it in the same folder that we
 launched `evil-winrm` from, we can upload it using it's `upload` command:
-![](/images/hackthebox/heist/upload.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/heist/upload.png)
 
 Now we can dump the Firefox process memory using the PID from the `Get-Process`
 command:
-![](/images/hackthebox/heist/procdump.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/heist/procdump.png)
 
 Because I'm a PowerShell noob, I've downloaded the dump on my machine to
 analyze it, with `download firefox.exe_191129_053757.dmp` and after (quite) a

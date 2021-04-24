@@ -4,7 +4,7 @@ date: "2020-06-20"
 tags: []
 ---
 
-![](/images/hackthebox/servmon/info.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/servmon/info.png)
 Servmon is an easy Windows machine on Hack The Box. We will get some passwords
 from a path traversal vulnerability and exploit a misconfigured monitoring app
 running as Administrator.
@@ -140,7 +140,7 @@ Host script results:
 
 There's a FTP server running on port 21, a SSH server on port 22 (unusual for
 windows machines) and a HTTP server on port 80. Let's start from the FTP server:
-![](/images/hackthebox/servmon/ftp.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/servmon/ftp.png)
 
 Navigating inside `Users` we can find two files. Here's the content of
 `Nadine/Confidential.txt`:
@@ -165,7 +165,7 @@ And the content of `Nathan/Notes to do.txt`:
 
 Let's keep this stuff in mind. The HTTP server shows us a login and there's not
 much that we can do:
-![](/images/hackthebox/servmon/http.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/servmon/http.png)
 
 ## Finding some credentials
 Searchsploit reveals some path traversal exploits for `nvms`:
@@ -185,7 +185,7 @@ Shellcodes: No Results
 I couldn't get any to work tho, because the python library `requests` removes
 the dots from the url, but luckily there's an exploit in metasploit. Let's use
 it:
-![](/images/hackthebox/servmon/exploit.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/servmon/exploit.png)
 
 Let's read the file that metasploit downloaded:
 ```
@@ -217,7 +217,7 @@ Gr4etN3w5w17hMySk1Pa5$
 ## Getting a shell
 Using [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) we can try to
 bruteforce smb:
-![](/images/hackthebox/servmon/cme.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/servmon/cme.png)
 
 Trying to login in with `smbclient` doesn't give us acces to anything, but
 remember the ssh server? Let's try the password against it!
@@ -247,7 +247,7 @@ Successfully processed 1 files; Failed processing 0 files
 
 One thing that we did not investigate is the HTTP server on port 8443, let's
 visit it:
-![](/images/hackthebox/servmon/nsclient.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/servmon/nsclient.png)
 
 There's an [exploit](https://www.exploit-db.com/exploits/46802) for NSClient++
 that leverages on the fact that it's running as Administrator, and we can

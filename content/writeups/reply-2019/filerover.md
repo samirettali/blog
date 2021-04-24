@@ -9,7 +9,7 @@ In this challenge we had a [link](https://gamebox3.reply.it:20443/) to a site.
 The first thing that was peculiar about it was the invalid certificate. After
 telling the browser to ignore it, we were presented with a some download links:
 
-![](/images/reply-2019/download.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/reply-2019/download.png)
 
 Reading the source code of the page we can see an old commented link to a file
 called `flag.txt`:

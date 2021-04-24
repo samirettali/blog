@@ -63,11 +63,11 @@ $ curl -X POST -L http://10.10.10.157/monitoring
 Visiting `/centreon` we find ourselves in front of a login form for the Centreon
 platform, which is a system monitoring tool:
 
-![](/images/hackthebox/wall/centreon.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/wall/centreon.png)
 
 Let's try to login with a random username and password, and intercept the
 request with Burp:
-![](/images/hackthebox/wall/login.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/wall/login.png)
 
 The login process uses a token that changes with every request, so we can not
 use hydra to do a bruteforce. We might write a script that fetches the token and
@@ -112,7 +112,7 @@ Nice! Look's like admin's password is `password1`! Let's use it to login.
 ## Exploiting
 
 Here is the panel after logging in:
-![](/images/hackthebox/wall/panel.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/wall/panel.png)
 The menu on the right of the Centreon panel allows us to discover it's version
 by going on Administration > About, and it's 19.04.0 commit `f2a106936`.
 
@@ -219,7 +219,7 @@ At first I saw this message `[+] We can connect to the local MYSQL service as
 could not get a stable output because of the shell running on netcat. I
 continued reading LinEnum's output and I found an unusual executable in the
 `SUID` files section:
-![](/images/hackthebox/wall/linenum.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/wall/linenum.png)
 
 It is `screen-4.5.0`, and luckily, there's a handy local root exploit on
 [exploit-db](https://www.exploit-db.com/exploits/41154). After downloading it on

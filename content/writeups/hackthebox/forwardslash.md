@@ -4,7 +4,7 @@ date: "2020-07-04"
 tags: [HackTheBox, LFI, SSRF, WAF, Arbitrary-file-read]
 ---
 
-![](/images/hackthebox/forwardslash/info.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/forwardslash/info.png)
 
 ForwardSlash is a hard machine on Hack The Box in which we'll exploit an
 arbitrary file read vulnerability in order to have a low privilege shell,
@@ -34,7 +34,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Visiting the web server redirects us to `forwardslash.htb`, so let's add it to
 `/etc/hosts` in order to visit it:
-![](/images/hackthebox/forwardslash/web.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/forwardslash/web.png)
 
 A quick fuzz on the web server allows us to find a file:
 ```
@@ -80,15 +80,15 @@ backup                  [Status: 200, Size: 1267, Words: 336, Lines: 40]
 ```
 
 Lets visit `backup.forwardslash.htb`:
-![](/images/hackthebox/forwardslash/login.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/forwardslash/login.png)
 
 ## Further exploration
 
 As we can register, let's do it! This is the dashboard after logging in:
-![](/images/hackthebox/forwardslash/dashboard.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/forwardslash/dashboard.png)
 
 The change profile picture functionality uses a form:
-![](/images/hackthebox/forwardslash/change-pic.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/forwardslash/change-pic.png)
 
 But trying to click on it to write something does not work because, as we can
 see in the code, the form is disabled:
@@ -108,7 +108,7 @@ remove the `disabled` option and reactivate the form functionality.
 
 We can start a web server with `python -m http.server 1337` and use the form
 to try make a request to it:
-![](/images/hackthebox/forwardslash/request.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/forwardslash/request.png)
 
 Lets check the web server:
 ```
@@ -119,16 +119,16 @@ Serving HTTP on 0.0.0.0 port 1337 (http://0.0.0.0:1337/) ...
 
 And we received the request! And the strange thing is that the request response is embedded in
 the response page:
-![](/images/hackthebox/forwardslash/listing.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/forwardslash/listing.png)
 
 At first I thought it was gonna be a RFI, but after a bit I tried to do a
 request to `index.php` and this was the result:
-![](/images/hackthebox/forwardslash/index-exfil.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/forwardslash/index-exfil.png)
 
 There's probably some kind of WAF preventing arbitrary file read, so we can try
 to use `php://filter` to encode the page before it gets sent, in order to bypass
 the WAF:
-![](/images/hackthebox/forwardslash/base64-exfil.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/forwardslash/base64-exfil.png)
 
 ## Bypassing the "WAF"
 

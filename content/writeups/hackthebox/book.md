@@ -35,23 +35,23 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
 The only accessible thing is the HTTP server on port 80, so let's visit it:
-![](/images/hackthebox/book/web.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/web.png)
 
 As we can register, let's do it and login:
-![](/images/hackthebox/book/library.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/library.png)
 
 ## Exploring the website
 
 It's a library website, one thing that may be useful later is a mail found in
 the *Contact Us* page:
-![](/images/hackthebox/book/contact.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/contact.png)
 
 Another interesting functionality is an upload in the Collections section that
 allows us to upload a new book to the library:
-![](/images/hackthebox/book/submission.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/submission.png)
 
 After uploading a `.pdf` file, this is the result:
-![](/images/hackthebox/book/upload.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/upload.png)
 
 ## Further exploration
 
@@ -117,23 +117,23 @@ trimmed.
 
 Let's fire up burp and, after intercepting the registration request, let's
 modify it like this:
-![](/images/hackthebox/book/registration.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/registration.png)
 
 And now we can login to `/admin` using `admin@book.htb` as mail and `admin` as
 password:
-![](/images/hackthebox/book/admin.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/admin.png)
 
 The admin panel allows us to export the list of users and the list of
 collections as a PDF:
-![](/images/hackthebox/book/collections-export.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/collections-export.png)
 
 And this will be the exported PDF:
-![](/images/hackthebox/book/exported-collections.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/exported-collections.png)
 
 I was doing some testing and when I tried to use `<h1>Bold test</h1>` as the
 book title in the user section of the website, this is the resulting exported
 Collections PDF from the admin section:
-![](/images/hackthebox/book/bold-collections.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/bold-collections.png)
 
 ## Arbitraty file read
 Great! Let's see how we can exploit this!
@@ -153,11 +153,11 @@ x.send();
 ```
 
 And let's export the Collections PDF from the admin section:
-![](/images/hackthebox/book/passwd.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/passwd.png)
 
 We can see that there's a user called `reader`. Let's try the same thing but for
 `/home/reader/.ssh/id_rsa` instead of `/etc/passwd`:
-![](/images/hackthebox/book/ssh-key.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/book/ssh-key.png)
 
 The only problem here is that it's not so easy to copy and paste, as long lines
 are overflowing outside of the PDF. Luckily there's a handy script that can help

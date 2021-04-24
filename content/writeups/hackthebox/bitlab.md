@@ -29,13 +29,13 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
 Let's visit the website on port 80:
-![](/images/hackthebox/bitlab/bitlab.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/bitlab/bitlab.png)
 
 This is a Gitlab server installation and trying common username and passwords
 combinations or a bruteforce with Hydra does not gives us anything, but by
 visiting the [Help](http://10.10.10.114/help/bookmarks.html) link in the bottom, we find an interesting page:
 
-![](/images/hackthebox/bitlab/help.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/bitlab/help.png)
 
 The most interesting link is the last one, Gitlab login, which contains this
 javascript function:
@@ -66,7 +66,7 @@ javascript: (function() {
 Basically what it does is it autocompletes the login form with `clave` as
 username and `11des0081x` as password. After logging in we find two
 repositories:
-![](/images/hackthebox/bitlab/repositories.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/bitlab/repositories.png)
 
 This is the code of Deployer:
 ```php
@@ -92,7 +92,7 @@ the web server, and it's visitable by going on the user's settings (which is
 strange, maybe it was an error).
 
 Another interesting thing can be found in the user's snippets:
-![](/images/hackthebox/bitlab/snippets.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/bitlab/snippets.png)
 
 The logical thing to do now is to try to use those credentials to dump the
 table, so let's create a file called dump.php in the Profile repository and let's write the
@@ -141,7 +141,7 @@ Let's copy it on our machine to analyze it:
 `scp clave@10.10.10.114:/home/clave/RemoteConnection.exe .`
 
 Using Ghidra to reverse engineer it we can find some interesting strings:
-![](/images/hackthebox/bitlab/strings.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/bitlab/strings.png)
 
 And those strings are used in this function:
 {{< highlight C "linenos=table, hl_lines=71" >}}
@@ -242,12 +242,12 @@ void FUN_00401520(void)
 It looks like it uses some functions to decrypt a password and use it to login
 with PuTTY to a machine on line 71. The only problem is that the user that runs
 the program must be named `Clave`, and this check is at address `0x401640`:
-![](/images/hackthebox/bitlab/graph.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/bitlab/graph.png)
 
 We can patch the program by editing `JNZ LAB_00401662` at address `0x401647` to `JMP 0x00401649` to
 unconditionally jump, and running the patched program gets us a root shell on
 the machine:
-![](/images/hackthebox/bitlab/putty.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/bitlab/putty.png)
 
 Cool! This was my first machine that needed reverse engineering so it took me a
 while, and the important thing that we can learn is to not be lazy and use

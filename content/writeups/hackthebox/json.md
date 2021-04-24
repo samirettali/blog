@@ -50,7 +50,7 @@ Host script results:
 ```
 
 The server is composed of a login page:
-![](/images/hackthebox/json/login.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/json/login.png)
 
 And trying common credentials we find out that `admin:admin` works, but a non
 functional web app is behind the login, so there's nothing to do there. An
@@ -69,13 +69,13 @@ base64 value we get:
 
 By intercepting the request with Burp we can see that the same value will be
 sent in the Bearer HTTP header:
-![](/images/hackthebox/json/bearer.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/json/bearer.png)
 
 Modifying it to a random value will trigger an error:
-![](/images/hackthebox/json/error.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/json/error.png)
 
 Using a base64 valid value we get another error:
-![](/images/hackthebox/json/json-error.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/json/json-error.png)
 
 This time we get more information about the backend, it seems like it uses
 Json.NET to deserialize the data.
@@ -154,7 +154,7 @@ Files\Sync2Ftp\SyncLocation.exe.config`:
 It looks like we have some encrypted credentials. We can use
 [dnSpy](https://github.com/0xd4d/dnSpy) to reverse the `SyncLocation.exe` file
 and understand more about how it decrypts the credentials:
-![](/images/hackthebox/json/dnspy.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/json/dnspy.png)
 
 Cool, easy and simple! Let's copy the code and modify it a bit:
 ```csharp
@@ -206,6 +206,6 @@ funnyhtb
 ```
 
 Using them to login into the FTP server allows us to read the flag:
-![](/images/hackthebox/json/root.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/json/root.png)
 
 Thanks for reading!

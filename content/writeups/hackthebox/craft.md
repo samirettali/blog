@@ -35,27 +35,27 @@ Nmap done: 1 IP address (1 host up) scanned in 15.88 seconds
 ```
 
 Let's visit the web site:
-![](/images/hackthebox/craft/site.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/craft/site.png)
 
 The two links in the upper right corner brings us to `api.craft.htb` and
 `gogs.craft.htb`, so let's add them to `/etc/hosts` and visit the first one:
 
-![](/images/hackthebox/craft/api.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/craft/api.png)
 
 Looks like we have instructions for an API.
 
 The gogs subdomain sounds interesting, as gogs is a Git hosting server and it
 could countain something interesting. Let's visit it. We can immediately
 enumerate some users by visiting the users section:
-![](/images/hackthebox/craft/users.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/craft/users.png)
 
 And there's a repository that seems looks like it contains the code
 for the previously found API:
-![](/images/hackthebox/craft/craft-repo.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/craft/craft-repo.png)
 
 Reading the commit history, specifically in commit `a2d28ed155`, we find out
 that there was a password accidentally commited for the user `dinesh`:
-![](/images/hackthebox/craft/api-key.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/craft/api-key.png)
 
 When something like this happens, the obvious thing to do is to change that
 password, but visiting the login endpoint and using the credentials actually
@@ -203,7 +203,7 @@ Modifying the query to `SHOW TABLES`, we can see that there is a table called
 
 Trying to login into the Gogs service, only gilfoyle's credentials works.
 He does have a private repository called `craft-infra`:
-![](/images/hackthebox/craft/craft-intra.png)
+![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/craft/craft-intra.png)
 
 
 Straight off, the `.ssh` directory contains a key, let's try to use it:

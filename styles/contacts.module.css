@@ -1,9 +1,0 @@
-.contacts {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.icon {
-  padding: 0.5rem;
-}

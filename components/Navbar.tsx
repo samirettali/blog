@@ -17,13 +17,13 @@ const Navbar = ({ className, showHome = true, showToggler = true }: NavbarProps)
   };
 
   return (
-    <header className={`my-8 ${className}`}>
+    <header className={`my-8 ${className || ''}`}>
       <nav className="flex items-center flex-wrap font-semibold text-lg">
         <div className="flex-grow">
           {showHome && (
             <Link href="/">
-              <a className="inline-flex mr-4">
-                Home
+              <a className="inline-flex mr-4 text-2xl">
+                Samir Ettali
               </a>
             </Link>
           )}

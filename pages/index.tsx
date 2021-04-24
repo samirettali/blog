@@ -1,23 +1,38 @@
 import Layout from "../components/layout";
 import Navbar from "../components/Navbar";
+import Links from '../components/Links'
 import About from '../content/about.mdx'
+import { Config, getConfig } from "../lib/config";
+import Contacts from "../components/Contacts";
 
-const Home = () => {
+interface Props {
+  config: Config;
+}
+
+const Home = ({ config }: Props) => {
+  const { links } = config
   return (
     <Layout
-      showNavbar={false}
       containerClassname='px-8'
-      contentClassname='flex flex-col max-w-xl mx-auto md:mt-0 mt-8 md:justify-center h-screen'
+      contentClassname='flex flex-col mx-auto mt-16'
     >
-      <div className='text-4xl mb-8 font-medium'>
-        Samir Ettali
-      </div>
-      <div className='text-2xl tracking-wide leading-relaxed'>
+      <div className='text-lg text-center tracking-wide leading-relaxed'>
         <About />
       </div>
-      <Navbar className='mb-0' showHome={false} showToggler={false}/>
+      <Contacts links={links} className='mt-8' />
     </Layout>
   );
 };
 
 export default Home;
+
+
+
+export const getStaticProps = async () => {
+  const config = await getConfig();
+  return {
+    props: {
+      config,
+    },
+  };
+};

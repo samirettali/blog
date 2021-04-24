@@ -1,7 +1,26 @@
 name: SE
-socials:
-  - github: samirettali
-  - twitter: samirettali
-  - instagram: samirettali
-  - mail: samirettali@protonmail.com
-  - rss: rss.xml
+links:
+  - name: Github
+    href: /github
+    iconName: github
+  - name: Twitter
+    href: /twitter
+    iconName: twitter
+  - name: Instagram
+    href: /instagram
+    iconName: instagram
+  - name: Linkedin
+    href: /linkedin
+    iconName: linkedin
+  - name: Mail
+    href: mailto:samirettali@protonmail.com
+    iconName: mail
+  - name: Photographs
+    href: /photographs
+    iconName: camera
+  # - name: NFT
+  #   href: https://rarible.com/samirettali
+  #   iconName: code
+  - name: RSS
+    href: /rss.xml
+    iconName: rss

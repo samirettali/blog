@@ -47,9 +47,9 @@ module.exports = {
     extend: {
       colors: {
         mygray: {
-          light: "#e4e4e4",
-          DEFAULT: "#18191a",
-          secondary: "#333333",
+          light: "#f5f5f5",
+          DEFAULT: "#121212",
+          secondary: "#212121",
         },
       },
     },

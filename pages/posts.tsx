@@ -10,8 +10,8 @@ type PostProps = {
 const Posts = ({ posts }: PostProps) => {
   return (
     <Layout title="Posts">
-      <section className="text-xl">
-        <h2 className="text-4xl mb-8">Posts</h2>
+      <section className="text-xl mt-12">
+        <h2 className="text-4xl mb-8 text-center">Posts</h2>
         <ArticlesList articles={posts} />
       </section>
     </Layout>

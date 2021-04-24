@@ -1,24 +1,29 @@
 import React from "react";
-import Social from "./Social";
+import Links from "./Links";
 import styles from "../styles/contacts.module.css";
+import { Link } from "../lib/config";
+import Icon from "./Icon";
 
-interface ContactProps {
-  socials: { [key: string]: string }[];
+interface Props {
+  links: Link[];
+  className?: string;
 }
 
-const Contacts: React.FC<ContactProps> = ({ socials }) => {
+const Contacts: React.FC<Props> = ({ links, className }) => {
   return (
-    <div className={styles.contacts}>
-      {socials.map((social) => {
-        const name = Object.keys(social)[0];
-        const username = Object.values(social)[0];
-        return (
-          <div className={styles.icon} key={name}>
-            <Social name={name} username={username} />
-          </div>
-        );
-      })}
-    </div>
+    <div className={`flex flex-row justify-center w-full ${className || ''}`}>
+      {
+        links.map(({ name, href, iconName }) => {
+          return (
+            <div className='p-3' key={name}>
+              <a href={href} target='blank'>
+                <Icon name={iconName as any} />
+              </a>
+            </div>
+          );
+        })
+      }
+    </div >
   );
 };
 

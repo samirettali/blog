@@ -12,7 +12,7 @@ if (firebase.apps.length == 0) {
 
 export const increaseCounter = (field: string) => {
   try {
-    firebase.firestore().collection('analytics').doc('redirects').update({
+    firebase.firestore().collection('analytics').doc('links').update({
       [field]: firebase.firestore.FieldValue.increment(1),
     });
   } catch (error) {

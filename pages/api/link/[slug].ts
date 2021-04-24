@@ -1,4 +1,3 @@
-import http from 'http';
 import { increaseCounter } from '../../../firebase'
 
 const links = {
@@ -12,7 +11,7 @@ const links = {
 };
 
 
-export default function link(req: http.IncomingMessage, res: http.ServerResponse) {
+export default function link(req, res) {
   const { slug } = req.query;
   if (links[slug]) {
     increaseCounter(slug);

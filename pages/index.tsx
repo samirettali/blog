@@ -1,6 +1,4 @@
 import Layout from "../components/layout";
-import Navbar from "../components/Navbar";
-import Links from '../components/Links'
 import About from '../content/about.mdx'
 import { Config, getConfig } from "../lib/config";
 import Contacts from "../components/Contacts";

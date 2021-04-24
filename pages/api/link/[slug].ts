@@ -1,4 +1,4 @@
-import { increaseCounter } from '../../../firebase'
+import { increaseCounter } from '../../../lib/firebase'
 
 const links = {
   github: "https://github.com/samirettali",

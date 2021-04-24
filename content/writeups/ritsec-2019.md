@@ -38,9 +38,8 @@ RITSEC{POEWASTHEGOAT}
 ## HD Pepe - 300 points
 
 > Pepe is alpha tier  
-> [ctf-pepe.png](/images/ritsec-2019/ctf_pepe.png)
 
-![](/images/ritsec-2019/ctf_pepe.png)
+![](/files/ritsec-2019/ctf_pepe.png)
 
 Running exiftool on the image gives us some interesting information:
 {{< highlight text "hl_lines=22 28" >}}

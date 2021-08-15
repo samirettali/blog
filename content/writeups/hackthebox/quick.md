@@ -408,7 +408,7 @@ Now, we can generate a SSH key locally and add the public one to
 ## Finding another VHOST
 While doing the common enumeration tasks we can see in
 `/etc/apache2/sites-enabled/000-default.conf` that there's another virtual host:
-```conf
+```apache
 <VirtualHost *:80>
         # The ServerName directive sets the request scheme, hostname and port that
         # the server uses to identify itself. This is used when creating

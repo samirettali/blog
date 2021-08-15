@@ -38,7 +38,7 @@ If you already have your website on version control, you can skip to the
 After creating a repository on Github, let's create the website structure, make
 it a repository and add the remote:
 
-```
+```console
 $ hugo new website
 $ cd website
 $ git init
@@ -47,7 +47,7 @@ $ git remote add origin git@github.com:samirettali/website
 
 Let's add the files to the repository:
 
-```
+```console
 $ git add .
 $ git commit
 $ git push --set-upstream origin master
@@ -117,7 +117,7 @@ from the working tree, which will contain the files of the repository.
 
 After copying the previously generated keys to our server, let's add it to the
 `~/.ssh/config` file, so that git will use it:
-```
+```console
 Host github.com-website
   HostName github.com
   User git
@@ -128,7 +128,7 @@ computer, so that, for example, if I lose a key or it gets compromised, I only
 have to change that one.
 
 Now we have to set up a bare local repository and tell it where to pull from:
-```
+```console
 $ git init --bare website
 $ cd website
 $ git remote add origin github.com-website:samirettali/website
@@ -140,8 +140,8 @@ and you can of course use your web server directory instead of `/var/www/html`,
 which is mine.
 
 Now we need to tell git to use the files in the `public` branch:
-```
-git --git-dir=/home/samir/website --work-tree=/var/www/html checkout public
+```console
+$ git --git-dir=/home/samir/website --work-tree=/var/www/html checkout public
 ```
 
 And now we can setup cron to periodically pull from Github. After running

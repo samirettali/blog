@@ -19,15 +19,15 @@ const Layout: React.FC<LayoutProps> = ({
   showNavbar = true,
   containerClassname,
   contentClassname
- }) => {
+}) => {
   return (
     <>
       <Head>
         <title>{title(pageTitle)}</title>
       </Head>
-      <div className={`container mx-auto max-w-3xl px-4 lg:px-6 text-base ${containerClassname}`}>
+      <div className={`container mx-auto max-w-3xl px-4 lg:px-6 ${containerClassname}`}>
         {showNavbar && <Navbar />}
-        <main className={contentClassname}>
+        <main className={`${contentClassname} mt-12`}>
           {children}
           {showBack && (
             <div className="my-12">

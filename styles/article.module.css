@@ -1,16 +1,28 @@
-/* .article img { */
-/*   max-width: 100%; */
-/*   display: block; */
-/* } */
+/* .article img {
+  max-width: 100%;
+  display: block;
+} */
 
-.article pre {
-	@apply rounded;
-	@apply text-sm !important;
+.article p {
+	@apply my-6 !important;
+}
+
+/* Target the first paragraph under a title */
+.article h2 + p {
+  @apply mt-2 !important;
+}
+
+.article img {
+	@apply rounded !important;
+}
+
+.article pre code {
+  @apply p-8 !important;
+	@apply rounded-lg !important;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
 }
 
 .article code {
-	@apply font-mono !important;
-	@apply text-sm !important;
 	@apply rounded;
 }
 
@@ -19,16 +31,6 @@
 .article ul code {
 	@apply py-0.5 !important;
 	@apply px-1 !important;
-}
-
-/* Fix for prism shadow */
-.article code[class*="language-"],
-.article pre[class*="language-"] {
-	text-shadow: none !important;
-}
-
-.article p {
-	@apply my-6;
 }
 
 .article ol {

@@ -6,6 +6,11 @@ export const usePanelbear = (site, config = {}) => {
   const router = useRouter();
 
   useEffect(() => {
+    if (!site) {
+      console.log("skipping panelbear initialization");
+      return;
+    }
+
     Panelbear.load(site, { ...config, scriptSrc: '/bear.js' });
 
     // Trigger initial page view

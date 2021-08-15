@@ -1,156 +1,104 @@
 export default `
-/**
- * base16-prism (https://github.com/h404bi/base16-prism)
- * @license MIT
- *
- * prism.js Default Light theme for JavaScript, CSS and HTML
- * @author Chris Kempson (http:&#x2F;&#x2F;chriskempson.com)
- */
 
-code[class*="language-"],
-pre[class*="language-"] {
-    color: #383838; /* base05 */
-    background: none;
-    text-shadow: 0 1px white;
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    font-size: 1em;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    line-height: 1.5;
+/*
 
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
+Atom One Light by Daniel Gamage
+Original One Light Syntax theme from https://github.com/atom/one-light-syntax
 
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
+base:    #fafafa
+mono-1:  #383a42
+mono-2:  #686b77
+mono-3:  #a0a1a7
+hue-1:   #0184bb
+hue-2:   #4078f2
+hue-3:   #a626a4
+hue-4:   #50a14f
+hue-5:   #e45649
+hue-5-2: #c91243
+hue-6:   #986801
+hue-6-2: #c18401
+
+*/
+
+.hljs, code {
+  color: #383a42;
+  background: #f2f2f2;
 }
 
-pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
-    color: inherit;
-    text-shadow: none;
-    background: #d8d8d8; /* base02 */
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
 }
 
-pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
-code[class*="language-"]::selection, code[class*="language-"] ::selection {
-    color: inherit;
-    text-shadow: none;
-    background: #d8d8d8; /* base02 */
+.hljs-comment,
+.hljs-quote {
+  color: #a0a1a7;
+  font-style: italic;
 }
 
-@media print {
-    code[class*="language-"],
-    pre[class*="language-"] {
-        text-shadow: none;
-    }
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #a626a4;
 }
 
-/* Code blocks */
-pre[class*="language-"] {
-    padding: 1em;
-    margin: .5em 0;
-    overflow: auto;
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e45649;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-    background: #f8f8f8; /* base00 */
+.hljs-literal {
+  color: #0184bb;
 }
 
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-    padding: .1em;
-    border-radius: .3em;
-    white-space: normal;
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #50a14f;
 }
 
-.token.comment,
-.token.prolog,
-.token.cdata {
-    color: #b8b8b8; /* base03 */
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #986801;
 }
 
-.token.entity,
-.language-css .token.string,
-.style .token.string {
-    color: #585858; /* base04 */
-    background: #e8e8e8; /* base01 */
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #4078f2;
 }
 
-.token.punctuation {
-    color: #383838; /* base05 */
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #c18401;
 }
 
-.token.variable,
-.token.tag,
-.token.operator,
-.token.deleted {
-    color: #ab4642; /* base08 */
+.hljs-emphasis {
+  font-style: italic;
 }
 
-.token.property,
-.token.number,
-.token.boolean,
-.token.constant,
-.token.url {
-    color: #dc9656; /* base09 */
+.hljs-strong {
+  font-weight: bold;
 }
 
-.token.class-name,
-.token.bold {
-    color: #f7ca88; /* base0A */
+.hljs-link {
+  text-decoration: underline;
 }
 
-.token.string,
-.token.symbol,
-.token.attr-value,
-.token.inserted,
-.token.atrule {
-    color:#a1b56c; /* base0B */
-}
-
-.token.regex,
-.token.important {
-    color: #86c1b9; /* base0C */
-}
-
-.token.function,
-.token.attr-name {
-    color: #7cafc2; /* base0D */
-}
-
-.token.keyword,
-.token.selector,
-.token.italic,
-.token.char,
-.token.builtin {
-    color: #ba8baf; /* base0E */
-}
-
-.token.doctype {
-    color: #a16946; /* base0F */
-}
-
-.token.important,
-.token.bold {
-    font-weight: bold;
-}
-.token.italic {
-    font-style: italic;
-}
-
-.token.entity {
-    cursor: help;
-}
-
-.namespace {
-    opacity: .7;
-}
 `;

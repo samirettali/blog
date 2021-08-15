@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Moon, Sun } from 'react-feather'
 
 import { useTheme } from "next-themes";
+import { useRouter } from "next/router";
 
 type NavbarProps = {
   className?: string;
@@ -12,18 +13,21 @@ type NavbarProps = {
 const Navbar = ({ className, showHome = true, showToggler = true }: NavbarProps) => {
   const { theme, setTheme } = useTheme();
 
+  const router = useRouter();
+  console.log(router.asPath);
+
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
   return (
-    <header className={`my-8 ${className || ''}`}>
-      <nav className="flex items-center flex-wrap font-semibold text-lg">
+    <header className={`my-8 ${className ?? ''}`}>
+      <nav className="flex items-center flex-wrap">
         <div className="flex-grow">
           {showHome && (
             <Link href="/">
-              <a className="inline-flex mr-4 text-2xl">
-                Samir Ettali
+              <a className="inline-flex mr-4 nav-brand">
+                SE
               </a>
             </Link>
           )}
@@ -31,20 +35,24 @@ const Navbar = ({ className, showHome = true, showToggler = true }: NavbarProps)
         <div className="flex items-center">
           <div className="px-3">
             <Link href="/writeups">
-              <a>Writeups</a>
+              <a className={`${router.asPath === '/writeups' ? 'nav-link-active' : 'nav-link'}`}>
+                Writeups
+              </a>
             </Link>
           </div>
           <div className={showToggler ? "px-3" : null}>
             <Link href="/posts">
-              <a>Posts</a>
+              <a className={`${router.asPath === '/posts' ? 'nav-link-active' : 'nav-link'}`}>
+                Posts
+              </a>
             </Link>
           </div>
           {showToggler && (
             <div
-              className="block cursor-pointer transition pl-3"
+              className="block cursor-pointer pl-3"
               onClick={toggleTheme}
             >
-              <a>{theme === "dark" ? <Moon /> : <Sun />}</a>
+              <a className='nav-link'>{theme === "dark" ? <Moon /> : <Sun />}</a>
             </div>
           )}
         </div>

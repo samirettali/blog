@@ -26,14 +26,15 @@ const Article = ({ article }: ArticleProps) => {
 
   return (
     <article>
-      <div className="post-header mb-8 text-center">
-        <h1 className="font-bold text-4xl mb-1">{title}</h1>
+      <div className="post-header mb-8 mt-6 text-center">
+        <h1 className="font-bold text-4xl mb-3">{title}</h1>
         <div className="text-gray-500 dark:text-gray-400">
           <Date dateString={date.toLocaleString()} />
         </div>
       </div>
-      <div
+      <article
         className={styles.article}
+        // className="prose-blue prose lg:prose-lg"
         dangerouslySetInnerHTML={{ __html: html }}
       />
       <style>{theme === "dark" ? prismDark : prismLight}</style>

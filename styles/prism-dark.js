@@ -1,156 +1,109 @@
 export default `
-/**
- * base16-prism (https://github.com/h404bi/base16-prism)
- * @license MIT
- *
- * prism.js Tomorrow Night theme for JavaScript, CSS and HTML
- * @author Chris Kempson (http:&#x2F;&#x2F;chriskempson.com)
- */
 
-code[class*="language-"],
-pre[class*="language-"] {
-    color: #c5c8c6; /* base05 */
-    background: none;
-    text-shadow: 0 1px white;
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    font-size: 1em;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    line-height: 1.5;
-
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
 }
 
-pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
-    color: inherit;
-    text-shadow: none;
-    background: #373b41; /* base02 */
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+
+pre code {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
 }
 
-pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
-code[class*="language-"]::selection, code[class*="language-"] ::selection {
-    color: inherit;
-    text-shadow: none;
-    background: #373b41; /* base02 */
+.hljs, code {
+  color: #abb2bf;
+  background: #1b1f27;
 }
 
-@media print {
-    code[class*="language-"],
-    pre[class*="language-"] {
-        text-shadow: none;
-    }
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
 }
 
-/* Code blocks */
-pre[class*="language-"] {
-    padding: 1em;
-    margin: .5em 0;
-    overflow: auto;
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-    background: #1d1f21; /* base00 */
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
 }
 
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-    padding: .1em;
-    border-radius: .3em;
-    white-space: normal;
+.hljs-literal {
+  color: #56b6c2;
 }
 
-.token.comment,
-.token.prolog,
-.token.cdata {
-    color: #969896; /* base03 */
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
 }
 
-.token.entity,
-.language-css .token.string,
-.style .token.string {
-    color: #b4b7b4; /* base04 */
-    background: #282a2e; /* base01 */
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
 }
 
-.token.punctuation {
-    color: #c5c8c6; /* base05 */
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
 }
 
-.token.variable,
-.token.tag,
-.token.operator,
-.token.deleted {
-    color: #cc6666; /* base08 */
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
 }
 
-.token.property,
-.token.number,
-.token.boolean,
-.token.constant,
-.token.url {
-    color: #de935f; /* base09 */
+.hljs-emphasis {
+  font-style: italic;
 }
 
-.token.class-name,
-.token.bold {
-    color: #f0c674; /* base0A */
+.hljs-strong {
+  font-weight: bold;
 }
 
-.token.string,
-.token.symbol,
-.token.attr-value,
-.token.inserted,
-.token.atrule {
-    color:#b5bd68; /* base0B */
-}
-
-.token.regex,
-.token.important {
-    color: #8abeb7; /* base0C */
-}
-
-.token.function,
-.token.attr-name {
-    color: #81a2be; /* base0D */
-}
-
-.token.keyword,
-.token.selector,
-.token.italic,
-.token.char,
-.token.builtin {
-    color: #b294bb; /* base0E */
-}
-
-.token.doctype {
-    color: #a3685a; /* base0F */
-}
-
-.token.important,
-.token.bold {
-    font-weight: bold;
-}
-.token.italic {
-    font-style: italic;
-}
-
-.token.entity {
-    cursor: help;
-}
-
-.namespace {
-    opacity: .7;
+.hljs-link {
+  text-decoration: underline;
 }
 `;

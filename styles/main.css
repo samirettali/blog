@@ -2,19 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import "inter-ui/inter.css";
+@import "jetbrains-mono";
 
 @layer base {
   h1 {
-    @apply text-4xl;
-  }
-
-  h2 {
     @apply text-3xl;
   }
 
+  h2 {
+    @apply text-2xl;
+  }
+
   h3 {
-    @apply text-xl;
+    @apply text-lg;
+    @apply mt-8;
   }
 
   h1,
@@ -23,26 +25,28 @@
     @apply font-semibold;
   }
 
-  a {
-    @apply transition;
-    @apply text-blue-500;
-    @apply hover:text-blue-600;
-  }
-
   body {
-    @apply font-sans;
-    @apply lg:text-lg;
+    @apply font-sans !important;
+
+    @apply text-base;
+    /* @apply lg:text-lg; */
 
     @apply bg-white;
-    @apply text-mygray-secondary;
-    @apply dark:bg-mygray;
-    @apply dark:text-mygray-light;
+    @apply text-coolGray-800;
+    @apply dark:bg-olive;
+    @apply dark:text-coolGray-200;
   }
 
   body,
-  pre,
-  code {
+  pre
+  {
     @apply transition-all;
+  }
+
+  a {
+    @apply transition;
+    @apply text-blue-500;
+    @apply hover:text-blue-800;
   }
 
   blockquote {
@@ -77,8 +81,41 @@
   /* } */
 }
 
-/* html { */
-/*   letter-spacing: -.015em; */
-/*   text-rendering: optimizeLegibility; */
-/*   -moz-osx-font-smoothing: grayscale; */
-/* } */
+html {
+  letter-spacing: -.01em;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.nav-link {
+  @apply text-coolGray-500;
+  @apply text-lg;
+  @apply dark:text-coolGray-400;
+  @apply font-medium !important;
+}
+
+.nav-link-active {
+  @apply text-coolGray-800;
+  @apply text-lg;
+  @apply dark:text-coolGray-200;
+  @apply font-medium !important;
+}
+
+.nav-link:hover {
+  @apply hover:text-coolGray-800;
+  @apply dark:text-coolGray-200 !important;
+}
+
+.nav-brand {
+  @apply text-2xl;
+  @apply text-coolGray-800 !important;
+  @apply font-semibold !important;
+  @apply dark:text-coolGray-200 !important;
+}
+
+.nav-brand:hover {
+  @apply text-coolGray-500 !important;
+  @apply dark:text-trueGray-100;
+}
+
+

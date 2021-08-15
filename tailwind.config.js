@@ -1,5 +1,7 @@
 const colors = require("tailwindcss/colors");
 
+// #15181b
+
 module.exports = {
   purge: {
     enabled: process.env.NODE_ENV === "production",
@@ -19,6 +21,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
+        "Inter",
         "-apple-system",
         "BlinkMacSystemFont",
         "Segoe UI",
@@ -34,28 +37,38 @@ module.exports = {
         "Segoe UI Symbol",
         "Noto Color Emoji",
       ],
-      mono: ["Menlo", "Consolas", "Liberation Mono", "monospace"],
+      mono: ["JetBrains Mono", "Menlo", "Consolas", "Liberation Mono", "monospace"],
     },
     colors: {
       ...colors,
-      blue: {
-        ...colors.blue,
-        500: "#1982ff",
-        600: "#0070f3",
-      },
+      coolGray: colors.coolGray,
+      gray: colors.gray,
+      trueGray: colors.trueGray,
     },
     extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.gray.800'),
+          }
+        }
+      }),
       colors: {
         mygray: {
           light: "#f5f5f5",
-          DEFAULT: "#121212",
-          secondary: "#212121",
+          DEFAULT: "#1a1b2f",
+          secondary: "#333333",
+          tertiary: "#242424"
         },
+        olive: "#121212",
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    // require('@tailwindcss/typography'),
+  ],
+  mode: 'jit'
 };

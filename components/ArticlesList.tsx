@@ -10,11 +10,11 @@ type ArticlesListProps = {
 const ArticlesList = ({ articles }: ArticlesListProps) => {
   return (
     <ul className="list-none">
-      {articles.map(({ id, type, date, title }, index) => {
+      {articles.map(({ id, type, date, title }) => {
         return (
           <li
             className="text-coolGray-700 hover:text-coolGray-500 mb-4"
-            key={index}
+            key={typeof id === 'string' ? id : id[0]}
           >
             <Link href={`/${type}/${id}`}>
               <a>{title}</a>

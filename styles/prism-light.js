@@ -1,5 +1,11 @@
 export default `
 
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+
 /*
 
 Atom One Light by Daniel Gamage

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "inter-ui/inter.css";
 @import "jetbrains-mono";
 
 @layer base {
@@ -29,11 +28,10 @@
     @apply font-sans !important;
 
     @apply text-base;
-    /* @apply lg:text-lg; */
 
     @apply bg-white;
     @apply text-coolGray-800;
-    @apply dark:bg-olive;
+    @apply dark:bg-myblack;
     @apply dark:text-coolGray-200;
   }
 

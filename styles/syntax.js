@@ -32,7 +32,7 @@ pre code {
   padding: 1em;
 }
 
-.hljs, code {
+.hljs {
   color: #abb2bf;
   background: #1b1f27;
 }

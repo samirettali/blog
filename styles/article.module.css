@@ -19,7 +19,7 @@
 .article pre code {
   @apply p-8 !important;
 	@apply rounded-lg !important;
-  box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
+  box-shadow: 2px 4px 25px rgb(0 0 0 / 30%);
 }
 
 .article code {

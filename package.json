@@ -19,7 +19,8 @@
     "next-themes": "^0.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "remark-highlight.js": "^7.0.0"
+    "remark-highlight.js": "^7.0.0",
+    "sass": "^1.37.5"
   },
   "devDependencies": {
     "@mdx-js/loader": "^1.6.22",

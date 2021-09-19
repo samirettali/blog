@@ -2,8 +2,7 @@ import { useTheme } from "next-themes";
 
 import Date from "./Date";
 import styles from "../styles/article.module.css";
-import prismLight from "../styles/prism-light";
-import prismDark from "../styles/prism-dark";
+import syntaxTheme from "../styles/syntax";
 
 export type ArticleType = {
   type: "posts" | "writeups";
@@ -37,7 +36,7 @@ const Article = ({ article }: ArticleProps) => {
         // className="prose-blue prose lg:prose-lg"
         dangerouslySetInnerHTML={{ __html: html }}
       />
-      <style>{theme === "dark" ? prismDark : prismLight}</style>
+      <style>{syntaxTheme}</style>
     </article>
   );
 };

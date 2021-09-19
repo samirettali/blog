@@ -21,7 +21,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
-        "Inter",
+        "inter",
         "-apple-system",
         "BlinkMacSystemFont",
         "Segoe UI",
@@ -60,15 +60,13 @@ module.exports = {
           secondary: "#333333",
           tertiary: "#242424"
         },
-        olive: "#121212",
+        myblack: "#121212",
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [
-    // require('@tailwindcss/typography'),
-  ],
+  plugins: [],
   mode: 'jit'
 };

@@ -1,8 +1,0 @@
-.bio {
-	@apply text-xl;
-	@apply leading-relaxed;
-}
-
-.bio p {
-	@apply my-6;
-}

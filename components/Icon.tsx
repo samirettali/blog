@@ -1,26 +1,20 @@
-import React from "react";
-import * as icons from "react-feather";
+import * as icons from "lucide-react";
 
 export type IconName = keyof typeof icons;
 
-export type IconProps = {
-  name: IconName;
-} & icons.IconProps;
-// } & icons.Props;
+type IconProps = {
+  name: string;
+} & icons.LucideProps;
 
-const names = Object.keys(icons);
+const iconNames = Object.keys(icons);
 
-const Icon = ({ name, ...rest }: IconProps) => {
-  const realName: string[] = names.filter(
-    (n) => n.toLowerCase() === name.toLowerCase()
-  );
+export default function Icon({ name, ...rest }: IconProps) {
+  const realName = iconNames.find((iconName) => iconName.toLowerCase() === name.toLowerCase());
 
-  if (!realName || realName.length !== 1) {
+  if (!realName) {
     return null;
   }
 
-  const IconComponent = (icons as any)[realName[0]];
+  const IconComponent = icons[realName as IconName] as React.ComponentType<icons.LucideProps>;
   return <IconComponent {...rest} />;
-};
-
-export default Icon;
+}

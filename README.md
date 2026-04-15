@@ -1,13 +1,29 @@
-# My blog
+# Blog
 
-This is the source code for my personal blog.
+Personal blog built with Next.js App Router, Bun, Tailwind CSS, and a filesystem-based markdown content layer.
 
-It was previously using [Hugo](https://gohugo.io/) but as I started doint web
-development I switched to a stack that fits my needs.
+## Stack
 
-It is currently built in typescript using [Next.js](https://nextjs.org/) with
-SSG, [Tailwind](https://tailwindcss.com/) and [unified](https://unifiedjs.com/)
-for parsing markdown files and generating the HTML.
+- Next.js 15
+- React 19
+- Bun
+- Tailwind CSS
+- unified/remark/rehype for markdown rendering
 
-It is hosted on [Vercel](https://vercel.com/) with automatic deployments after
-a push to Github.
+## Development
+
+```bash
+bun install
+bun run dev
+```
+
+## Content
+
+Posts and writeups live in `content/`.
+
+- `content/posts`
+- `content/writeups`
+- `content/about.mdx`
+
+The homepage, listing pages, and article routes are statically generated.
+RSS is served from `/rss.xml`.

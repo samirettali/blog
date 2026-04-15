@@ -1,29 +1,21 @@
-import React from "react";
 import Icon from "./Icon";
-
-import { Link } from "../lib/config";
+import type { Link as ContactLink } from "../lib/config";
 
 interface Props {
-  links: Link[];
+  links: ContactLink[];
   className?: string;
 }
 
-const Contacts: React.FC<Props> = ({ links, className }) => {
+export default function Contacts({ links, className }: Props) {
   return (
-    <div className={`flex flex-row justify-center w-full ${className || ''}`}>
-      {
-        links.map(({ name, target, iconName }) => {
-          return (
-            <div className='p-3' key={name}>
-              <a href={target} target='blank'>
-                <Icon name={iconName as any} />
-              </a>
-            </div>
-          );
-        })
-      }
-    </div >
+    <div className={`flex w-full flex-row justify-center ${className ?? ""}`}>
+      {links.map(({ name, target, iconName }) => (
+        <div className="p-3" key={name}>
+          <a href={target} target="_blank" rel="noreferrer">
+            {iconName ? <Icon name={iconName} /> : name}
+          </a>
+        </div>
+      ))}
+    </div>
   );
-};
-
-export default Contacts;
+}

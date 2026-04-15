@@ -1,6 +1,4 @@
-import { increaseCounter } from '../../../lib/firebase'
-
-const links = {
+export const externalLinks: Record<string, string> = {
   github: "https://github.com/samirettali",
   twitter: "https://twitter.com/samirettali",
   instagram: "https://instagram.com/samirettali",
@@ -9,15 +7,3 @@ const links = {
   nft: "https://rarible.com/samir",
   cv: "https://samir-resume.vercel.app",
 };
-
-
-export default function link(req, res) {
-  const { slug } = req.query;
-  if (links[slug]) {
-    increaseCounter(slug);
-    res.redirect(links[slug])
-  } else {
-    res.writeHead(404);
-    res.end();
-  }
-}

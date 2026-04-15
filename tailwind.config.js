@@ -1,58 +1,13 @@
-const colors = require("tailwindcss/colors");
-
-// #15181b
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: {
-    enabled: process.env.NODE_ENV === "production",
-    content: [
-      "./pages/**/*.js",
-      "./pages/**/*.ts",
-      "./pages/**/*.jsx",
-      "./pages/**/*.tsx",
-      "./components/**/*.js",
-      "./components/**/*.ts",
-      "./components/**/*.jsx",
-      "./components/**/*.tsx",
-      "./styles/**/*.css",
-    ],
-  },
   darkMode: "class",
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./lib/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    fontFamily: {
-      sans: [
-        "inter",
-        "-apple-system",
-        "BlinkMacSystemFont",
-        "Segoe UI",
-        "Roboto",
-        "system-ui",
-        "Helvetica Neue",
-        "Helvetica",
-        "Arial",
-        "Noto Sans",
-        "sans-serif",
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol",
-        "Noto Color Emoji",
-      ],
-      mono: ["JetBrains Mono", "Menlo", "Consolas", "Liberation Mono", "monospace"],
-    },
-    colors: {
-      ...colors,
-      coolGray: colors.coolGray,
-      gray: colors.gray,
-      trueGray: colors.trueGray,
-    },
     extend: {
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            color: theme('colors.gray.800'),
-          }
-        }
-      }),
       colors: {
         mygray: {
           light: "#f5f5f5",
@@ -62,11 +17,35 @@ module.exports = {
         },
         myblack: "#121212",
       },
+      typography: ({ theme }) => ({
+        slate: {
+          css: {
+            color: theme("colors.slate.800"),
+            a: {
+              color: theme("colors.blue.500"),
+              textDecoration: "none",
+            },
+            "a:hover": {
+              color: theme("colors.blue.800"),
+            },
+            blockquote: {
+              color: theme("colors.slate.700"),
+              borderLeftColor: theme("colors.slate.300"),
+            },
+            code: {
+              color: theme("colors.slate.800"),
+            },
+            "pre code": {
+              color: "inherit",
+            },
+          },
+        },
+      }),
+    },
+    fontFamily: {
+      sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+      mono: ["var(--font-jetbrains-mono)", "monospace"],
     },
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
-  mode: 'jit'
+  plugins: [require("@tailwindcss/typography")],
 };

@@ -1,11 +1,12 @@
-import fs from "fs";
+import fs from "node:fs/promises";
+import path from "node:path";
 import yaml from "js-yaml";
-import path from "path";
+import { cache } from "react";
 
 export interface Config {
   name?: string;
   shortName?: string;
-  links?: Link[]
+  links?: Link[];
 }
 
 export interface Link {
@@ -14,9 +15,8 @@ export interface Link {
   iconName?: string;
 }
 
-export const getConfig = async (): Promise<Config> => {
+export const getConfig = cache(async (): Promise<Config> => {
   const configPath = path.join(process.cwd(), "config.yml");
-  const fileContent = fs.readFileSync(configPath, "utf8");
-  const config = yaml.load(fileContent);
-  return config;
-}
+  const fileContent = await fs.readFile(configPath, "utf8");
+  return (yaml.load(fileContent) as Config) ?? {};
+});
